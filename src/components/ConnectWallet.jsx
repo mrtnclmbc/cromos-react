@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Blockies from 'react-blockies';
 
-import { makeStyles } from '@material-ui/core/styles';
-
 import { useWeb3Modal } from '../hooks/web3';
 
 const truncateAddress = (address) => {
@@ -10,8 +8,6 @@ const truncateAddress = (address) => {
 };
 
 const ConnectWallet = () => {
-  const classes = useStyles();
-
   const [signerAddress, setSignerAddress] = useState('');
   // const [isWaiting, setWaiting] = useState(false)
   // const [isSent, setSent] = useState(false)
@@ -39,11 +35,11 @@ const ConnectWallet = () => {
 
   return (
     <button
-      className={classes.btn}
+      className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base text-white text-sm py-2.5 px-5 rounded-md bg-red-500 hover:bg-red-600 hover:shadow-lg"
       onClick={signerAddress ? handleClickAddress : handleClickConnect}
     >
       <Blockies
-        className={classes.img}
+        className="h-8 w-auto mr-2"
         seed={signerAddress.toLowerCase()}
         size={8}
         scale={3}
@@ -54,22 +50,5 @@ const ConnectWallet = () => {
     </button>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  btn: {
-    background: 'rgb(183,192,238)',
-    cursor: 'pointer',
-    border: 0,
-    outline: 'none',
-    borderRadius: 9999,
-    height: 35,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  img: {
-    borderRadius: 999,
-    marginRight: 5,
-  },
-}));
 
 export default ConnectWallet;
