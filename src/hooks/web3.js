@@ -13,7 +13,7 @@ const providerOptions = {
 };
 
 const web3Modal = new Web3Modal({
-  network: 'kovan',
+  network: 'rinkeby',
   cacheProvider: true,
   providerOptions,
 });

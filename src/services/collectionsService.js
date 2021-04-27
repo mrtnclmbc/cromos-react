@@ -1,0 +1,113 @@
+const fetch = require('node-fetch');
+// TO-DO fix undefined env vars!
+// const OPEN_SEA_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = 'https://cromy.io/api/v1';
+
+const getAlbum = async (albumId) => {
+  // Compose URL
+  const url = `${API_BASE_URL}/albums/${albumId}`;
+
+  // Define options
+  const options = {
+    method: 'GET',
+  };
+
+  // Fetch!
+  // fetch(url, options)
+  //   .then(res => res.json())
+  //   .then(json => console.log(json))
+  //   .catch(err => console.error('error:' + err));
+
+  // Testing
+  return {
+    album_id: 1,
+    title: 'Momentos del Fútbol',
+    description: 'Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.',
+    image: null,
+    assets: [
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920970',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'lg'
+      },
+      {
+        token_id: '31712412',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'md'
+      },
+      {
+        token_id: '1797908753318167498064568441076271140892002045234138787585013810849535492097',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'sm'
+      },
+      {
+        token_id: '179790875331816749806456844107627114089200204523413878758501381084953549209',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920971',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'md'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920974',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920975',
+        address: '0xe99C918E3Ad0eBa0B873cB472D1DC08979660499',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920976',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'md'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920973',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920972',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+      {
+        token_id: '179790875331816749806456844107627114089200204523413878758501381084953549209703',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'md'
+      },
+      {
+        token_id: '1797908753318167498064568441076271140892002045234138787585013810849535492097051',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'md'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920970123',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+      {
+        token_id: '1797908753318167498064568441076271140892002045234138787585013810849535492097014',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920970152',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+      {
+        token_id: '17979087533181674980645684410762711408920020452341387875850138108495354920970123 ',
+        address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
+        size: 'sm'
+      },
+
+    ]
+  }
+}
+
+export { getAlbum };

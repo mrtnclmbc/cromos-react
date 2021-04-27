@@ -3,9 +3,7 @@ import Blockies from 'react-blockies';
 
 import { useWeb3Modal } from '../hooks/web3';
 
-const truncateAddress = (address) => {
-  return address.slice(0, 6) + '...' + address.slice(-4);
-};
+import { truncateString } from '../helpers/formatHelper';
 
 const ConnectWallet = () => {
   const [signerAddress, setSignerAddress] = useState('');
@@ -45,7 +43,7 @@ const ConnectWallet = () => {
         scale={3}
       />
       <div>
-        {signerAddress ? truncateAddress(signerAddress) : 'Connect Wallet'}
+        {signerAddress ? truncateString(signerAddress) : 'Connect Wallet'}
       </div>
     </button>
   );
