@@ -1,59 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import Asset from './Asset';
-import { getAssets } from '../services/assetsService';
+import { Asset, HeroSection, LoadingIndicator } from './';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { ApplicationContext } from '../state/store';
 import { getAlbum } from '../services/collectionsService';
-import { useWeb3Modal } from '../hooks/web3';
+import { getAssets } from '../services/assetsService';
 
 const Album = (props) => {
   const [album, setAlbum] = useState(null);
   const [walletAssets, setWalletAssets] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [signerAddress, setSignerAddress] = useState(null);
-  const { provider } = useWeb3Modal();
+  const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
 
   useEffect(async () => {
     // Get album
-    const data = await getAlbum(1);
-    setAlbum(data);
+    const album = await getAlbum(2);
+    setAlbum(album);
 
-    // Get connected wallet address
-    if (provider) {
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
-      setSignerAddress(address);
-    } else setSignerAddress(null);
+    if (!currentAddress) {
+      setWalletAssets([]);
+    }
 
-    // Get NFTS
-    if (signerAddress) {
-      const walletAssets = await getAssets(signerAddress);
+    setLoading(false);
+  }, [currentAddress]);
+
+  useEffect(async () => {
+    // Get NFTs
+    if (album && currentAddress) {
+      const walletAssets = await getAssets(currentAddress);
       setWalletAssets(walletAssets);
     }
-  }, [provider]);
+  }, [album]);
 
   return (
-    <>
-      <section className="py-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
-        <div className="flex w-full flex-wrap pb-4">
-          <h1 className="sm:text-xl text-xl font-normal title-font text-gray-900 lg:mb-0">
-            Tu Álbum <span className="font-bold">{signerAddress || null}</span><
-          /h1>
-        </div>
-        <div className="container mx-auto grid grid-cols-6 grid-rows-12 gap-4 md:grid-cols-6 min-h-screen">
-          {album && album.assets.map((albumAsset, index) => {
-            const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address) || null;
-            return (
-              <Asset
-                key={index}
-                size={albumAsset.size}
-                image={ownedAsset ? ownedAsset.image_url : null}
-                tokenId={albumAsset.token_id}
-                addressId={albumAsset.address}
-              />
-            );
-          })}
-        </div>
-      </section>
-    </>
+    <div className="min-h-screen">
+      {loading ? <LoadingIndicator /> :
+        (
+          <>
+            <HeroSection
+              title={album.title}
+              description={album.description}
+            />
+            <section className="py-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
+              <div className="flex w-full flex-wrap pb-4">
+                <h1 className="sm:text-xl text-xl font-normal title-font text-gray-900 lg:mb-0">
+                  Tu Álbum <span className="font-bold">{currentAddress}</span>
+                </h1>
+              </div>
+              <div className={`container mx-auto grid grid-cols-6 grid-rows-12 md:grid-cols-6 ${album.gap || 'gap-4'}`}>
+                {album && album.assets.map((albumAsset, index) => {
+                  const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address);
+                  return (
+                    <Asset
+                      key={index}
+                      size={albumAsset.size}
+                      image={ownedAsset ? ownedAsset.image_url : null}
+                      tokenId={albumAsset.token_id}
+                      addressId={albumAsset.address}
+                      padding={album.padding}
+                      type={album.type}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+          </>
+        )}
+      </div>
   );
 }
 

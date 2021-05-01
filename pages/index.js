@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import { Album, HeroSection } from '../src/components';
+import { Album } from '../src/components';
+import Head from 'next/head';
 
 export default function Home() {
   return (
@@ -8,7 +8,6 @@ export default function Home() {
         <title>Cromy</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HeroSection />
       <Album />
     </div>
   )

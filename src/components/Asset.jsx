@@ -6,18 +6,28 @@ const Asset = (props) => {
     size,
     image,
     tokenId,
-    addressId
+    addressId,
+    padding,
+    type
   } = props;
+
   const styles = {
-    lg: 'w-full h-full col-span-2 row-span-6 rounded shadow-sm bg-red-600',
-    md: 'w-full h-80 col-span-2 row-span-3 rounded shadow-sm bg-yellow-600',
-    sm: 'w-full h-80 col-span-1 row-span-3 rounded shadow-sm bg-purple-600',
+    album: {
+      lg: 'w-full h-full col-span-2 row-span-6 rounded shadow-sm bg-red-600',
+      md: 'w-full h-80 col-span-2 row-span-3 rounded shadow-sm bg-yellow-600',
+      sm: 'w-full h-80 col-span-1 row-span-3 rounded shadow-sm bg-purple-600',
+    },
+    comic: {
+      lg: 'w-full h-80 col-span-4 row-span-6 rounded shadow-sm bg-red-600',
+      md: 'w-full h-80 col-span-3 row-span-6 rounded shadow-sm bg-yellow-600',
+      sm: 'w-full h-80 col-span-2 row-span-6 rounded shadow-sm bg-purple-600',
+    }
   }
 
   return (
     <>
-      <div className={styles[size]}>
-        <div className="bg-gray-900 shadow-lg rounded p-3 h-full">
+      <div className={styles[type][size]}>
+        <div className={`bg-gray-900 shadow-lg rounded h-full ${padding || null}`}>
           <div className="group relative h-full">
             <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
               <button className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
@@ -38,15 +48,19 @@ const Asset = (props) => {
                 </svg>
               </button>
             </div>
-            {image && <img alt="" src={image} className='w-full h-full object-cover rounded'/>}
-            <div className="p-2 text-right top-0 absolute right-0">
-              <h3 className="text-white text-lg">Token ID</h3>
-              <p className="text-gray-400">{truncateString(tokenId)}</p>
-            </div>
-            <div className="p-2 text-left bottom-0 absolute">
-              <h3 className="text-white text-lg">Address</h3>
-              <p className="text-gray-400">{truncateString(addressId)}</p>
-            </div>
+            {image ? <img alt="" src={image} className='w-full h-full object-cover rounded'/> :
+              (
+                <>
+                  <div className="p-2 text-right top-0 absolute right-0">
+                    <h3 className="text-white text-lg">Token ID</h3>
+                    <p className="text-gray-400">{truncateString(tokenId)}</p>
+                  </div>
+                  <div className="p-2 text-left bottom-0 absolute">
+                    <h3 className="text-white text-lg">Address</h3>
+                    <p className="text-gray-400">{truncateString(addressId)}</p>
+                  </div>
+                </>
+              )}
           </div>
         </div>
       </div>
