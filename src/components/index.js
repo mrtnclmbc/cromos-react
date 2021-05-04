@@ -1,9 +1,14 @@
 import dynamic from 'next/dynamic';
 import Footer from './Footer';
-import HeroSection from './HeroSection';
+import AlbumHeader from './AlbumHeader';
 import Navbar from './Navbar';
 import Asset from './Asset';
 import LoadingIndicator from './LoadingIndicator';
+import SearchBar from './SearchBar';
+import HeroSection from './HeroSection';
+import FeaturedRow from './FeaturedRow';
+import ServicesRow from './ServicesRow';
+import SubscribeRow from './SubscribeRow';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -17,9 +22,14 @@ const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
 export {
   ConnectWallet,
   Footer,
-  HeroSection,
+  AlbumHeader,
   Navbar,
   Album,
   Asset,
   LoadingIndicator,
+  SearchBar,
+  HeroSection,
+  FeaturedRow,
+  ServicesRow,
+  SubscribeRow,
 };
