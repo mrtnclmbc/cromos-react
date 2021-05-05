@@ -4,12 +4,12 @@ const CardStack = (props) => {
   return (
     <>
       <div>
-         <div className='flex p-8 w-full bg-gray-200 shadow-md rounded-lg overflow-hidden mx-auto'>
+         <div className='flex p-8 w-full rounded-lg overflow-hidden mx-auto'>
             <div className="relative flex flex-col items-center justify-around p-4 mr-4 w-80 h-80 rounded-2xl " style={{transform: 'translate(0px, 0px)', opacity: 1}}>
-               <div className="absolute z-0 w-full h-full text-white transform scale-x-105 scale-y-95 bg-purple-300 rounded-xl -rotate-2 " style={{zIndex: -1}}></div>
-               <div className="absolute z-0 w-full h-full text-white transform scale-x-105 scale-y-95 bg-purple-400 rounded-xl rotate-2 " style={{zIndex: -1}}></div>
+               <div className="absolute z-0 w-full h-full text-white transform scale-x-105 scale-y-95 bg-red-300 rounded-xl -rotate-2 " style={{zIndex: -1}}></div>
+               <div className="absolute z-0 w-full h-full text-white transform scale-x-105 scale-y-95 bg-red-400 rounded-xl rotate-2 " style={{zIndex: -1}}></div>
                <div className="absolute z-0 w-full h-full transform scale-x-105 scale-y-95 bg-white rounded-xl " style={{zIndex: -1}}></div>
-               <h3 className="z-10 p-2 text-2xl font-semibold text-purple-900">SEO</h3>
+               <h3 className="z-10 p-2 text-2xl font-semibold text-purple-900">{props.title}</h3>
                <div className="z-10 p-2 text-purple-900">
                   <svg className="fill-current" height="96" viewBox="0 0 512 512" width="96">
                      <path d="m123.806 105h234.55c21.146 0 38.349 17.271 38.349 38.5v102.556c0 4.143 3.358 7.5 7.5 7.5s7.5-3.357 7.5-7.5v-102.556c0-29.5-23.932-53.5-53.349-53.5h-234.55c-4.142 0-7.5 3.357-7.5 7.5s3.358 7.5 7.5 7.5z"></path>
@@ -23,7 +23,7 @@ const CardStack = (props) => {
                      <path d="m452.329 352.759c-4.142 0-7.5 3.357-7.5 7.5 0 13.423-10.92 24.343-24.342 24.343s-24.342-10.92-24.342-24.343 10.92-24.343 24.342-24.343c3.515 0 6.904.731 10.071 2.173 3.771 1.718 8.218.051 9.934-3.719 1.716-3.771.051-8.218-3.719-9.934-5.132-2.336-10.611-3.521-16.286-3.521-21.693 0-39.342 17.649-39.342 39.343s17.649 39.343 39.342 39.343 39.342-17.649 39.342-39.343c0-4.142-3.358-7.499-7.5-7.499z"></path>
                   </svg>
                </div>
-               <div className="z-10 p-2 text-sm text-center text-gray-500 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit enim totam possimus rem. Totam, quis!</div>
+               <div className="z-10 p-2 text-sm text-center text-gray-500 ">{props.text}</div>
             </div>
          </div>
       </div>

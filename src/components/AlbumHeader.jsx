@@ -7,7 +7,7 @@ const AlbumHeader = (props) => {
   // TO-DO: Remove hardcoded values!
   return (
     <>
-      <div className="w-full bg-cover bg-opacity-5 bg-center py-12 bg-gradient-to-r from-yellow-400 to-red-600" style={ backgroundImage ? {backgroundImage} : null }>
+      <section className="w-full bg-cover bg-opacity-5 bg-center py-12 bg-gradient-to-r from-yellow-400 to-red-600" style={ backgroundImage ? {backgroundImage} : null }>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-center">
             <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-white sm:text-4xl">
@@ -18,7 +18,7 @@ const AlbumHeader = (props) => {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

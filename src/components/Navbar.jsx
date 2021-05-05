@@ -16,6 +16,7 @@ import {
   CogIcon
 } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import Link from 'next/link'
 import { ConnectWallet, SearchBar } from './';
 
 const menuItems = [
@@ -52,13 +53,11 @@ const Navbar = ({ toggleMode, darkMode }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
               <div className="flex justify-start flex-1">
-                <a href="#">
-                  <img
-                    className="h-8 w-auto sm:h-10"
-                    src="logo.svg"
-                    alt="Cromy Logo"
-                  />
-                </a>
+                <img
+                  className="h-8 w-auto sm:h-10"
+                  src="logo.svg"
+                  alt="Cromy Logo"
+                />
               </div>
               <div className="flex items-center flex-grow flex-5">
                 <div className="-mr-2 -my-2 md:hidden">
@@ -105,17 +104,18 @@ const Navbar = ({ toggleMode, darkMode }) => {
                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                               <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                 {menuItems.map((item) => (
-                                  <a
+                                  <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                                   >
-                                    <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
-                                    <div className="ml-4">
-                                      <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                      <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                                    </div>
-                                  </a>
+                                    <a className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
+                                      <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                      <div className="ml-4">
+                                        <p className="text-base font-medium text-gray-900">{item.name}</p>
+                                        <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                                      </div>
+                                    </a>
+                                  </Link>
                                 ))}
                               </div>
                             </div>
@@ -168,14 +168,15 @@ const Navbar = ({ toggleMode, darkMode }) => {
                   <div className="mt-6">
                     <nav className="grid gap-y-8">
                       {menuItems.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
-                          className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
                         >
-                          <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
-                          <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
-                        </a>
+                          <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
+                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                            <span className="ml-3 text-base font-medium text-gray-900">{item.name}</span>
+                          </a>
+                        </Link>
                       ))}
                     </nav>
                   </div>
