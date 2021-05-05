@@ -46,7 +46,7 @@ const Album = (props) => {
                   Tu Álbum <span className="font-bold">{currentAddress}</span>
                 </h1>
               </div>
-              <div className={`container mx-auto grid grid-cols-6 grid-rows-12 md:grid-cols-6 ${album.gap || 'gap-4'}`}>
+              <div className={`container mx-auto grid grid-cols-12 grid-rows-6 ${album.gap || 'gap-4'}`}>
                 {album && album.assets.map((albumAsset, index) => {
                   const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address);
                   return (
@@ -58,6 +58,7 @@ const Album = (props) => {
                       addressId={albumAsset.address}
                       padding={album.padding}
                       type={album.type}
+                      aspectRatio={albumAsset.aspect_ratio}
                     />
                   );
                 })}

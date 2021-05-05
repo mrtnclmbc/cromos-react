@@ -8,25 +8,13 @@ const Asset = (props) => {
     tokenId,
     addressId,
     padding,
-    type
+    type,
+    aspectRatio,
   } = props;
-
-  const styles = {
-    album: {
-      lg: 'w-full h-full col-span-2 row-span-6 rounded shadow-sm bg-red-600',
-      md: 'w-full h-80 col-span-2 row-span-3 rounded shadow-sm bg-yellow-600',
-      sm: 'w-full h-80 col-span-1 row-span-3 rounded shadow-sm bg-purple-600',
-    },
-    comic: {
-      lg: 'w-full h-80 col-span-4 row-span-6 rounded shadow-sm bg-red-600',
-      md: 'w-full h-80 col-span-3 row-span-6 rounded shadow-sm bg-yellow-600',
-      sm: 'w-full h-80 col-span-2 row-span-6 rounded shadow-sm bg-purple-600',
-    }
-  }
 
   return (
     <>
-      <div className={styles[type][size]}>
+      <div className={`rounded shadow-sm aspect-w-${aspectRatio.width} aspect-h-${aspectRatio.height} col-span-${size.columns} row-span-${size.rows}`}>
         <div className={`bg-gray-900 shadow-lg rounded h-full ${padding || null}`}>
           <div className="group relative h-full">
             <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
@@ -48,9 +36,9 @@ const Asset = (props) => {
                 </svg>
               </button>
             </div>
-            {image ? <img alt="" src={image} className='w-full h-full object-cover rounded'/> :
+            {image ? <img alt="" src={image} className='h-full w-full rounded'/> :
               (
-                <>
+                <div className="w-full h-full rounded">
                   <div className="p-2 text-right top-0 absolute right-0">
                     <h3 className="text-white text-lg">Token ID</h3>
                     <p className="text-gray-400">{truncateString(tokenId)}</p>
@@ -59,7 +47,7 @@ const Asset = (props) => {
                     <h3 className="text-white text-lg">Address</h3>
                     <p className="text-gray-400">{truncateString(addressId)}</p>
                   </div>
-                </>
+                </div>
               )}
           </div>
         </div>

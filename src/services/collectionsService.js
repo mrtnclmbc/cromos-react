@@ -31,37 +31,86 @@ const getAlbum = async (albumId) => {
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858104333930594305',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'md'
+        aspect_ratio:  {
+          width: 2,
+          height: 1,
+        },
+        size: {
+          columns: 6,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858105433442222081',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'md'
+        aspect_ratio:  {
+          width: 2,
+          height: 1,
+        },
+        size: {
+          columns: 6,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858106532953849857',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'sm'
+        aspect_ratio:  {
+          width: 1,
+          height: 1,
+        },
+        size: {
+          columns: 4,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858107632465477633',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'sm'
+        aspect_ratio:  {
+          width: 1,
+          height: 1,
+        },
+        size: {
+          columns: 4,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858108731977105409',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'sm'
+        aspect_ratio:  {
+          width: 1,
+          height: 1,
+        },
+        size: {
+          columns: 4,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858109831488733185',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'sm'
+        aspect_ratio:  {
+          width: 1,
+          height: 1,
+        },
+        size: {
+          columns: 4,
+          rows: 2,
+        },
       },
       {
         token_id: '105665526449733265606596008423351073540659047519780003086054858110931000360961',
         address: '0xee45b41d1ac24e9a620169994deb22739f64f231',
-        size: 'lg'
+        aspect_ratio:  {
+          width: 3,
+          height: 1,
+        },
+        size: {
+          columns: 8,
+          rows: 2,
+        },
       },
     ]
   }
