@@ -9,6 +9,7 @@ const Album = (props) => {
   const [album, setAlbum] = useState(null);
   const [walletAssets, setWalletAssets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [walletConnected, setWalletConnected] = useState(false);
   const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
 
   useEffect(async () => {
@@ -28,6 +29,7 @@ const Album = (props) => {
     if (album && currentAddress) {
       const walletAssets = await getAssets(currentAddress);
       setWalletAssets(walletAssets);
+      setWalletConnected(true);
     }
   }, [album]);
 
@@ -59,6 +61,7 @@ const Album = (props) => {
                       padding={album.padding}
                       type={album.type}
                       aspectRatio={albumAsset.aspect_ratio}
+                      walletConnected={walletConnected}
                     />
                   );
                 })}

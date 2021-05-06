@@ -25,7 +25,7 @@ const getAssets = (owner, limit = 10) => {
   });
 };
 
-const getAsset = async (contractAddress, tokenId, accountAddress) => {
+const getAsset = async (contractAddress, tokenId) => {
   // Compose URL
   const url = `${OPEN_SEA_BASE_URL}/asset/${contractAddress}/${tokenId}`;
 
@@ -35,10 +35,13 @@ const getAsset = async (contractAddress, tokenId, accountAddress) => {
   };
 
   // Fetch!
-  fetch(url, options)
-    .then(res => res.json())
-    .then(json => console.log(json))
-    .catch(err => console.error('error:' + err));
+  return axios.get(url)
+  .then(function (response) {
+    return response.data;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 export { getAssets, getAsset };
