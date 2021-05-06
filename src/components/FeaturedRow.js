@@ -18,7 +18,7 @@ const FeaturedRow = (props) => {
               <h2 className="title-font text-lg font-medium text-indigo-800 mt-6 mb-3">Comic</h2>
               <p className="leading-relaxed font-bold text-black">Nakamoto's Adventure</p>
               <p className="leading-relaxed text-base">Santos de los correos</p>
-              <Link href="/games/1">
+              <Link href="/game/1">
                 <button className="flex mx-auto mt-6 text-white bg-red-600 border-0 py-2 px-5 focus:outline-none hover:bg-red-700 shadow hover:shadow-xl rounded">Coming Soon</button>
               </Link>
             </div>
