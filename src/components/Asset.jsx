@@ -18,9 +18,7 @@ const Asset = (props) => {
 
   useEffect(async () => {
     if(!image && walletConnected) {
-
       const asset = await getAsset(addressId, tokenId);
-      console.log('NOT OWNED', asset);
       if (asset) { setNotOwned(asset) }
     }
   },[walletConnected]);
