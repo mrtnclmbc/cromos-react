@@ -55,7 +55,7 @@ const Navbar = ({ toggleMode, darkMode }) => {
               <div className="flex justify-start flex-1">
                 <img
                   className="h-8 w-auto sm:h-10"
-                  src="logo.svg"
+                  src="/logo.svg"
                   alt="Cromy Logo"
                 />
               </div>
