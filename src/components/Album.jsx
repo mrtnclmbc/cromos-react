@@ -1,12 +1,13 @@
 import { Asset, HeroSection, LoadingIndicator } from './';
 import React, { useContext, useEffect, useState } from 'react';
+import { getAssets, getAssetsInfo } from '../services/assetsService';
 
 import { ApplicationContext } from '../state/store';
 import { getAlbum } from '../services/collectionsService';
-import { getAssets } from '../services/assetsService';
 
 const Album = (props) => {
   const [album, setAlbum] = useState(null);
+  const [albumAssets, setAlbumAssets] = useState([]);
   const [walletAssets, setWalletAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [walletConnected, setWalletConnected] = useState(false);
@@ -16,6 +17,13 @@ const Album = (props) => {
     // Get album
     const album = await getAlbum(2);
     setAlbum(album);
+
+    if (album.assets?.length) {
+      const contractAddress = album.assets[0].address;
+      const tokenIds = album.assets.map(asset => asset.token_id);
+      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds);
+      setAlbumAssets(assetsInfo.assets);
+    }
 
     if (!currentAddress) {
       setWalletAssets([]);
@@ -49,13 +57,15 @@ const Album = (props) => {
                 </h1>
               </div>
               <div className={`container mx-auto grid grid-cols-12 grid-rows-6 ${album.gap || 'gap-4'}`}>
-                {album && album.assets.map((albumAsset, index) => {
+                {album && album.assets?.map((albumAsset, index) => {
                   const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address);
+                  const asset = albumAssets.find((asset) => asset.token_id === albumAsset.token_id);
                   return (
                     <Asset
                       key={index}
                       size={albumAsset.size}
                       image={ownedAsset ? ownedAsset.image_url : null}
+                      backgroundImage={asset?.image_url}
                       tokenId={albumAsset.token_id}
                       addressId={albumAsset.address}
                       padding={album.padding}
