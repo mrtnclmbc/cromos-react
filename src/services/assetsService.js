@@ -44,4 +44,18 @@ const getAsset = async (contractAddress, tokenId) => {
   });
 }
 
-export { getAssets, getAsset };
+const getAssetsInfo = async (contractAddress, tokenIds) => {
+  // Compose URL
+  const url = `${OPEN_SEA_BASE_URL}/assets?asset_contract_address=${contractAddress}${tokenIds.reduce((acc, tokenId) => acc + `&token_ids=${tokenId}`, '')}`;
+
+  // Fetch!
+  return axios.get(url)
+  .then(function (response) {
+    return response.data;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+export { getAssets, getAsset, getAssetsInfo };

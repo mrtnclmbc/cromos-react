@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { truncateString } from '../helpers/formatHelper';
+
 import { getAsset } from '../services/assetsService';
+import { truncateString } from '../helpers/formatHelper';
 
 const Asset = (props) => {
   const {
     size,
     image,
+    backgroundImage,
     tokenId,
     addressId,
     padding,
@@ -13,15 +15,6 @@ const Asset = (props) => {
     aspectRatio,
     walletConnected
   } = props;
-
-  const [notOwned, setNotOwned] = useState(null);
-
-  useEffect(async () => {
-    if(!image && walletConnected) {
-      const asset = await getAsset(addressId, tokenId);
-      if (asset) { setNotOwned(asset) }
-    }
-  },[walletConnected]);
 
   return (
     <>
@@ -50,7 +43,7 @@ const Asset = (props) => {
             {image ? <img alt="" src={image} className='h-full w-full rounded'/> :
               (
                 <>
-                  <div className="w-full h-full rounded filter blur-lg z-0 absolute" style={notOwned ? { backgroundImage: `url(${notOwned.image_url})`} : null}></div>
+                  <img src={backgroundImage} className='h-full w-full rounded filter blur-xl z-0 absolute'/>
                   <div className="p-2 text-right top-0 absolute right-0 z-20">
                     <h3 className="text-white text-lg">Token ID</h3>
                     <p className="text-gray-400">{truncateString(tokenId)}</p>
