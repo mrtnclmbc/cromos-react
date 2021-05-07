@@ -20,7 +20,7 @@ const Asset = (props) => {
     <>
       <div className={`rounded shadow-sm aspect-w-${aspectRatio.width} aspect-h-${aspectRatio.height} col-span-${size.columns} row-span-${size.rows}`}>
         <div className={`bg-gray-900 shadow-lg rounded h-full ${padding || null}`}>
-          <div className="group relative h-full z-10">
+          <div className="group relative h-full z-0">
             <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10">
               <button className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
@@ -44,11 +44,11 @@ const Asset = (props) => {
               (
                 <>
                   <img src={backgroundImage} className='h-full w-full rounded filter blur-xl z-0 absolute'/>
-                  <div className="p-2 text-right top-0 absolute right-0 z-20">
+                  <div className="p-2 text-right top-0 absolute right-0 z-10">
                     <h3 className="text-white text-lg">Token ID</h3>
                     <p className="text-gray-400">{truncateString(tokenId)}</p>
                   </div>
-                  <div className="p-2 text-left bottom-0 absolute z-20 ">
+                  <div className="p-2 text-left bottom-0 absolute z-10 ">
                     <h3 className="text-white text-lg filter drop-shadow-lg">Address</h3>
                     <p className="text-gray-400">{truncateString(addressId)}</p>
                   </div>
