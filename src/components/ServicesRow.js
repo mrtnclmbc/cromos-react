@@ -6,19 +6,19 @@ const ServicesRow = () => {
     <>
       <div className="flex items-between justify-center">
         <CardStack
-          title="Quick Delivery"
+          title="Tokenize your brand"
           text="Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet"
         />
         <CardStack
-          title="Secure Payment"
+          title="Make NFT auctions"
           text="Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet"
         />
         <CardStack
-          title="Best quality"
+          title="Deliver gamificated experiences to your collectors"
           text="Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet"
         />
         <CardStack
-          title="Return guarantee"
+          title="All parties win!"
           text="Lorem Ipsum dolor sit amet Lorem Ipsum dolor sit amet"
         />
       </div>

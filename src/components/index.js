@@ -9,6 +9,7 @@ import HeroSection from './HeroSection';
 import FeaturedRow from './FeaturedRow';
 import ServicesRow from './ServicesRow';
 import SubscribeRow from './SubscribeRow';
+import GameCard from './GameCard';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -32,4 +33,5 @@ export {
   FeaturedRow,
   ServicesRow,
   SubscribeRow,
+  GameCard,
 };
