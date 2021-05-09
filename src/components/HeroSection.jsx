@@ -1,26 +1,31 @@
+import React from 'react';
+import { ArrowCircleRightIcon } from '@heroicons/react/outline';
+
 const HeroSection = (props) => {
-  const {
-    backgroundImage = null,
-    title,
-    description,
-  } = props;
-  // TO-DO: Remove hardcoded values!
   return (
     <>
-      <div className="w-full bg-cover bg-opacity-5 bg-center py-12 bg-gradient-to-r from-yellow-400 to-red-600" style={ backgroundImage ? {backgroundImage} : null }>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center">
-            <p className="mt-2 text-3xl leading-8 font-bold tracking-tight text-white sm:text-4xl">
-              {`${title || 'Momentos del Fútbol'} `}<span className="font-black">Vol. 1</span>
-            </p>
-            <p className="mt-4 max-w-2xl text-l text-white lg:mx-auto font-light">
-                {description || 'Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.'}
-            </p>
+      <section className="text-gray-600 bg-red-400 body-font">
+        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <h1 className="lg:text-5xl sm:text-4xl text-4xl mb-4 font-bold text-white">We give you real reasons
+              <br className="hidden lg:inline-block" />to collect NTFs.
+            </h1>
+            <p className="mb-8 leading-relaxed text-white">Buy, collect and trade NTFs with playable value.
+            <br className="hidden lg:inline-block" />Use your NTFs in our gamified experiences. Welcome to Cromy.</p>
+            <div className="flex justify-center">
+              <button className="text-white bg-red-600 border-0 py-3 px-6 w-80 flex focus:outline-none hover:bg-red-700 shadow hover:shadow-xl rounded text-lg">
+                Discover NFTs Experiences
+                <ArrowCircleRightIcon className="w-7 h-7 self-end ml-2"/>
+              </button>
+            </div>
+          </div>
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+            <img className="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600" />
           </div>
         </div>
-      </div>
+      </section>
     </>
-  );
+  )
 }
 
 export default HeroSection;

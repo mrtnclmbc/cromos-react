@@ -1,4 +1,4 @@
-import { Asset, HeroSection, LoadingIndicator } from './';
+import { Asset, AlbumHeader, LoadingIndicator } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
@@ -15,7 +15,7 @@ const Album = (props) => {
 
   useEffect(async () => {
     // Get album
-    const album = await getAlbum(2);
+    const album = await getAlbum(props.albumId);
     setAlbum(album);
 
     if (album.assets?.length) {
@@ -46,7 +46,7 @@ const Album = (props) => {
       {loading ? <LoadingIndicator /> :
         (
           <>
-            <HeroSection
+            <AlbumHeader
               title={album.title}
               description={album.description}
             />

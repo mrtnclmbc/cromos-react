@@ -1,4 +1,9 @@
-import { Album } from '../src/components';
+import {
+  HeroSection,
+  FeaturedRow,
+  ServicesRow,
+  SubscribeRow,
+} from '../src/components';
 import Head from 'next/head';
 
 export default function Home() {
@@ -8,7 +13,10 @@ export default function Home() {
         <title>Cromy</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Album />
+      <HeroSection />
+      <FeaturedRow />
+      <ServicesRow />
+      <SubscribeRow />
     </div>
   )
 }
