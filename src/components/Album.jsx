@@ -1,4 +1,4 @@
-import { Asset, AlbumHeader, LoadingIndicator } from './';
+import { AlbumHeader, Asset, LoadingIndicator } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
@@ -22,7 +22,7 @@ const Album = (props) => {
       const contractAddress = album.assets[0].address;
       const tokenIds = album.assets.map(asset => asset.token_id);
       const assetsInfo = await getAssetsInfo(contractAddress, tokenIds);
-      setAlbumAssets(assetsInfo.assets);
+      setAlbumAssets(assetsInfo?.assets);
     }
 
     if (!currentAddress) {
@@ -59,7 +59,7 @@ const Album = (props) => {
               <div className={`container mx-auto grid grid-cols-12 grid-rows-6 ${album.gap || 'gap-4'}`}>
                 {album && album.assets?.map((albumAsset, index) => {
                   const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address);
-                  const asset = albumAssets.find((asset) => asset.token_id === albumAsset.token_id);
+                  const asset = albumAssets?.find((asset) => asset.token_id === albumAsset.token_id);
                   return (
                     <Asset
                       key={index}

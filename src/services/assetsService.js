@@ -1,3 +1,5 @@
+import * as rax from 'retry-axios';
+
 import axios from 'axios';
 
 // TO-DO fix undefined env vars!
@@ -9,6 +11,7 @@ const getAssets = (owner, limit = 10) => {
   const url = `${OPEN_SEA_BASE_URL}/assets`;
 
   // Fetch!
+  rax.attach();
   return axios.get(url, {
     params: {
       owner,
@@ -35,6 +38,7 @@ const getAsset = async (contractAddress, tokenId) => {
   };
 
   // Fetch!
+  rax.attach();
   return axios.get(url)
   .then(function (response) {
     return response.data;
@@ -49,6 +53,7 @@ const getAssetsInfo = async (contractAddress, tokenIds) => {
   const url = `${OPEN_SEA_BASE_URL}/assets?asset_contract_address=${contractAddress}${tokenIds.reduce((acc, tokenId) => acc + `&token_ids=${tokenId}`, '')}`;
 
   // Fetch!
+  rax.attach();
   return axios.get(url)
   .then(function (response) {
     return response.data;
