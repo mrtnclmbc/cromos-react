@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css';
+import './style.scss';
 
 import { Footer, Navbar } from '../src/components';
 import React, { useEffect, useState } from 'react';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import Blur from 'react-blur';
 import { getAsset } from '../services/assetsService';
 import { truncateString } from '../helpers/formatHelper';
 
@@ -19,8 +18,8 @@ const Asset = (props) => {
 
   return (
     <>
-      <div className={`rounded shadow-sm aspect-w-${aspectRatio.width} aspect-h-${aspectRatio.height} col-span-${size.columns} row-span-${size.rows}`}>
-        <div className={`bg-gray-900 shadow-lg rounded h-full ${padding || null}`}>
+      <div className={`aspect-w-${aspectRatio.width} aspect-h-${aspectRatio.height} col-span-${size.columns} row-span-${size.rows}`}>
+        <div className={`bg-gray-900 h-full ${padding || null}`}>
           <div className="group relative h-full z-0">
             <div className="absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10">
               <button className="hover:scale-110 text-white opacity-0 transform translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 transition">
@@ -42,14 +41,23 @@ const Asset = (props) => {
               </button>
             </div>
             <>
-              <Blur img={backgroundImage} blurRadius={50} className='h-full w-full filter z-0 rounded absolute' />
-              {image ? <img alt="" src={image} className='h-full w-full rounded absolute'/> : (
-                <div className="mt-3 mr-3 top-0 flex flex-col md:flex-row absolute right-0 z-1">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="0">
+                <defs>
+                  <filter id="f1">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+                  </filter>
+                </defs>
+              </svg>
+              <div className="h-full w-full absolute overflow-hidden">
+                <img src={backgroundImage} className='h-full w-full blurred' />
+              </div>
+              {image ? <img src={image} className='h-full w-full absolute' /> : (
+                <div className="mt-3 mr-3 top-0 flex flex-col absolute right-0 z-1">
                   <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12">
                     <h3 className="text-gray-300 text-xs filter">Address</h3>
                     <p className="text-white text-sm">{truncateString(addressId)}</p>
                   </div>
-                  <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12 mt-2 md:mt-0 md:ml-2">
+                  <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12 mt-2">
                     <h3 className="text-gray-300 text-xs filter">Token ID</h3>
                     <p className="text-white text-sm">{truncateString(tokenId)}</p>
                   </div> 

@@ -25,7 +25,6 @@ const getAlbum = async (albumId) => {
     description: 'Completa las aventuras del héroe descentralizado, Satoshi Nakamoto, que vino a devolvernos la privacidad y la libertdad que el mundo perdió',
     image: null,
     gap: 'gap-1',
-    padding: 'p-1',
     type: 'comic',
     assets: [
       {

@@ -1,9 +1,10 @@
 import {
-  HeroSection,
   FeaturedRow,
+  HeroSection,
   ServicesRow,
   SubscribeRow,
 } from '../src/components';
+
 import Head from 'next/head';
 
 export default function Home() {
