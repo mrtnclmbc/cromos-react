@@ -6,11 +6,10 @@ import { ApplicationContext } from '../state/store';
 import HTMLFlipBook from "react-pageflip";
 import { getAlbum } from '../services/collectionsService';
 
-const PageCover = React.forwardRef(({ title, subtitle, children }, ref) => {
+const PageCover = React.forwardRef(({ children }, ref) => {
   return (
     <div className="page page-cover" ref={ref}>
-        <h2>{title}</h2>
-        <h3>{subtitle}</h3>
+      {children}
     </div>
   );
 });
@@ -49,12 +48,15 @@ const Album = (props) => {
 
   useEffect(async () => {
     // Get album
-    const album = await getAlbum(props.albumId);
-    setAlbum(album);
+    if(props.albumId) {
+      const album = await getAlbum(props.albumId);
+      setAlbum(album);
+    }
 
-    if (album.assets?.length) {
-      const contractAddress = album.assets[0].address;
-      const tokenIds = album.assets.map(asset => asset.token_id);
+    if (album && album.pages?.length) {
+      const contractAddress = album.address;
+      let tokenIds = [];
+      album.pages.map(page => page.assets?.columns?.reduce((assets, total) => [...total, ...assets], []).map(asset => tokenIds.push(asset.token_id)));
       const assetsInfo = await getAssetsInfo(contractAddress, tokenIds);
       setAlbumAssets(assetsInfo?.assets);
     }
@@ -62,9 +64,7 @@ const Album = (props) => {
     if (!currentAddress) {
       setWalletAssets([]);
     }
-
-    setLoading(false);
-  }, [currentAddress]);
+  }, [currentAddress, album, props.albumId]);
 
   useEffect(async () => {
     // Get NFTs
@@ -73,6 +73,8 @@ const Album = (props) => {
       setWalletAssets(walletAssets);
       setWalletConnected(true);
     }
+
+    if(album) { setLoading(false); }
   }, [album]);
 
   return (
@@ -92,52 +94,52 @@ const Album = (props) => {
               </div>
               <div className={`container grid grid-cols-19`}>
                 <HTMLFlipBook
-                  width={700}
-                  height={800}
+                  width={album.width * album.sizeMultiplier}
+                  height={album.height * album.sizeMultiplier}
+                  minWidth={album.width * album.sizeMultiplier}
+                  minHeight={album.height * album.sizeMultiplier}
                   size="stretch"
-                  minWidth={465}
-                  maxWidth={1150}
-                  minHeight={565}
-                  maxHeight={1250}
                   maxShadowOpacity={0.5}
                   mobileScrollSupport={true}
-                  className="comic"
+                  className="comic justify-self-center"
+                  showCover={true}
                 >
-                  <PageCover
-                    title="Nakamoto's Adventures"
-                    subtitle="Vol. 1" />
-                  <PageStructured
-                    title="Nakamoto's Adventures"
-                    footer="Cromy in collaboration with DC Comics">
-                    <h4><b>Directed by: </b>Santos de las Carreras</h4>
-                    <h4><b>Story by: </b>Santos de las Carreras</h4>
-                    <h4><b>Illustrated by: </b>Gabriel Picolo</h4>
-                  </PageStructured>
-                  {[...Array(5)].map((value, index) => (
-                    <Page title="Nakamoto's Adventures" number={index}>
-                      <div className={` grid grid-cols-12 grid-rows-6 ${album.gap || 'gap-4'}`}>
-                        {album && album.assets.map((albumAsset, index) => {
-                          const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === albumAsset.token_id && walletAsset.asset_contract.address === albumAsset.address);
-                          const asset = albumAssets?.find((asset) => asset.token_id === albumAsset.token_id);
-                          return (
-                            <Asset
-                              key={index}
-                              size={albumAsset.size}
-                              image={ownedAsset ? ownedAsset.image_url : null}
-                              backgroundImage={asset?.image_url}
-                              tokenId={albumAsset.token_id}
-                              addressId={albumAsset.address}
-                              padding={album.padding}
-                              type={album.type}
-                              aspectRatio={albumAsset.aspect_ratio}
-                              walletConnected={walletConnected}
-                            />
-                          );
-                        })}
+                  <PageCover>
+                    <img src={album.cover.image} className="page-image" />
+                  </PageCover>
+                  {album.pages.map((page, index) => (
+                    <Page number={index}>
+                      <div style={{ flex: 1 }}>
+                        {album && page.assets?.columns?.map((columns, index) => (
+                          <div className="flex">
+                            {columns.map((columnAsset, index) => {
+                              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
+                              const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
+                              return (
+                                <Asset
+                                  key={index}
+                                  columnNumber={columns.length}
+                                  size={columnAsset.size}
+                                  image={ownedAsset ? ownedAsset.image_url : null}
+                                  backgroundImage={asset?.image_url}
+                                  tokenId={columnAsset.token_id}
+                                  addressId={columnAsset.address}
+                                  padding={album.padding}
+                                  type={album.type}
+                                  walletConnected={walletConnected}
+                                  isNFT={columnAsset.isNFT}
+                                  sizeMultiplier={album.sizeMultiplier}
+                                />
+                              );
+                            })}
+                          </div>
+                        ))}
                       </div>
                     </Page>
                   ))}
-                <PageCover subtitle="To be continued..." />
+                <PageCover>
+                  <img src={album.back.image} className="page-image" />
+                </PageCover>
               </HTMLFlipBook>
               </div>
             </section>

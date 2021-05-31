@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import Ratio from 'react-ratio';
 import { getAsset } from '../services/assetsService';
 import { truncateString } from '../helpers/formatHelper';
 
@@ -13,13 +14,16 @@ const Asset = (props) => {
     padding,
     type,
     aspectRatio,
-    walletConnected
+    walletConnected,
+    isNFT,
+    sizeMultiplier,
+    columnNumber
   } = props;
 
   return (
     <>
-      <div className={`aspect-w-${aspectRatio.width} aspect-h-${aspectRatio.height} col-span-${size.columns} row-span-${size.rows}`}>
-        <div className={`bg-gray-900 h-full ${padding || null}`}>
+      <Ratio ratio={size.width / size.height} className={`object-cover`} style={{ width: 100 / columnNumber + "%"  }}>
+        <div className={`bg-gray-900 h-full w-full`}>
           <div className="group relative h-full z-0">
             <div className="absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10">
               <button className="hover:scale-110 text-white opacity-0 transform translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 transition">
@@ -49,9 +53,9 @@ const Asset = (props) => {
                 </defs>
               </svg>
               <div className="h-full w-full absolute overflow-hidden">
-                <img src={backgroundImage} className='h-full w-full blurred' />
+                <img src={backgroundImage} className={`h-full w-full ${isNFT ? 'blurred' : null}`} />
               </div>
-              {image ? <img src={image} className='h-full w-full absolute' /> : (
+              {image || !isNFT ? <img src={image} className='h-full w-full absolute' /> : (
                 <div className="mt-3 mr-3 top-0 flex flex-col absolute right-0 z-1">
                   <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12">
                     <h3 className="text-gray-300 text-xs filter">Address</h3>
@@ -60,13 +64,13 @@ const Asset = (props) => {
                   <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12 mt-2">
                     <h3 className="text-gray-300 text-xs filter">Token ID</h3>
                     <p className="text-white text-sm">{truncateString(tokenId)}</p>
-                  </div> 
+                  </div>
                 </div>
               )}
             </>
           </div>
         </div>
-      </div>
+      </Ratio>
     </>
   )
 }
