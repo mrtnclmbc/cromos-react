@@ -96,8 +96,8 @@ const Album = (props) => {
                 <HTMLFlipBook
                   width={album.width * album.sizeMultiplier}
                   height={album.height * album.sizeMultiplier}
-                  minWidth={album.width * album.sizeMultiplier}
-                  minHeight={album.height * album.sizeMultiplier}
+                  minWidth={album.width * album.sizeMultiplier / 2}
+                  minHeight={album.height * album.sizeMultiplier / 2}
                   size="stretch"
                   maxShadowOpacity={0.5}
                   mobileScrollSupport={true}
