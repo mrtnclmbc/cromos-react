@@ -26,6 +26,7 @@ jobs:
           prodRun=""
           if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
             prodRun="--prod"
+            echo "Deploying in Production Environment"
           fi
 
           npx vercel --token ${VERCEL_TOKEN} $prodRun
