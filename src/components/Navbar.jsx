@@ -53,12 +53,15 @@ const Navbar = ({ toggleMode, darkMode }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
               <div className="flex justify-start flex-1">
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src="/logo.svg"
-                  alt="Cromy Logo"
-                />
+                <Link href="/">
+                  <img
+                    className="h-8 w-auto sm:h-10 cursor-pointer"
+                    src="/logo.svg"
+                    alt="Cromy Logo"
+                  />
+                </Link>
               </div>
+              {/*
               <div className="flex items-center flex-grow flex-5">
                 <div className="-mr-2 -my-2 md:hidden">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -127,6 +130,7 @@ const Navbar = ({ toggleMode, darkMode }) => {
                 </Popover.Group>
                 <SearchBar />
               </div>
+              */}
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                 <ConnectWallet />
               </div>

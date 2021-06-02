@@ -10,6 +10,7 @@ import FeaturedRow from './FeaturedRow';
 import ServicesRow from './ServicesRow';
 import SubscribeRow from './SubscribeRow';
 import GameCard from './GameCard';
+import ComingSoon from './ComingSoon';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -34,4 +35,5 @@ export {
   ServicesRow,
   SubscribeRow,
   GameCard,
+  ComingSoon,
 };
