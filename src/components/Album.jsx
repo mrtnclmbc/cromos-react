@@ -86,12 +86,7 @@ const Album = (props) => {
               title={album.title}
               description={album.description}
             />
-            <section className="py-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
-              <div className="flex w-full flex-wrap pb-4">
-                <h1 className="sm:text-xl text-xl font-normal title-font text-gray-900 lg:mb-0">
-                  Tu Álbum <span className="font-bold">{currentAddress}</span>
-                </h1>
-              </div>
+            <section className="pt-0 pb-0 sm:pb-6 sm:pt-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
               <div className={`container grid grid-cols-19`}>
                 <HTMLFlipBook
                   width={album.width * album.sizeMultiplier}

@@ -131,7 +131,7 @@ const Navbar = ({ toggleMode, darkMode }) => {
                 <SearchBar />
               </div>
               */}
-              <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+              <div className="flex items-center justify-end md:flex-1 lg:w-0">
                 <ConnectWallet />
               </div>
             </div>

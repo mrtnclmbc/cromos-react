@@ -1,16 +1,16 @@
 import {
+  ComingSoon,
   FeaturedRow,
   HeroSection,
   ServicesRow,
   SubscribeRow,
-  ComingSoon,
 } from '../src/components';
 
 import Head from 'next/head';
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" style={{ height: "100%", overflow: "hidden" }}>
       {/* Coming Soon Replacement
         <Head>
           <title>Cromy</title>
