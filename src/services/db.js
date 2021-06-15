@@ -289,6 +289,566 @@ var db = [
       },
     ]
   },
+  {
+    // https://testnets.opensea.io/collection/comic-walking-dead
+    album_id: 2,
+    title: 'Bizarrap Sticker Album',
+    description: 'Biza biza rap',
+    image: null,
+    gap: 'gap-0',
+    type: 'album',
+    address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+    width: 1090.5,
+    height: 1536,
+    sizeMultiplier: .7,
+    cover: {
+      image: '../../img/comics/bizacover.jpeg',
+    },
+    back: {
+      image: '../../img/comics/back-the-walking-dead.png',
+    },
+    pages: [
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      },
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: false,
+                resource: 'https://elrescatemusical.com/wp-content/uploads/2020/12/unnamed-1.jpg',
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: false,
+                resource: 'https://i.scdn.co/image/ab67616d00001e02e26045ed24b1c5c1510fb710',
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      },
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      },
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      },
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      },
+      {
+        type: 'content',
+        backgroundImage: '../../img/comics/bizacover.jpeg',
+        assets: {
+          columns: [
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 242.33,
+                  height: 342,
+                },
+                isNFT: true,
+                resource: null,
+                type: 'sticker',
+                padding: 2,
+                rounded: true,
+                borderColor: 'white'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858128523186405377',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  columns: 12,
+                  rows: 3,
+                  width: 727,
+                  height: 341,
+                },
+                isNFT: false,
+                resource: null,
+                type: 'empty',
+                rounded: true
+              },
+            ]
+          ]
+        }
+      }
+    ]
+  },
 ];
 
 export default db;

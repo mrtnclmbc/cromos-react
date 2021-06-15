@@ -104,9 +104,10 @@ const Album = (props) => {
                   </PageCover>
                   {album.pages.map((page, index) => (
                     <Page number={index}>
+                      {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                       <div style={{ flex: 1 }}>
                         {album && page.assets?.columns?.map((columns, index) => (
-                          <div className="flex">
+                          <div className="flex" style={{ backgroundImage: page.backgroundImage }}>
                             {columns.map((columnAsset, index) => {
                               const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
                               const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
@@ -119,11 +120,14 @@ const Album = (props) => {
                                   backgroundImage={asset?.image_url}
                                   tokenId={columnAsset.token_id}
                                   addressId={columnAsset.address}
-                                  padding={album.padding}
-                                  type={album.type}
+                                  padding={columnAsset.padding}
                                   walletConnected={walletConnected}
                                   isNFT={columnAsset.isNFT}
                                   sizeMultiplier={album.sizeMultiplier}
+                                  type={columnAsset.type}
+                                  rounded={columnAsset.rounded}
+                                  borderColor={columnAsset.borderColor}
+                                  resource={columnAsset.resource}
                                 />
                               );
                             })}
