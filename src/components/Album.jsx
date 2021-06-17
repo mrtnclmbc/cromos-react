@@ -78,7 +78,7 @@ const Album = (props) => {
   }, [album]);
 
   return (
-    <div className="min-h-screen">
+    <div>
       {loading ? <LoadingIndicator /> :
         (
           <>
@@ -107,7 +107,7 @@ const Album = (props) => {
                       {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                       <div style={{ flex: 1 }}>
                         {album && page.assets?.columns?.map((columns, index) => (
-                          <div className="flex" style={{ backgroundImage: page.backgroundImage }}>
+                          <div className="flex">
                             {columns.map((columnAsset, index) => {
                               const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
                               const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
@@ -128,6 +128,8 @@ const Album = (props) => {
                                   rounded={columnAsset.rounded}
                                   borderColor={columnAsset.borderColor}
                                   resource={columnAsset.resource}
+                                  widthPercentage={columnAsset?.size?.width * 100 / album.width}
+                                  stickerBackgroundImage={columnAsset?.backgroundImage}
                                 />
                               );
                             })}

@@ -17,15 +17,16 @@ const Asset = (props) => {
     walletConnected,
     isNFT,
     sizeMultiplier,
-    columnNumber,
+    widthPercentage,
     rounded,
     borderColor,
-    resource
+    resource,
+    stickerBackgroundImage
   } = props;
 
   return (
     <>
-      <Ratio ratio={size.width / size.height} className={`object-cover`} style={{ width: 100 / columnNumber + "%"  }}>
+      <Ratio ratio={size.width / size.height} className={`object-cover`} style={{ width: widthPercentage + "%" }}>
         <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter drop-shadow-lg' : ''} h-full w-full ${padding && `p-${padding}`}`}>
           <div className="group relative h-full z-0 ">
             {type !== 'empty' && (
@@ -59,17 +60,21 @@ const Asset = (props) => {
                   </defs>
                 </svg>
                 <div className={`h-full w-full absolute overflow-hidden ${rounded && 'rounded-lg'}`}>
-                  {type === "image" && !image && <img src={backgroundImage} className={`h-full w-full ${isNFT ? 'blurred' : null}`} />}
-                  {type === "sticker" && ((isNFT && !image) || (!isNFT && !resource)) && <div className={`h-full w-full bg-gray-800 ${borderColor && 'border-solid border-white border-4'} ${rounded && 'rounded-lg'}`} />}
+                  {type === "image" && ((isNFT && !image) || (!isNFT && !resource)) && <img src={backgroundImage} className={`h-full w-full ${isNFT ? 'blurred' : null}`} />}
+                  {type === "sticker" && ((isNFT && !image) || (!isNFT && !resource)) && (
+                    <div className={`h-full w-full ${!stickerBackgroundImage ? 'bg-gray-800' : ''} ${borderColor && 'border-solid border-white border-4'} ${rounded && 'rounded-lg'}`}>
+                      {stickerBackgroundImage && <img src={stickerBackgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
+                    </div>
+                  )}
                 </div>
                 {image || !isNFT ? <img src={isNFT ? image : resource} className={`h-full w-full ${rounded && 'rounded-lg'} ${type === "sticker" && 'object-cover drop-shadow-md'}`} /> : (
-                  <div className={`mt-3 mr-3 top-0 flex flex-col absolute right-0 z-1 ${rounded && 'rounded-lg'}`}>
+                  <div className={`mt-3 mr-3 top-0 flex flex-col absolute right-0 z-1`}>
                     <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12">
-                      <h3 className="text-gray-300 text-xs filter">Address</h3>
+                      <h3 className="text-gray-300 text-xs">Address</h3>
                       <p className="text-white text-sm">{truncateString(addressId)}</p>
                     </div>
                     <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12 mt-2">
-                      <h3 className="text-gray-300 text-xs filter">Token ID</h3>
+                      <h3 className="text-gray-300 text-xs">Token ID</h3>
                       <p className="text-white text-sm">{truncateString(tokenId)}</p>
                     </div>
                   </div>
