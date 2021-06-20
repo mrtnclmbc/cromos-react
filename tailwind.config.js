@@ -7,6 +7,14 @@ module.exports = {
       display: ['Poppins', 'sans-serif'],
       sans: ['Poppins', 'sans-serif'],
     },
+    maxWidth: {
+      "7/8": "87.5%",
+      "12/13": "92.3%"
+    },
+    maxHeight: {
+      "7/8": "87.5%",
+      "12/13": "92.3%"
+    },
     extend: {
       height: {
         xs: "20rem",
@@ -19,6 +27,12 @@ module.exports = {
         "4xl": "56rem",
         "5xl": "64rem",
         "6xl": "72rem",
+        "7/8": "87.5%",
+        "12/13": "92.3%"
+      },
+      width: {
+        "7/8": "87.5%",
+        "12/13": "92.3%",
       },
     },
   },

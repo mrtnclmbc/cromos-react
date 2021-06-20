@@ -1,4 +1,4 @@
-import { AlbumHeader, Asset, LoadingIndicator } from './';
+import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
@@ -98,23 +98,24 @@ const Album = (props) => {
                   mobileScrollSupport={true}
                   className="comic justify-self-center"
                   showCover={true}
+                  clickEventForward={false}
+                  disableFlipByClick={true}
                 >
                   <PageCover>
                     <img src={album.cover.image} className="page-image" />
                   </PageCover>
                   {album.pages.map((page, index) => (
-                    <Page number={index}>
+                    <Page number={index} key={`page-${index}`}>
                       {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                       <div style={{ flex: 1 }}>
                         {album && page.assets?.columns?.map((columns, index) => (
-                          <div className="flex">
+                          <div className="flex" key={`column-container-${index}`}>
                             {columns.map((columnAsset, index) => {
                               const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
                               const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
                               return (
                                 <Asset
-                                  key={index}
-                                  columnNumber={columns.length}
+                                  key={`asset-${index}`}
                                   size={columnAsset.size}
                                   image={ownedAsset ? ownedAsset.image_url : null}
                                   backgroundImage={asset?.image_url}
@@ -130,6 +131,12 @@ const Album = (props) => {
                                   resource={columnAsset.resource}
                                   widthPercentage={columnAsset?.size?.width * 100 / album.width}
                                   stickerBackgroundImage={columnAsset?.backgroundImage}
+                                  title={columnAsset.title}
+                                  artist={columnAsset.artist}
+                                  color={columnAsset.color}
+                                  audioUrl={asset?.animation_url || ownedAsset?.animation_url}
+                                  cover={asset?.image_url || ownedAsset?.image_url}
+                                  isOwned={ownedAsset ? ownedAsset : false}
                                 />
                               );
                             })}
@@ -142,11 +149,11 @@ const Album = (props) => {
                   <img src={album.back.image} className="page-image" />
                 </PageCover>
               </HTMLFlipBook>
-              </div>
-            </section>
-          </>
-        )}
-      </div>
+            </div>
+          </section>
+        </>
+      )}
+    </div>
   );
 }
 

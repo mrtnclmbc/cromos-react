@@ -11,10 +11,10 @@ const AlbumHeader = (props) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="mt-2 text-2xl sm:text-3xl leading-8 font-bold tracking-tight text-white sm:text-4xl">
-              {`${title || 'Momentos del Fútbol'} `}<span className="font-black">Vol. 1</span>
+              {`${title} `}
             </p>
             <p className="mt-4 max-w-2xl text-l text-white lg:mx-auto font-light">
-                {description || 'Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.'}
+                {description}
             </p>
           </div>
         </div>

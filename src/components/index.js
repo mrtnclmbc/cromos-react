@@ -11,6 +11,8 @@ import ServicesRow from './ServicesRow';
 import SubscribeRow from './SubscribeRow';
 import GameCard from './GameCard';
 import ComingSoon from './ComingSoon';
+import AudioPlayer from './AudioPlayer';
+import AssetInfo from './AssetInfo';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -36,4 +38,6 @@ export {
   SubscribeRow,
   GameCard,
   ComingSoon,
+  AudioPlayer,
+  AssetInfo,
 };
