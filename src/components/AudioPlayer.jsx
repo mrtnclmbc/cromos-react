@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Palette, { usePalette } from 'react-palette';
 import AudioControls from "./AudioControls";
 import AudioBackdrop from './AudioBackdrop';
 import PreviewOutlineIcon from '../../public/icons/preview-outline.svg';
@@ -27,6 +28,8 @@ const AudioPlayer = (props) => {
   const audioRef = useRef(new Audio(audioUrl));
   const intervalRef = useRef();
   const isReady = useRef(false);
+  const [dominantColor, setDominantColor] = useState(null);
+  const { data, loading, error } = usePalette(backgroundImage);
 
   // Destructure for conciseness
   const { duration } = audioRef.current;
@@ -70,8 +73,10 @@ const AudioPlayer = (props) => {
     if(isOwned || !isNFT) {
       audioRef.current.src = audioUrl;
       audioRef.current.load();
+      const keys = Object.keys(data);
+      setDominantColor(data[keys[ keys.length * Math.random() << 0]]);
     }
-  }, [audioUrl, isOwned, isNFT])
+  }, [audioUrl, isOwned, isNFT, data])
 
   useEffect(() => {
     if (isPlaying) {
@@ -102,8 +107,8 @@ const AudioPlayer = (props) => {
                   src={cover}
                   alt={`track artwork for ${title} by ${artist}`}
                 />
-                <h2 className="font-semibold truncate text-xs md:text-md">{title}</h2>
-                <h3 className="artist mb-2 xl:mb-5 truncate text-xs md:text-md">{artist}</h3>
+                <h2 className="font-semibold truncate text-xs md:text-md text-shadow-sm">{title}</h2>
+                <h3 className="artist mb-2 xl:mb-5 truncate text-xs md:text-md text-shadow-sm">{artist}</h3>
                 {!isNFT || isOwned ? (
                   <>
                     <AudioControls
@@ -132,8 +137,9 @@ const AudioPlayer = (props) => {
                 )}
               </div>
               <AudioBackdrop
-                activeColor={color}
+                dominantColor={dominantColor}
                 isPlaying={isPlaying}
+                backgroundImage={backgroundImage}
               />
             </div>
           </>

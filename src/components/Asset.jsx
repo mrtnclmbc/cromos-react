@@ -1,11 +1,12 @@
+import { AssetInfo, AudioPlayer } from './';
 import React, { useEffect, useState } from 'react';
-import Ratio from 'react-ratio';
-import { AudioPlayer, AssetInfo } from './';
-import { getAsset } from '../services/assetsService';
-import { truncateString } from '../helpers/formatHelper';
+
+import EllipsisIcon from '../../public/icons/ellipsis.svg';
 import HeartIcon from '../../public/icons/heart-outline.svg';
 import PlayRoundedIcon from '../../public/icons/play-rounded.svg';
-import EllipsisIcon from '../../public/icons/ellipsis.svg';
+import Ratio from 'react-ratio';
+import { getAsset } from '../services/assetsService';
+import { truncateString } from '../helpers/formatHelper';
 
 const Asset = (props) => {
   const {

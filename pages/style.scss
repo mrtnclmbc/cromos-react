@@ -167,8 +167,6 @@ input[type="range"] {
 }
 
 .color-backdrop {
-  background: linear-gradient(45deg, var(--active-color) 20%, transparent 100%)
-    no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -192,4 +190,8 @@ input[type="range"] {
 
 .tippy-box {
   word-break: break-all;
+}
+
+.text-shadow-sm {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.10);
 }

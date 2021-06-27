@@ -1447,7 +1447,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '01 Re-Hash (Feat. Miho Hatori)',
+                artist: 'Gorillaz',
+                color: "#ffb77a",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1456,6 +1472,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#ffb77a",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858147214884077569',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1472,7 +1490,30 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
               },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858147214884077569',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '02 5-4 (Feat. Miho Hatori)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
             ],
+          ]
+        }
+      },
+      {
+        type: 'content',
+        assets: {
+          columns: [
             [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858148314395705345',
@@ -1481,7 +1522,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '03 Tomorrow Comes Today',
+                artist: 'Gorillaz',
+                color: "#5f9fff",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858148314395705345',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1490,6 +1547,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#5f9fff",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858149413907333121',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1497,11 +1556,27 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
                 type: 'audio',
+                title: '04 New Genius (Brother)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858149413907333121',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
                 title: '04 New Genius (Brother)',
                 artist: 'Gorillaz',
                 color: "#00aeb0",
@@ -1522,7 +1597,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '05 Clint Eastwood',
+                artist: 'Gorillaz',
+                color: "#ffb77a",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858150513418960897',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1531,6 +1622,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#ffb77a",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858151612930588673',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1538,7 +1631,7 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1547,7 +1640,30 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
               },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858151612930588673',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '06 Man Research (Clapper)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
             ],
+          ]
+        }
+      },
+      {
+        type: 'content',
+        assets: {
+          columns: [
             [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858153811953844225',
@@ -1556,7 +1672,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '07 Punk (Feat. Dave Rowntree)',
+                artist: 'Gorillaz',
+                color: "#5f9fff",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858153811953844225',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1565,6 +1697,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#5f9fff",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858154911465472001',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1577,6 +1711,22 @@ var db = [
                 padding: null,
                 rounded: false,
                 type: 'audio',
+                title: '08 Sound Check (Gravity)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858154911465472001',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
                 title: '08 Sound Check (Gravity)',
                 artist: 'Gorillaz',
                 color: "#00aeb0",
@@ -1597,7 +1747,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '09 Double Bass',
+                artist: 'Gorillaz',
+                color: "#ffb77a",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858157110488727553',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1606,6 +1772,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#ffb77a",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858158210000355329',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1613,7 +1781,7 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1622,7 +1790,30 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
               },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858158210000355329',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '10 Rock The House (Feat. Del Tha Funky)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
             ],
+          ]
+        }
+      },
+      {
+        type: 'content',
+        assets: {
+          columns: [
             [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
@@ -1631,7 +1822,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '11 19-2000 (Feat. Miho Hatori _ Tina Weymouth)',
+                artist: 'Gorillaz',
+                color: "#5f9fff",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1640,6 +1847,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#5f9fff",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858160409023610881',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1656,10 +1865,27 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
               },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858160409023610881',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '12 Latin Simone (¿Qué Pasa Contigo_)',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
             ],
           ]
         }
-      },{
+      },
+      {
         type: 'content',
         assets: {
           columns: [
@@ -1671,7 +1897,23 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '13 Starshine',
+                artist: 'Gorillaz',
+                color: "#ffb77a",
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858161508535238657',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -1680,6 +1922,8 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#ffb77a",
               },
+            ],
+            [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858162608046866433',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
@@ -1696,7 +1940,30 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
               },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858162608046866433',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 640,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '14 Slow Country',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
+              },
             ],
+          ]
+        }
+      },
+      {
+        type: 'content',
+        assets: {
+          columns: [
             [
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858163707558494209',
@@ -1705,11 +1972,11 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
-                type: 'audio',
+                type: 'image',
                 title: '15 M1A1',
                 artist: 'Gorillaz',
                 color: "#5f9fff",
@@ -1721,12 +1988,32 @@ var db = [
                   width: 640,
                   height: 640,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
+                padding: null,
+                rounded: false,
                 type: 'audio',
-                title: '16 Dracula (US Bonus Track)',
+                title: '15 M1A1',
                 artist: 'Gorillaz',
                 color: "#5f9fff",
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858164807070121985',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 1280,
+                  height: 640,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'image',
+                title: '14 Slow Country',
+                artist: 'Gorillaz',
+                color: "#00aeb0",
               },
             ],
           ]
