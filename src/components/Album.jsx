@@ -145,6 +145,9 @@ const Album = (props) => {
                                   color={columnAsset.color}
                                   audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                                   cover={asset?.image_url || ownedAsset?.image_url}
+                                  showCover={columnAsset.showCover}
+                                  coverSize={columnAsset.coverSize}
+                                  backgroundType={columnAsset.backgroundType}
                                   isOwned={ownedAsset ? ownedAsset : false}
                                   setModalOpen={setModalOpen}
                                   setSelectedAsset={setSelectedAsset}

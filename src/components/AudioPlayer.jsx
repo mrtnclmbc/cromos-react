@@ -23,6 +23,9 @@ const AudioPlayer = (props) => {
     addressId,
     showProgressBar = false,
     backgroundImage,
+    showCover = true,
+    coverSize,
+    backgroundType = 'backdrop',
   } = props;
   // Refs
   const audioRef = useRef(new Audio(audioUrl));
@@ -30,6 +33,29 @@ const AudioPlayer = (props) => {
   const isReady = useRef(false);
   const [dominantColor, setDominantColor] = useState(null);
   const { data, loading, error } = usePalette(backgroundImage);
+
+  let size;
+
+  switch (coverSize) {
+    case 'xs':
+      size = 'md:h-1/6 w-1/6'
+      break;
+    case 'sm':
+      size = 'md:h-1/5 w-1/5'
+      break;
+    case 'md':
+      size = 'md:h-1/4 w-1/4'
+      break;
+    case 'lg':
+      size = 'md:h-1/3 w-1/3'
+      break;
+    case 'xl':
+      size = 'md:h-1/2 w-1/2'
+      break;
+    default:
+      size = 'md:h-1/4 w-1/4'
+      break;
+  }
 
   // Destructure for conciseness
   const { duration } = audioRef.current;
@@ -95,18 +121,21 @@ const AudioPlayer = (props) => {
     };
   }, []);
 
+
   return (
     <>
       { isNFT && !isOwned ? <AssetInfo tokenId={tokenId} addressId={addressId} backgroundImage={backgroundImage} />
         :(
           <>
-            <div className="text-white max-w-full max-h-full w-full h-full p-2 rounded-xl mx-auto flex justify-center items-center">
+            <div className={`${backgroundType === 'overlay' && 'bg-gray-900 bg-opacity-50'} text-white max-w-full max-h-full w-full h-full p-2 rounded-xl mx-auto flex justify-center items-center`}>
               <div className="text-center overflow-hidden">
-                <img
-                  className="h-1/3 w-1/3 md:h-1/2 md:w-1/2 mx-auto mb-3 md:mb-5 rounded-full m-1 ring-2 ring-white"
-                  src={cover}
-                  alt={`track artwork for ${title} by ${artist}`}
-                />
+                {showCover &&
+                  <img
+                    className={`h-1/3 w-1/3 ${size} mx-auto mb-3 md:mb-5 rounded-full m-1 ring-2 ring-white`}
+                    src={cover}
+                    alt={`track artwork for ${title} by ${artist}`}
+                  />
+                }
                 <h2 className="font-semibold truncate text-xs md:text-md text-shadow-sm">{title}</h2>
                 <h3 className="artist mb-2 xl:mb-5 truncate text-xs md:text-md text-shadow-sm">{artist}</h3>
                 {!isNFT || isOwned ? (
@@ -136,11 +165,13 @@ const AudioPlayer = (props) => {
                   </button>
                 )}
               </div>
-              <AudioBackdrop
-                dominantColor={dominantColor}
-                isPlaying={isPlaying}
-                backgroundImage={backgroundImage}
-              />
+              {backgroundType === 'backdrop' &&
+                <AudioBackdrop
+                  dominantColor={dominantColor}
+                  isPlaying={isPlaying}
+                  backgroundImage={backgroundImage}
+                />
+              }
             </div>
           </>
         )}

@@ -26,6 +26,8 @@ const Asset = (props) => {
     color,
     audioUrl,
     cover,
+    showCover,
+    coverSize,
     isOwned,
     widthPercentage,
     rounded,
@@ -35,6 +37,7 @@ const Asset = (props) => {
     setSelectedAsset,
     setModalOpen,
     asset,
+    backgroundType,
   } = props;
 
   return (
@@ -100,6 +103,9 @@ const Asset = (props) => {
                   tokenId={tokenId}
                   addressId={addressId}
                   backgroundImage={backgroundImage}
+                  showCover={showCover}
+                  coverSize={coverSize}
+                  backgroundType={backgroundType}
                 />
               </>
             )}
