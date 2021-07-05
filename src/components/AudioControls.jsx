@@ -14,7 +14,7 @@ const AudioControls = ({
     {isPlaying ? (
       <button
         type="button"
-        className="pause hover:scale-110 text-white transform transition h-auto xl:w-8 lg:w-6 md:w-4 sm:w-4"
+        className="pause hover:scale-110 text-white transform transition h-auto w-6 xl:w-8 lg:w-6 md:w-4"
         onClick={() => onPlayPauseClick(false)}
         aria-label="Pause"
       >
@@ -23,7 +23,7 @@ const AudioControls = ({
     ) : (
       <button
         type="button"
-        className="play hover:scale-110 text-white transform transition h-auto xl:w-8 lg:w-6 md:w-4 sm:w-4"
+        className="play hover:scale-110 text-white transform transition h-auto w-6 xl:w-8 lg:w-6 md:w-4"
         onClick={() => onPlayPauseClick(true)}
         aria-label="Play"
       >

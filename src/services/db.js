@@ -2062,13 +2062,85 @@ var db = [
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
                 size: {
                   width: 1280,
-                  height: 1280,
+                  height: 365,
                 },
                 isNFT: false,
                 resource: null,
-                padding: '48',
+                padding: '0',
+                rounded: false,
+                type: 'empty',
+                artist: 'Gorillaz',
+                title: 'Re-Hash (Feat. Miho Hatori)',
+                backgroundType: 'overlay',
+                coverSize: 'lg'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 365,
+                  height: 550,
+                },
+                isNFT: false,
+                resource: null,
+                padding: '0',
+                rounded: false,
+                type: 'empty',
+                artist: 'Gorillaz',
+                title: 'Re-Hash (Feat. Miho Hatori)',
+                backgroundType: 'overlay',
+                coverSize: 'lg'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 550,
+                  height: 550,
+                },
+                isNFT: false,
+                resource: null,
+                padding: '0',
                 rounded: false,
                 type: 'audio',
+                artist: 'Gorillaz',
+                title: 'Re-Hash (Feat. Miho Hatori)',
+                backgroundType: 'overlay',
+                coverSize: 'lg'
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 365,
+                  height: 550,
+                },
+                isNFT: false,
+                resource: null,
+                padding: '0',
+                rounded: false,
+                type: 'empty',
+                artist: 'Gorillaz',
+                title: 'Re-Hash (Feat. Miho Hatori)',
+                backgroundType: 'overlay',
+                coverSize: 'lg'
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 1280,
+                  height: 365,
+                },
+                isNFT: false,
+                resource: null,
+                padding: '0',
+                rounded: false,
+                type: 'empty',
                 artist: 'Gorillaz',
                 title: 'Re-Hash (Feat. Miho Hatori)',
                 backgroundType: 'overlay',
@@ -2098,7 +2170,6 @@ var db = [
                 title: '5-4 (Feat. Miho Hatori)',
                 artist: 'Gorillaz',
                 color: "#ffb77a",
-                showCover: true,
                 coverSize: 'xs',
               },
             ],
@@ -2557,7 +2628,7 @@ var db = [
                 artist: 'Gorillaz',
                 color: "",
                 backgroundType: 'backdrop',
-                coerSize: 'md'
+                coverSize: 'md'
               },
             ],
           ]

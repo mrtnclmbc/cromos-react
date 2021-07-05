@@ -38,22 +38,22 @@ const AudioPlayer = (props) => {
 
   switch (coverSize) {
     case 'xs':
-      size = 'md:h-1/6 w-1/6'
+      size = 'h-1/6 w-1/6'
       break;
     case 'sm':
-      size = 'md:h-1/5 w-1/5'
+      size = 'h-1/5 w-1/5'
       break;
     case 'md':
-      size = 'md:h-1/4 w-1/4'
+      size = 'h-1/4 w-1/4'
       break;
     case 'lg':
-      size = 'md:h-1/3 w-1/3'
+      size = 'h-1/3 w-1/3'
       break;
     case 'xl':
-      size = 'md:h-1/2 w-1/2'
+      size = 'h-1/2 w-1/2'
       break;
     default:
-      size = 'md:h-1/4 w-1/4'
+      size = 'h-1/4 w-1/4'
       break;
   }
 
@@ -131,7 +131,7 @@ const AudioPlayer = (props) => {
               <div className="text-center overflow-hidden">
                 {showCover &&
                   <img
-                    className={`h-1/3 w-1/3 ${size} mx-auto mb-3 md:mb-5 rounded-full m-1 ring-2 ring-white`}
+                    className={`${size} hidden sm:block sm:mx-auto mb-3 md:mb-5 rounded-full m-1 ring-2 ring-white`}
                     src={cover}
                     alt={`track artwork for ${title} by ${artist}`}
                   />

@@ -104,7 +104,7 @@ const Album = (props) => {
                   minHeight={album.height * album.sizeMultiplier / 2}
                   size="stretch"
                   maxShadowOpacity={0.5}
-                  mobileScrollSupport={true}
+                  mobileScrollSupport={false}
                   className="comic justify-self-center"
                   showCover={true}
                   clickEventForward={false}
