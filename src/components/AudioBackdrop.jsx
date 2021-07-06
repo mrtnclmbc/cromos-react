@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 const AudioBackdrop = ({ dominantColor, isPlaying, backgroundImage }) => {
   useEffect(() => {
-    console.log(dominantColor)
     document.documentElement.style.setProperty("--active-color", dominantColor);
   }, [dominantColor]);
 

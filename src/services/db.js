@@ -2072,7 +2072,7 @@ var db = [
                 artist: 'Gorillaz',
                 title: 'Re-Hash (Feat. Miho Hatori)',
                 backgroundType: 'overlay',
-                coverSize: 'lg'
+                coverSize: 'xs'
               },
             ],
             [
@@ -2108,7 +2108,7 @@ var db = [
                 artist: 'Gorillaz',
                 title: 'Re-Hash (Feat. Miho Hatori)',
                 backgroundType: 'overlay',
-                coverSize: 'lg'
+                coverSize: 'md'
               },
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858146115372449793',
@@ -2170,7 +2170,7 @@ var db = [
                 title: '5-4 (Feat. Miho Hatori)',
                 artist: 'Gorillaz',
                 color: "#ffb77a",
-                coverSize: 'xs',
+                coverSize: 'sm',
               },
             ],
             [
@@ -2213,7 +2213,7 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
                 showCover: true,
-                coverSize: 'md',
+                coverSize: 'xs',
               },
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858154911465472001',
@@ -2231,7 +2231,7 @@ var db = [
                 artist: 'Gorillaz',
                 color: "#00aeb0",
                 showCover: true,
-                coverSize: 'md',
+                coverSize: 'xs',
               },
               {
                token_id: '105665526449733265606596008423351073540659047519780003086054858157110488727553',
@@ -2249,7 +2249,7 @@ var db = [
                artist: 'Gorillaz',
                color: "#ffb77a",
                showCover: true,
-               coverSize: 'md',
+               coverSize: 'xs',
              },
             ],
             [
@@ -2334,26 +2334,64 @@ var db = [
                 token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
                 size: {
-                  width: 670,
-                  height: 700,
+                  width: 1280,
+                  height: 200,
                 },
                 isNFT: false,
                 resource: null,
-                padding: 12,
+                padding: null,
+                rounded: false,
+                type: 'empty',
+                title: '19-2000 (Feat. Miho Hatori _ Tina Weymouth)',
+                artist: 'Gorillaz',
+                color: "#5f9fff",
+                backgroundType: 'backdrop',
+                coverSize: 'md',
+              },
+            ],
+            [
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 77,
+                  height: 440,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
+                rounded: false,
+                type: 'empty',
+                title: '19-2000 (Feat. Miho Hatori _ Tina Weymouth)',
+                artist: 'Gorillaz',
+                color: "#5f9fff",
+                backgroundType: 'backdrop',
+                coverSize: 'md',
+              },
+              {
+                token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
+                address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
+                size: {
+                  width: 440,
+                  height: 440,
+                },
+                isNFT: false,
+                resource: null,
+                padding: null,
                 rounded: false,
                 type: 'audio',
                 title: '19-2000 (Feat. Miho Hatori _ Tina Weymouth)',
                 artist: 'Gorillaz',
                 color: "#5f9fff",
                 backgroundType: 'backdrop',
-                coverSize: 'lg',
+                coverSize: 'md',
               },
               {
                 token_id: '105665526449733265606596008423351073540659047519780003086054858159309511983105',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
                 size: {
-                  width: 610,
-                  height: 580,
+                  width: 763,
+                  height: 440,
                 },
                 isNFT: false,
                 resource: null,

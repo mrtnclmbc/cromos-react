@@ -106,6 +106,7 @@ const Asset = (props) => {
                   showCover={showCover}
                   coverSize={coverSize}
                   backgroundType={backgroundType}
+                  size={size}
                 />
               </>
             )}
