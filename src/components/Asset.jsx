@@ -30,12 +30,23 @@ const Asset = (props) => {
     rounded,
     borderColor,
     resource,
-    stickerBackgroundImage
+    stickerBackgroundImage,
+    setSelectedAsset,
+    setModalOpen,
+    asset,
   } = props;
-  console.log(props);
+
   return (
     <>
-      <Ratio ratio={size.width / size.height} className={`object-cover`} style={{ width: widthPercentage + "%" }}>
+      <Ratio
+        ratio={size.width / size.height}
+        className={`object-cover`}
+        style={{ width: widthPercentage + "%" }}
+        onClick={isNFT && !isOwned ? (() => {
+          setModalOpen(true);
+          setSelectedAsset(asset)
+          }) : null}
+      >
         <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter drop-shadow-lg' : ''} h-full w-full ${padding && `p-${padding}`}`}>
           <div className="group relative h-full z-0 ">
             {type !== 'empty' && isNFT && (

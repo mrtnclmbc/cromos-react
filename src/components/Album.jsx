@@ -1,4 +1,4 @@
-import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer } from './';
+import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer, Modal } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
@@ -45,6 +45,8 @@ const Album = (props) => {
   const [loading, setLoading] = useState(true);
   const [walletConnected, setWalletConnected] = useState(false);
   const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   useEffect(async () => {
     // Get album
@@ -82,6 +84,13 @@ const Album = (props) => {
       {loading ? <LoadingIndicator /> :
         (
           <>
+            {selectedAsset &&
+              <Modal
+                open={modalOpen}
+                setOpen={setModalOpen}
+                selectedAsset={selectedAsset}
+              />
+            }
             <AlbumHeader
               title={album.title}
               description={album.description}
@@ -137,6 +146,9 @@ const Album = (props) => {
                                   audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                                   cover={asset?.image_url || ownedAsset?.image_url}
                                   isOwned={ownedAsset ? ownedAsset : false}
+                                  setModalOpen={setModalOpen}
+                                  setSelectedAsset={setSelectedAsset}
+                                  asset={asset || null}
                                 />
                               );
                             })}

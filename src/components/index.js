@@ -13,6 +13,8 @@ import GameCard from './GameCard';
 import ComingSoon from './ComingSoon';
 import AudioPlayer from './AudioPlayer';
 import AssetInfo from './AssetInfo';
+import Modal from './Modal';
+import ModalContent from './ModalContent';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -40,4 +42,6 @@ export {
   ComingSoon,
   AudioPlayer,
   AssetInfo,
+  Modal,
+  ModalContent,
 };

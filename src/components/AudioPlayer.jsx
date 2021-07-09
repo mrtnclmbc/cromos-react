@@ -76,7 +76,6 @@ const AudioPlayer = (props) => {
   useEffect(() => {
     if (isPlaying) {
       audioRef.current.play();
-      console.log(audioRef.current);
       startTimer();
     } else {
       audioRef.current.pause();
