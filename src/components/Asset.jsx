@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Ratio from 'react-ratio';
-import { AudioPlayer } from './';
+import { AudioPlayer, AssetInfo } from './';
 import { getAsset } from '../services/assetsService';
 import { truncateString } from '../helpers/formatHelper';
 import HeartIcon from '../../public/icons/heart-outline.svg';
@@ -50,7 +50,7 @@ const Asset = (props) => {
         <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter drop-shadow-lg' : ''} h-full w-full ${padding && `p-${padding}`}`}>
           <div className="group relative h-full z-0 ">
             {type !== 'empty' && isNFT && (
-              <div className={`hidden sm:flex absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10 ${rounded && 'rounded-lg'}`}>
+              <div className={`${rounded && 'rounded-lg'} hidden sm:flex absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10`}>
                 <button className="hover:scale-110 text-white opacity-0 transform translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 transition">
                   <HeartIcon />
                 </button>
@@ -82,16 +82,7 @@ const Asset = (props) => {
                   )}
                 </div>
                 {image || !isNFT ? <img src={isNFT ? image : resource} className={`h-full w-full ${rounded && 'rounded-lg'} ${type === "sticker" && 'object-cover drop-shadow-md'}`} /> : (
-                  <div className={`mt-3 mr-3 top-0 flex flex-col absolute right-0 z-1`}>
-                    <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12">
-                      <h3 className="text-gray-300 text-xs">Address</h3>
-                      <p className="text-white text-sm">{truncateString(addressId)}</p>
-                    </div>
-                    <div className="p-2 text-left z-1 bg-gray-900 bg-opacity-30 h-12 mt-2">
-                      <h3 className="text-gray-300 text-xs">Token ID</h3>
-                      <p className="text-white text-sm">{truncateString(tokenId)}</p>
-                    </div>
-                  </div>
+                  <AssetInfo tokenId={tokenId} addressId={addressId} backgroundImage={backgroundImage} />
                 )}
               </>
             )}

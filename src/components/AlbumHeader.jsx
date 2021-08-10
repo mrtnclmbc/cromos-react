@@ -13,7 +13,7 @@ const AlbumHeader = (props) => {
             <p className="mt-2 text-2xl sm:text-3xl leading-8 font-bold tracking-tight text-white sm:text-4xl">
               {`${title} `}
             </p>
-            <p className="mt-4 max-w-2xl text-l text-white lg:mx-auto font-light">
+            <p className="mt-4 max-w-2xl text-xl text-white lg:mx-auto font-light">
                 {description}
             </p>
           </div>
