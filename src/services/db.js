@@ -2436,7 +2436,7 @@ var db = [
     ]
   },
   {
-    // https://testnets.opensea.io/collection/gorrillaz-album-test
+    // https://testnets.opensea.io/collection/iota-mural-poc
     album_id: 4,
     title: 'IOTA Mural POC',
     description: 'An Open, Feeless Data and Value Transfer Protocol',
