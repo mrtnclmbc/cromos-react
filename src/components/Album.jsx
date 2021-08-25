@@ -97,24 +97,82 @@ const Album = (props) => {
             />
             <section className="pt-0 pb-0 sm:pb-6 sm:pt-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
               <div className={`container grid grid-cols-19`}>
-                <HTMLFlipBook
-                  width={album.width * album.sizeMultiplier}
-                  height={album.height * album.sizeMultiplier}
-                  minWidth={album.width * album.sizeMultiplier / 2}
-                  minHeight={album.height * album.sizeMultiplier / 2}
-                  size="stretch"
-                  maxShadowOpacity={0.5}
-                  mobileScrollSupport={true}
-                  className="comic justify-self-center"
-                  showCover={true}
-                  clickEventForward={false}
-                  disableFlipByClick={true}
-                >
+                {album.type !== 'mural' ? (
+                  <HTMLFlipBook
+                    width={album.width * album.sizeMultiplier}
+                    height={album.height * album.sizeMultiplier}
+                    minWidth={album.width * album.sizeMultiplier / 2}
+                    minHeight={album.height * album.sizeMultiplier / 2}
+                    size="stretch"
+                    maxShadowOpacity={0.5}
+                    mobileScrollSupport={true}
+                    className="comic justify-self-center"
+                    showCover={true}
+                    clickEventForward={false}
+                    disableFlipByClick={true}
+                  >
+                    <PageCover>
+                      <img src={album.cover.image} className="page-image" />
+                    </PageCover>
+                    {album.pages.map((page, index) => (
+                      <Page number={index} key={`page-${index}`}>
+                        {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
+                        <div style={{ flex: 1 }}>
+                          {album && page.assets?.columns?.map((columns, index) => (
+                            <div className="flex" key={`column-container-${index}`}>
+                              {columns.map((columnAsset, index) => {
+                                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
+                                const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
+                                return (
+                                  <Asset
+                                    key={`asset-${index}`}
+                                    size={columnAsset.size}
+                                    image={ownedAsset ? ownedAsset.image_url : null}
+                                    backgroundImage={asset?.image_url}
+                                    tokenId={columnAsset.token_id}
+                                    addressId={columnAsset.address}
+                                    padding={columnAsset.padding}
+                                    walletConnected={walletConnected}
+                                    isNFT={columnAsset.isNFT}
+                                    sizeMultiplier={album.sizeMultiplier}
+                                    type={columnAsset.type}
+                                    rounded={columnAsset.rounded}
+                                    borderColor={columnAsset.borderColor}
+                                    resource={columnAsset.resource}
+                                    widthPercentage={columnAsset?.size?.width * 100 / album.width}
+                                    stickerBackgroundImage={columnAsset?.backgroundImage}
+                                    title={columnAsset.title}
+                                    artist={columnAsset.artist}
+                                    color={columnAsset.color}
+                                    audioUrl={asset?.animation_url || ownedAsset?.animation_url}
+                                    cover={asset?.image_url || ownedAsset?.image_url}
+                                    isOwned={ownedAsset ? ownedAsset : false}
+                                    setModalOpen={setModalOpen}
+                                    setSelectedAsset={setSelectedAsset}
+                                    asset={asset || null}
+                                  />
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      </Page>
+                    ))}
                   <PageCover>
-                    <img src={album.cover.image} className="page-image" />
+                    <img src={album.back.image} className="page-image" />
                   </PageCover>
+                </HTMLFlipBook>
+              ) : (
+                <div
+                  style={{
+                    width: album.width * album.sizeMultiplier,
+                    height: album.height * album.sizeMultiplier,
+                    minWidth: album.width * album.sizeMultiplier / 2,
+                    minHeight: album.height * album.sizeMultiplier / 2,
+                  }}
+                >
                   {album.pages.map((page, index) => (
-                    <Page number={index} key={`page-${index}`}>
+                    <div number={index} key={`page-${index}`}>
                       {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                       <div style={{ flex: 1 }}>
                         {album && page.assets?.columns?.map((columns, index) => (
@@ -158,12 +216,10 @@ const Album = (props) => {
                           </div>
                         ))}
                       </div>
-                    </Page>
+                    </div>
                   ))}
-                <PageCover>
-                  <img src={album.back.image} className="page-image" />
-                </PageCover>
-              </HTMLFlipBook>
+                </div>
+              )}
             </div>
           </section>
         </>
