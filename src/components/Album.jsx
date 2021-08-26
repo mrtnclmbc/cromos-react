@@ -1,4 +1,4 @@
-import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer, Modal } from './';
+import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
