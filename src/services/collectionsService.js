@@ -22,7 +22,7 @@ const getAlbum = async (albumId) => {
   //   .catch(err => console.error('error:' + err));
 
   // Testing
-  return db.default[albumId - 1];
+  return db.default.find(album => album.album_id == albumId);
 }
 
 export { getAlbum };

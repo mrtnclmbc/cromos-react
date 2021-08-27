@@ -77,7 +77,7 @@ const Album = (props) => {
     }
 
     if(album) { setLoading(false); }
-  }, [album]);
+  }, [album, currentAddress]);
 
   return (
     <div>

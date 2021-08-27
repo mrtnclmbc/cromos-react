@@ -3,7 +3,7 @@
 var db = [
   {
     // https://testnets.opensea.io/collection/comic-walking-dead
-    album_id: 1,
+    album_id: "comic",
     title: 'The Walking Dead',
     description: 'The world we knew is gone.',
     image: null,
@@ -259,7 +259,7 @@ var db = [
   },
   {
     // https://testnets.opensea.io/collection/comic-walking-dead
-    album_id: 2,
+    album_id: "sticker-album",
     title: 'Bizarrap Sticker Album',
     description: 'Biza biza rap',
     image: null,
@@ -1418,7 +1418,7 @@ var db = [
   },
   {
     // https://testnets.opensea.io/collection/gorrillaz-album-test
-    album_id: 3,
+    album_id: "musical-booklet",
     title: 'Gorillaz',
     description: '',
     image: null,
@@ -1900,7 +1900,7 @@ var db = [
   },
   {
     // https://testnets.opensea.io/collection/gorrillaz-album-test
-    album_id: 4,
+    album_id: "musical-booklet-vol-2",
     title: 'Gorillaz Vol 2',
     description: '',
     image: null,
@@ -2437,8 +2437,8 @@ var db = [
   },
   {
     // https://testnets.opensea.io/collection/iota-mural-poc
-    album_id: 4,
-    title: 'IOTA Mural POC',
+    album_id: "iota-mural",
+    title: 'IOTA Mural',
     description: 'An Open, Feeless Data and Value Transfer Protocol',
     image: null,
     gap: 'gap-0',
@@ -2462,7 +2462,7 @@ var db = [
                   width: 960,
                   height: 540,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -2576,7 +2576,7 @@ var db = [
                   width: 960,
                   height: 540,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -2610,7 +2610,7 @@ var db = [
                   width: 960,
                   height: 540,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
@@ -2708,7 +2708,7 @@ var db = [
                   width: 960,
                   height: 540,
                 },
-                isNFT: true,
+                isNFT: false,
                 resource: null,
                 padding: null,
                 rounded: false,
