@@ -6,7 +6,7 @@ import axios from 'axios';
 // const OPEN_SEA_BASE_URL = process.env.OPEN_SEA_BASE_URL;
 const OPEN_SEA_BASE_URL = 'https://testnets-api.opensea.io/api/v1';
 
-const getAssets = (owner, limit = 10) => {
+const getAssets = (owner, limit = 50) => {
   // Compose URL
   const url = `${OPEN_SEA_BASE_URL}/assets`;
 
