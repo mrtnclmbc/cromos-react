@@ -15,6 +15,7 @@ import AudioPlayer from './AudioPlayer';
 import AssetInfo from './AssetInfo';
 import Modal from './Modal';
 import ModalContent from './ModalContent';
+import Launcher from './Launcher';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -44,4 +45,5 @@ export {
   AssetInfo,
   Modal,
   ModalContent,
+  Launcher,
 };
