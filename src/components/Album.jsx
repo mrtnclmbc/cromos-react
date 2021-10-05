@@ -95,7 +95,7 @@ const Album = (props) => {
               title={album.title}
               description={album.description}
             />
-            <section className="pt-0 pb-0 sm:pb-6 sm:pt-6 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
+            <section className="pt-0 pb-0 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
               <div className={`container grid grid-cols-19 ${album.type === 'mural' && 'overflow-scroll'}`}>
                 {album.type !== 'mural' ? (
                   <HTMLFlipBook
