@@ -47,6 +47,9 @@ module.exports = {
         '12/13': '92.3%',
       },
     },
+    cursor: {
+      "grab": "grab",
+    }
   },
   variants: {
     opacity: ({ after }) => after(['disabled']),

@@ -1,5 +1,7 @@
-import 'tailwindcss/tailwind.css';
 import './style.scss';
+import 'tailwindcss/tailwind.css';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
 import { Footer, Navbar } from '../src/components';
 import React, { useEffect, useState } from 'react';

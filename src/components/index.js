@@ -16,6 +16,7 @@ import AssetInfo from './AssetInfo';
 import Modal from './Modal';
 import ModalContent from './ModalContent';
 import Launcher from './Launcher';
+import OnboardingSlider from './OnboardingSlider';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -46,4 +47,5 @@ export {
   Modal,
   ModalContent,
   Launcher,
+  OnboardingSlider,
 };

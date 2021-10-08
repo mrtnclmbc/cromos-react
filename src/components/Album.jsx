@@ -1,10 +1,10 @@
-import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal } from './';
+import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer, Modal, OnboardingSlider } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
-
 import { ApplicationContext } from '../state/store';
 import HTMLFlipBook from "react-pageflip";
 import { getAlbum } from '../services/collectionsService';
+import slidesArray from '../onboardingSlides';
 
 const PageCover = React.forwardRef(({ children }, ref) => {
   return (
@@ -47,7 +47,9 @@ const Album = (props) => {
   const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [onboardingDone, setOnboardingDone] = useState(false);
 
+  // Hooks
   useEffect(async () => {
     // Get album
     if(props.albumId) {
@@ -79,6 +81,19 @@ const Album = (props) => {
     if(album) { setLoading(false); }
   }, [album, currentAddress]);
 
+  useEffect(() => {
+    const onboardingDone = localStorage.getItem('onboardingDone');
+    setOnboardingDone(onboardingDone);
+    if(!onboardingDone) setModalOpen(true);
+  }, []);
+
+  // Helper functions
+  const handleOnboardingEnd = () => {
+    const onboardingDone = localStorage.setItem('onboardingDone', 1);
+    setOnboardingDone(onboardingDone);
+    setModalOpen(false);
+  }
+
   return (
     <div>
       {loading ? <LoadingIndicator /> :
@@ -89,7 +104,24 @@ const Album = (props) => {
                 open={modalOpen}
                 setOpen={setModalOpen}
                 selectedAsset={selectedAsset}
+                okButtonText="Get NFT!"
+                cancelButtonText="Cancel"
               />
+            }
+            {!onboardingDone && !selectedAsset &&
+              <Modal
+                open={modalOpen}
+                setOpen={setModalOpen}
+                showFooter={false}
+                isOnboarding
+                handleOnboardingEnd={handleOnboardingEnd}
+              >
+                <OnboardingSlider
+                  slidesArray={slidesArray}
+                  setOpen={setModalOpen}
+                  handleOnboardingEnd={handleOnboardingEnd}
+                />
+              </Modal>
             }
             <AlbumHeader
               title={album.title}
