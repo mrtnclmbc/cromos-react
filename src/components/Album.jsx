@@ -1,6 +1,7 @@
-import { AlbumHeader, Asset, LoadingIndicator, AudioPlayer, Modal, OnboardingSlider } from './';
+import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider } from './';
 import React, { useContext, useEffect, useState } from 'react';
 import { getAssets, getAssetsInfo } from '../services/assetsService';
+
 import { ApplicationContext } from '../state/store';
 import HTMLFlipBook from "react-pageflip";
 import { getAlbum } from '../services/collectionsService';
@@ -47,7 +48,7 @@ const Album = (props) => {
   const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
-  const [onboardingDone, setOnboardingDone] = useState(false);
+  const [onboardingDone, setOnboardingDone] = useState();
 
   // Hooks
   useEffect(async () => {
@@ -82,9 +83,12 @@ const Album = (props) => {
   }, [album, currentAddress]);
 
   useEffect(() => {
-    const onboardingDone = localStorage.getItem('onboardingDone');
-    setOnboardingDone(onboardingDone);
-    if(!onboardingDone) setModalOpen(true);
+    const onboardingDoneSetting = localStorage.getItem('onboardingDone');
+    
+    if (onboardingDone === undefined && !onboardingDoneSetting && !modalOpen) {
+      setOnboardingDone(onboardingDoneSetting);
+      setModalOpen(true);
+    }
   }, []);
 
   // Helper functions
