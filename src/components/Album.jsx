@@ -1,40 +1,20 @@
 import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider } from './';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { EffectCoverflow } from "swiper";
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
 import { ApplicationContext } from '../state/store';
-import HTMLFlipBook from "react-pageflip";
+import Ratio from 'react-ratio/lib/Ratio';
 import { getAlbum } from '../services/collectionsService';
 import slidesArray from '../onboardingSlides';
 
-const PageCover = React.forwardRef(({ children }, ref) => {
-  return (
-    <div className="page page-cover" ref={ref}>
-      {children}
-    </div>
-  );
-});
-
-const PageStructured = React.forwardRef(({ title, footer, children }, ref) => {
-  return (
-    <div className="page page-cover" ref={ref}>
-        <div className="page-header">{title}</div>
-        <div className="cover-content">{children}</div>
-        <div className="page-footer">{footer}</div>
-    </div>
-  );
-});
+SwiperCore.use([EffectCoverflow]);
 
 const Page = React.forwardRef(({ title, children, number }, ref) => {
   return (
     <div className="page" ref={ref}>
-      <div className="page-container">
-        <h2 className={`page-header${(number + 1) % 2 === 0 ? ' right' : ''}`}>{title}</h2>
-        <div className="page-content">
-          {children}
-        </div>
-        <h2 className="page-footer">{number + 1}</h2>
-      </div>
+      {children}
     </div>
   );
 });
@@ -49,6 +29,7 @@ const Album = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [onboardingDone, setOnboardingDone] = useState();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // Hooks
   useEffect(async () => {
@@ -58,11 +39,11 @@ const Album = (props) => {
       setAlbum(album);
     }
 
-    if (album && album.pages?.length) {
-      const contractAddress = album.address;
+    if (album && album?.pages?.length) {
+      const contractAddress = album?.address;
       let tokenIds = [];
-      album.pages.map(page => page.assets?.columns?.reduce((assets, total) => [...total, ...assets], []).map(asset => tokenIds.push(asset.token_id)));
-      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds);
+      album?.pages.map(page => page.assets?.columns?.reduce((assets, total) => [...total, ...assets], []).map(asset => tokenIds.push(asset.token_id)));
+      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds.filter(tokenId => tokenId));
       setAlbumAssets(assetsInfo?.assets);
     }
 
@@ -89,6 +70,20 @@ const Album = (props) => {
       setOnboardingDone(onboardingDoneSetting);
       setModalOpen(true);
     }
+
+    const handleResize = () => {
+      if (window.innerWidth > 600) {
+        setIsSmallScreen(false);
+      } else {
+        setIsSmallScreen(true);
+      }
+    }
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Helper functions
@@ -97,6 +92,75 @@ const Album = (props) => {
     setOnboardingDone(onboardingDone);
     setModalOpen(false);
   }
+
+  const slides = useMemo(() => {
+    if (!albumAssets?.length || !album || !walletAssets) return [];
+
+    const pages = album?.pages?.map((page, index) => (
+      <Page>
+        {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} />}
+        <div>
+          {album && page.assets?.columns?.map((columns, index) => (
+            <div className="flex" key={`column-container-${index}`}>
+              {columns.map((columnAsset, index) => {
+              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
+              const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
+              return (
+                <Asset
+                  key={`asset-${index}`}
+                  size={columnAsset.size}
+                  image={ownedAsset ? ownedAsset.image_url : null}
+                  backgroundImage={columnAsset?.backgroundImage || asset?.image_url}
+                  tokenId={columnAsset.token_id}
+                  addressId={columnAsset.address}
+                  padding={columnAsset.padding}
+                  walletConnected={walletConnected}
+                  isNFT={columnAsset.isNFT}
+                  sizeMultiplier={album?.sizeMultiplier}
+                  type={columnAsset.type}
+                  rounded={columnAsset.rounded}
+                  borderColor={columnAsset.borderColor}
+                  resource={columnAsset.resource}
+                  widthPercentage={columnAsset?.size?.width * 100 / album?.width}
+                  stickerBackgroundImage={columnAsset?.backgroundImage}
+                  title={columnAsset.title}
+                  artist={columnAsset.artist}
+                  color={columnAsset.color}
+                  audioUrl={asset?.animation_url || ownedAsset?.animation_url}
+                  cover={asset?.image_url || ownedAsset?.image_url}
+                  isOwned={ownedAsset ? ownedAsset : false}
+                  setModalOpen={setModalOpen}
+                  setSelectedAsset={setSelectedAsset}
+                  asset={asset || null}
+                />
+              );
+              })}
+            </div>
+          ))}
+        </div>
+      </Page>
+    ));
+  
+    const cover = (
+      <Ratio
+        style={{ width: "100%" }}
+        className={`object-cover`}
+        ratio={album?.width / album?.height}>
+        <img src={album?.cover?.image} style={{ height: "100%" }} />
+      </Ratio>
+    );
+
+    const back = (
+      <Ratio
+        style={{ width: "100%" }}
+        className={`object-cover`}
+        ratio={album?.width / album?.height}>
+        <img src={album?.back?.image} style={{ height: "100%" }} />
+      </Ratio>
+    );
+
+    return [...(album?.cover?.image ? [cover] : []), ...(pages || []), ...(album?.back?.image ? [back] : [])];
+  }, [albumAssets, walletAssets]);
 
   return (
     <div>
@@ -128,30 +192,47 @@ const Album = (props) => {
               </Modal>
             }
             <AlbumHeader
-              title={album.title}
-              description={album.description}
+              title={album?.title}
+              description={album?.description}
             />
-            <section className="pt-0 pb-0 dark:bg-coolGray-800 dark:text-coolGray-50 container mx-auto">
-              <div className={`container grid grid-cols-19 ${album.type === 'mural' && 'overflow-scroll'}`}>
-                {album.type !== 'mural' ? (
-                  <HTMLFlipBook
-                    width={album.width * album.sizeMultiplier}
-                    height={album.height * album.sizeMultiplier}
-                    minWidth={album.width * album.sizeMultiplier / 2}
-                    minHeight={album.height * album.sizeMultiplier / 2}
-                    size="stretch"
-                    maxShadowOpacity={0.5}
-                    mobileScrollSupport={true}
-                    className="comic justify-self-center"
-                    showCover={true}
-                    clickEventForward={false}
-                    disableFlipByClick={true}
+            <section className="pt-0 pb-0 w-full dark:bg-coolGray-800 dark:text-coolGray-50 mx-auto">
+              <div className={album?.type === 'mural' ? 'container grid grid-cols-19 overflow-scroll mx-auto' : 'w-full'}>
+                {album?.type !== 'mural' ? (
+                  slides?.length > 1 ? (
+                    <div style={{ width: "100%" }}>
+                      <Swiper
+                        spaceBetween={0}
+                        slidesPerView={isSmallScreen ? 1 : 2.3}
+                        centeredSlides
+                        effect={'coverflow'}
+                        autoHeight
+                        shortSwipes={false}
+                        coverflowEffect={{
+                          rotate: 40,
+                          stretch: 30,
+                          depth: 300,
+                          modifier: 1,
+                          slideShadows: true
+                        }}
+                        slideToClickedSlide={true}
+                      >
+                        {slides?.map((slide, idx) => (
+                          <SwiperSlide>
+                            {slide}
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    </div>
+                  ) : <LoadingIndicator />
+                ) : (
+                  <div
+                    style={{
+                      minWidth: album.width * album.sizeMultiplier / 2,
+                      minHeight: album.height * album.sizeMultiplier / 2,
+                    }}
                   >
-                    <PageCover>
-                      <img src={album.cover.image} className="page-image" />
-                    </PageCover>
                     {album.pages.map((page, index) => (
-                      <Page number={index} key={`page-${index}`}>
+                      <div number={index} key={`page-${index}`}>
                         {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                         <div style={{ flex: 1 }}>
                           {album && page.assets?.columns?.map((columns, index) => (
@@ -182,6 +263,9 @@ const Album = (props) => {
                                     color={columnAsset.color}
                                     audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                                     cover={asset?.image_url || ownedAsset?.image_url}
+                                    showCover={columnAsset.showCover}
+                                    coverSize={columnAsset.coverSize}
+                                    backgroundType={columnAsset.backgroundType}
                                     isOwned={ownedAsset ? ownedAsset : false}
                                     setModalOpen={setModalOpen}
                                     setSelectedAsset={setSelectedAsset}
@@ -192,68 +276,10 @@ const Album = (props) => {
                             </div>
                           ))}
                         </div>
-                      </Page>
-                    ))}
-                  <PageCover>
-                    <img src={album.back.image} className="page-image" />
-                  </PageCover>
-                </HTMLFlipBook>
-              ) : (
-                <div
-                  style={{
-                    minWidth: album.width * album.sizeMultiplier / 2,
-                    minHeight: album.height * album.sizeMultiplier / 2,
-                  }}
-                >
-                  {album.pages.map((page, index) => (
-                    <div number={index} key={`page-${index}`}>
-                      {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
-                      <div style={{ flex: 1 }}>
-                        {album && page.assets?.columns?.map((columns, index) => (
-                          <div className="flex" key={`column-container-${index}`}>
-                            {columns.map((columnAsset, index) => {
-                              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
-                              const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
-                              return (
-                                <Asset
-                                  key={`asset-${index}`}
-                                  size={columnAsset.size}
-                                  image={ownedAsset ? ownedAsset.image_url : null}
-                                  backgroundImage={asset?.image_url}
-                                  tokenId={columnAsset.token_id}
-                                  addressId={columnAsset.address}
-                                  padding={columnAsset.padding}
-                                  walletConnected={walletConnected}
-                                  isNFT={columnAsset.isNFT}
-                                  sizeMultiplier={album.sizeMultiplier}
-                                  type={columnAsset.type}
-                                  rounded={columnAsset.rounded}
-                                  borderColor={columnAsset.borderColor}
-                                  resource={columnAsset.resource}
-                                  widthPercentage={columnAsset?.size?.width * 100 / album.width}
-                                  stickerBackgroundImage={columnAsset?.backgroundImage}
-                                  title={columnAsset.title}
-                                  artist={columnAsset.artist}
-                                  color={columnAsset.color}
-                                  audioUrl={asset?.animation_url || ownedAsset?.animation_url}
-                                  cover={asset?.image_url || ownedAsset?.image_url}
-                                  showCover={columnAsset.showCover}
-                                  coverSize={columnAsset.coverSize}
-                                  backgroundType={columnAsset.backgroundType}
-                                  isOwned={ownedAsset ? ownedAsset : false}
-                                  setModalOpen={setModalOpen}
-                                  setSelectedAsset={setSelectedAsset}
-                                  asset={asset || null}
-                                />
-                              );
-                            })}
-                          </div>
-                        ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+                    ))}
+                  </div>
+                )}
             </div>
           </section>
         </>

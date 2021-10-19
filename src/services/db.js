@@ -11,7 +11,7 @@ var db = [
     type: 'comic',
     address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
     width: 1280,
-    height: 1968,
+    height: 1990,
     sizeMultiplier: .4,
     cover: {
       image: '../../img/comics/cover-the-walking-dead.jpg',
@@ -112,7 +112,7 @@ var db = [
                 size: {
                   columns: 12,
                   rows: 12,
-                  height: 1968,
+                  height: 1990,
                   width: 1280
                 },
                 isNFT: true,
@@ -244,7 +244,7 @@ var db = [
                 token_id: '105665526449733265606596008423351073540659047519780003086054858182399256166410',
                 address: '0x88b48f654c30e99bc2e4a1559b4dcf1ad93fa656',
                 size: {
-                  height: 1968,
+                  height: 1990,
                   width: 1280
                 },
                 isNFT: true,
