@@ -1,7 +1,7 @@
 import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider } from './';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { EffectCoverflow } from "swiper";
+import SwiperCore, { EffectCoverflow, Keyboard } from "swiper";
 import { getAssets, getAssetsInfo } from '../services/assetsService';
 
 import { ApplicationContext } from '../state/store';
@@ -9,7 +9,7 @@ import Ratio from 'react-ratio/lib/Ratio';
 import { getAlbum } from '../services/collectionsService';
 import slidesArray from '../onboardingSlides';
 
-SwiperCore.use([EffectCoverflow]);
+SwiperCore.use([EffectCoverflow, Keyboard]);
 
 const Page = React.forwardRef(({ title, children, number }, ref) => {
   return (
@@ -215,6 +215,10 @@ const Album = (props) => {
                           slideShadows: true
                         }}
                         slideToClickedSlide={true}
+                        keyboard={{
+                          enabled: true,
+                          onlyInViewport: false
+                        }}
                       >
                         {slides?.map((slide, idx) => (
                           <SwiperSlide>
