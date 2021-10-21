@@ -15039,7 +15039,7 @@ figure > img {
   padding: 0 24px;
   display: block;
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 80px;
   cursor: pointer;
@@ -15425,7 +15425,7 @@ figure > img {
 -----------------------------*/
 .section-header-info .section-pretitle {
   color: #8f91ac;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
 }

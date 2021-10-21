@@ -1,5 +1,6 @@
 import React from 'react';
 import { Footer, ConnectWallet  } from './';
+import Link from 'next/link';
 
 const Launcher = (props) => {
   return (
@@ -20,7 +21,7 @@ const Launcher = (props) => {
           {/*<!-- PAGE LOADER INFO -->*/}
           <div className="page-loader-info">
             {/*<!-- PAGE LOADER INFO TITLE -->*/}
-            <p className="page-loader-info-title">Cromy DAPPs launcher</p>
+            <p className="page-loader-info-title">DAPPSTER</p>
             {/*<!-- /PAGE LOADER INFO TITLE -->*/}
 
             {/*<!-- PAGE LOADER INFO TEXT -->*/}
@@ -53,11 +54,13 @@ const Launcher = (props) => {
               {/*<!-- LOGO -->*/}
               <div className="logo">
                 {/*<!-- ICON LOGO VIKINGER -->*/}
-                <img
-                  className="h-auto w-24"
-                  src="logo.svg"
-                  alt="Cromy logo"
-                />
+                <Link href="https://app.cromy.io/">
+                  <img
+                    className="h-auto w-24 cursor-pointer"
+                    src="logo.svg"
+                    alt="Cromy logo"
+                  />
+                </Link>
                 {/*<!-- /ICON LOGO VIKINGER -->*/}
               </div>
               {/*<!-- /LOGO -->*/}
@@ -399,11 +402,11 @@ const Launcher = (props) => {
             {/*<!-- /SECTION BANNER ICON -->*/}
 
             {/*<!-- SECTION BANNER TITLE -->*/}
-            <p className="section-banner-title">DAPP Launcher</p>
+            <p className="section-banner-title">DAPPSTER</p>
             {/*<!-- /SECTION BANNER TITLE -->*/}
 
             {/*<!-- SECTION BANNER TEXT -->*/}
-            <p className="section-banner-text">Start playing now!</p>
+            <p className="section-banner-text">Start now to collect and play!</p>
             {/*<!-- /SECTION BANNER TEXT -->*/}
           </div>
           {/*<!-- /SECTION BANNER -->*/}
@@ -417,7 +420,7 @@ const Launcher = (props) => {
               {/*<!-- /SECTION PRETITLE -->*/}
 
               {/*<!-- SECTION TITLE -->*/}
-              <h2 className="section-title">DAPP Categories</h2>
+              <h2 className="section-title">DAPPs & NFTs</h2>
               {/*<!-- /SECTION TITLE -->*/}
             </div>
             {/*<!-- /SECTION HEADER INFO -->*/}
@@ -429,15 +432,15 @@ const Launcher = (props) => {
             {/*<!-- PRODUCT CATEGORY BOX -->*/}
             <a className="product-category-box category-all" href="#">
               {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
-              <p className="product-category-box-title">Browse All</p>
+              <p className="product-category-box-title">Browse all</p>
               {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
-              <p className="product-category-box-text">Check out all DAPPs</p>
+              <p className="product-category-box-text">Check out all our own & 3rd party NFT DApps.</p>
               {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag">26 items</p>
+              <p className="product-category-box-tag">4 items</p>
               {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
             </a>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
@@ -445,15 +448,15 @@ const Launcher = (props) => {
             {/*<!-- PRODUCT CATEGORY BOX -->*/}
             <a className="product-category-box category-featured" href="#">
               {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
-              <p className="product-category-box-title">Cromy Seal</p>
+              <p className="product-category-box-title">NFTs</p>
               {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
-              <p className="product-category-box-text">Handpicked by the Cromy community</p>
+              <p className="product-category-box-text"><b>Cromy® seal of quality</b> ensures that each collection <br /> has attained our quality standard.</p>
               {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag">12 items</p>
+              <p className="product-category-box-tag mt-4">- items</p>
               {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
             </a>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
@@ -587,7 +590,7 @@ const Launcher = (props) => {
                   {/*<!-- /RATING -->*/}
 
                   {/*<!-- RATING -->*/}
-                  <div className="rating">
+                  <div className="rating filled">
                     {/*<!-- RATING ICON -->*/}
                     <svg className="rating-icon icon-star">
                       <use xlinkHref="#svg-star"></use>
@@ -703,7 +706,7 @@ const Launcher = (props) => {
                   {/*<!-- /RATING -->*/}
 
                   {/*<!-- RATING -->*/}
-                  <div className="rating">
+                  <div className="rating filled">
                     {/*<!-- RATING ICON -->*/}
                     <svg className="rating-icon icon-star">
                       <use xlinkHref="#svg-star"></use>
@@ -819,7 +822,7 @@ const Launcher = (props) => {
                   {/*<!-- /RATING -->*/}
 
                   {/*<!-- RATING -->*/}
-                  <div className="rating">
+                  <div className="rating filled">
                     {/*<!-- RATING ICON -->*/}
                     <svg className="rating-icon icon-star">
                       <use xlinkHref="#svg-star"></use>
@@ -935,7 +938,7 @@ const Launcher = (props) => {
                   {/*<!-- /RATING -->*/}
 
                   {/*<!-- RATING -->*/}
-                  <div className="rating">
+                  <div className="rating filled">
                     {/*<!-- RATING ICON -->*/}
                     <svg className="rating-icon icon-star">
                       <use xlinkHref="#svg-star"></use>
