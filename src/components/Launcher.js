@@ -433,7 +433,7 @@ const Launcher = (props) => {
             {/*<!-- PRODUCT CATEGORY BOX -->*/}
             <a className="product-category-box category-all" href="#">
               {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
-              <p className="product-category-box-title">Browse all</p>
+              <p className="product-category-box-title">DApps</p>
               {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
@@ -441,7 +441,7 @@ const Launcher = (props) => {
               {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag">4 items</p>
+              <p className="product-category-box-tag">4 dApps</p>
               {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
             </a>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
@@ -453,11 +453,11 @@ const Launcher = (props) => {
               {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
-              <p className="product-category-box-text"><b>Cromy® seal of quality</b> ensures that each collection <br /> has attained our quality standard.</p>
+              <p className="product-category-box-text"><b>Cromy®</b> seal of quality ensures that each collection <br /> has attained our quality standard.</p>
               {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag mt-4">- items</p>
+              <p className="product-category-box-tag mt-4">5 Collections</p>
               {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
             </a>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
