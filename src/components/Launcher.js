@@ -1,6 +1,7 @@
-import React from 'react';
-import { Footer, ConnectWallet  } from './';
+import { ConnectWallet, Footer } from './';
+
 import Link from 'next/link';
+import React from 'react';
 
 const Launcher = (props) => {
   return (
@@ -54,13 +55,13 @@ const Launcher = (props) => {
               {/*<!-- LOGO -->*/}
               <div className="logo">
                 {/*<!-- ICON LOGO VIKINGER -->*/}
-                <Link href="https://app.cromy.io/">
+                <a href="/">
                   <img
                     className="h-auto w-24 cursor-pointer"
                     src="logo.svg"
                     alt="Cromy logo"
                   />
-                </Link>
+                </a>
                 {/*<!-- /ICON LOGO VIKINGER -->*/}
               </div>
               {/*<!-- /LOGO -->*/}

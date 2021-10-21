@@ -1,9 +1,8 @@
-import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
 import {
   BookmarkAltIcon,
   CalendarIcon,
   ChartBarIcon,
+  CogIcon,
   CursorClickIcon,
   MenuIcon,
   PhoneIcon,
@@ -12,12 +11,14 @@ import {
   ShieldCheckIcon,
   SupportIcon,
   ViewGridIcon,
-  XIcon,
-  CogIcon
+  XIcon
 } from '@heroicons/react/outline';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
 import { ConnectWallet, SearchBar } from './';
+import { Popover, Transition } from '@headlessui/react';
+
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Fragment } from 'react';
+import Link from 'next/link';
 
 const menuItems = [
   {
@@ -53,13 +54,13 @@ const Navbar = ({ toggleMode, darkMode }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
               <div className="flex justify-start flex-1">
-                <Link href="https://app.cromy.io/">
+                <a href="/">
                   <img
                     className="h-8 w-auto sm:h-10 cursor-pointer"
                     src="/logo.svg"
                     alt="Cromy Logo"
                   />
-                </Link>
+                </a>
               </div>
               {/*
               <div className="flex items-center flex-grow flex-5">
