@@ -1902,7 +1902,7 @@ var db = [
     // https://testnets.opensea.io/collection/gorrillaz-album-test
     album_id: "musical-booklet-vol-2",
     title: 'Gorillaz Vol 2',
-    description: '',
+    description: 'The future is coming on 🎵',
     image: null,
     gap: 'gap-0',
     type: 'audio',

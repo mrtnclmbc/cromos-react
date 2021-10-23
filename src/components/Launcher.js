@@ -632,7 +632,7 @@ const Launcher = (props) => {
 
                 {/*<!-- PRODUCT PREVIEW TEXT -->*/}
                 <p className="product-preview-text">
-                  Bizarrap joined forces with Cromy to create this incredible sticker album. Grab your stikcer packs here!
+                  Bizarrap joined forces with Cromy to create this incredible sticker album. Grab your sticker packs here!
                 </p>
                 {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
               </div>
