@@ -1,17 +1,10 @@
-import { ConnectWallet, Footer } from './';
-
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+import { Footer, Header, SectionBanner } from './';
 
 const Launcher = (props) => {
   return (
     <>
-      {/*<!-- STYLES -->*/}
-      <link rel="stylesheet" href="/launcher/css/vendor/bootstrap.min.css" />
-      {/*<!-- styles -->*/}
-      <link rel="stylesheet" href="/launcher/css/styles.css" />
-      {/*<!-- simplebar styles -->*/}
-      <link rel="stylesheet" href="/launcher/css/vendor/simplebar.css" />
       {/*<!-- /STYLES -->*/}
         {/*<!-- PAGE LOADER -->*/}
         <div className="page-loader page-loader bg-gradient-to-bl from-yellow-400 via-red-500 to-red-800">
@@ -47,369 +40,17 @@ const Launcher = (props) => {
         {/*<!-- /PAGE LOADER -->*/}
 
         {/*<!-- HEADER -->*/}
-        <header className="header bg-gradient-to-b from-red-500 to-red-600">
-          {/*<!-- HEADER ACTIONS -->*/}
-          <div className="header-actions">
-            {/*<!-- HEADER BRAND -->*/}
-            <div className="header-brand">
-              {/*<!-- LOGO -->*/}
-              <div className="logo">
-                {/*<!-- ICON LOGO VIKINGER -->*/}
-                <a href="/">
-                  <img
-                    className="h-auto w-24 cursor-pointer"
-                    src="logo.svg"
-                    alt="Cromy logo"
-                  />
-                </a>
-                {/*<!-- /ICON LOGO VIKINGER -->*/}
-              </div>
-              {/*<!-- /LOGO -->*/}
-            </div>
-            {/*<!-- /HEADER BRAND -->*/}
-          </div>
-          {/*<!-- /HEADER ACTIONS -->*/}
-
-          {/*<!-- HEADER ACTIONS -->*/}
-          <div className="header-actions">
-            {/*<!-- MOBILEMENU TRIGGER -->*/}
-            <div className="mobilemenu-trigger navigation-widget-mobile-trigger">
-              {/*<!-- BURGER ICON -->*/}
-              <div className="burger-icon inverted">
-                {/*<!-- BURGER ICON BAR -->*/}
-                <div className="burger-icon-bar"></div>
-                {/*<!-- /BURGER ICON BAR -->*/}
-
-                {/*<!-- BURGER ICON BAR -->*/}
-                <div className="burger-icon-bar"></div>
-                {/*<!-- /BURGER ICON BAR -->*/}
-
-                {/*<!-- BURGER ICON BAR -->*/}
-                <div className="burger-icon-bar"></div>
-                {/*<!-- /BURGER ICON BAR -->*/}
-              </div>
-              {/*<!-- /BURGER ICON -->*/}
-            </div>
-            {/*<!-- /MOBILEMENU TRIGGER -->*/}
-
-            {/*<!-- NAVIGATION -->*/}
-            <nav className="navigation">
-              {/*<!-- MENU MAIN -->*/}
-              <ul className="menu-main">
-                {/*<!-- MENU MAIN ITEM -->*/}
-                <li className="menu-main-item">
-                  {/*<!-- MENU MAIN ITEM LINK -->*/}
-                  <a className="menu-main-item-link" href="#">Join us!</a>
-                  {/*<!-- /MENU MAIN ITEM LINK -->*/}
-                </li>
-                {/*<!-- /MENU MAIN ITEM -->*/}
-
-                {/*<!-- MENU MAIN ITEM -->*/}
-                <li className="menu-main-item">
-                  {/*<!-- MENU MAIN ITEM LINK -->*/}
-                  <a className="menu-main-item-link" href="#">About Cromy</a>
-                  {/*<!-- /MENU MAIN ITEM LINK -->*/}
-                </li>
-                {/*<!-- /MENU MAIN ITEM -->*/}
-
-                {/*<!-- MENU MAIN ITEM -->*/}
-                <li className="menu-main-item">
-                  {/*<!-- MENU MAIN ITEM LINK -->*/}
-                  <a className="menu-main-item-link" href="#">FAQs</a>
-                  {/*<!-- /MENU MAIN ITEM LINK -->*/}
-                </li>
-                {/*<!-- /MENU MAIN ITEM -->*/}
-
-              </ul>
-              {/*<!-- /MENU MAIN -->*/}
-            </nav>
-            {/*<!-- /NAVIGATION -->*/}
-          </div>
-          {/*<!-- /HEADER ACTIONS -->*/}
-
-          {/*<!-- HEADER ACTIONS -->*/}
-          <div className="header-actions search-bar">
-            {/*<!-- INTERACTIVE INPUT -->*/}
-            <div className="interactive-input light">
-              <input type="text" id="search-main" name="search_main" placeholder="Search here for NFT games & Experiences..." />
-              {/*<!-- INTERACTIVE INPUT ICON WRAP -->*/}
-              <div className="interactive-input-icon-wrap">
-                {/*<!-- INTERACTIVE INPUT ICON -->*/}
-                <svg className="interactive-input-icon icon-magnifying-glass light-icon">
-                  <use xlinkHref="#svg-magnifying-glass"></use>
-                </svg>
-                {/*<!-- /INTERACTIVE INPUT ICON -->*/}
-              </div>
-              {/*<!-- /INTERACTIVE INPUT ICON WRAP -->*/}
-
-              {/*<!-- INTERACTIVE INPUT ACTION -->*/}
-              <div className="interactive-input-action">
-                {/*<!-- INTERACTIVE INPUT ACTION ICON -->*/}
-                <svg className="interactive-input-action-icon icon-cross-thin">
-                  <use xlinkHref="#svg-cross-thin"></use>
-                </svg>
-                {/*<!-- /INTERACTIVE INPUT ACTION ICON -->*/}
-              </div>
-              {/*<!-- /INTERACTIVE INPUT ACTION -->*/}
-            </div>
-            {/*<!-- /INTERACTIVE INPUT -->*/}
-
-            {/*<!-- DROPDOWN BOX -->*/}
-            <div className="dropdown-box padding-bottom-small header-search-dropdown">
-
-              {/*<!-- DROPDOWN BOX CATEGORY -->*/}
-              <div className="dropdown-box-category">
-                {/*<!-- DROPDOWN BOX CATEGORY TITLE -->*/}
-                <p className="dropdown-box-category-title">DAPPs Launcher</p>
-                {/*<!-- /DROPDOWN BOX CATEGORY TITLE -->*/}
-              </div>
-              {/*<!-- /DROPDOWN BOX CATEGORY -->*/}
-
-              {/*<!-- DROPDOWN BOX LIST -->*/}
-              <div className="dropdown-box-list small no-scroll">
-                {/*<!-- DROPDOWN BOX LIST ITEM -->*/}
-                <a className="dropdown-box-list-item" href="/game/comic">
-                  {/*<!-- USER STATUS -->*/}
-                  <div className="user-status no-padding-top">
-                    {/*<!-- USER STATUS AVATAR -->*/}
-                    <div className="user-status-avatar">
-                      {/*<!-- PICTURE -->*/}
-                      <figure className="picture small round liquid">
-                        <img src="/img/launcher/marketplace/items/01.jpg" className="object-cover rounded-lg" alt="item-07" />
-                      </figure>
-                      {/*<!-- /PICTURE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS AVATAR -->*/}
-
-                    {/*<!-- USER STATUS TITLE -->*/}
-                    <p className="user-status-title"><span className="bold">The Walking Dead</span></p>
-                    {/*<!-- /USER STATUS TITLE -->*/}
-
-                    {/*<!-- USER STATUS TEXT -->*/}
-                    <p className="user-status-text">Limited edition</p>
-                    {/*<!-- /USER STATUS TEXT -->*/}
-
-                    {/*<!-- USER STATUS ICON -->*/}
-                    <div className="user-status-icon">
-                      {/*<!-- ICON MARKETPLACE -->*/}
-                      <svg className="icon-marketplace">
-                        <use xlinkHref="#svg-quests"></use>
-                      </svg>
-                      {/*<!-- /ICON MARKETPLACE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS ICON -->*/}
-                  </div>
-                  {/*<!-- /USER STATUS -->*/}
-                </a>
-                {/*<!-- /DROPDOWN BOX LIST ITEM -->*/}
-
-                {/*<!-- DROPDOWN BOX LIST ITEM -->*/}
-                <a className="dropdown-box-list-item" href="/game/sticker-album">
-                  {/*<!-- USER STATUS -->*/}
-                  <div className="user-status no-padding-top">
-                    {/*<!-- USER STATUS AVATAR -->*/}
-                    <div className="user-status-avatar">
-                      {/*<!-- PICTURE -->*/}
-                      <figure className="picture small round liquid">
-                        <img src="/img/launcher/marketplace/items/02.jpg" className="object-cover rounded-lg" alt="item-07" />
-                      </figure>
-                      {/*<!-- /PICTURE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS AVATAR -->*/}
-
-                    {/*<!-- USER STATUS TITLE -->*/}
-                    <p className="user-status-title"><span className="bold">Bizarrap Sticker Album</span></p>
-                    {/*<!-- /USER STATUS TITLE -->*/}
-
-                    {/*<!-- USER STATUS TEXT -->*/}
-                    <p className="user-status-text">Artist Collection</p>
-                    {/*<!-- /USER STATUS TEXT -->*/}
-
-                    {/*<!-- USER STATUS ICON -->*/}
-                    <div className="user-status-icon">
-                      {/*<!-- ICON MARKETPLACE -->*/}
-                      <svg className="icon-marketplace">
-                        <use xlinkHref="#svg-quests"></use>
-                      </svg>
-                      {/*<!-- /ICON MARKETPLACE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS ICON -->*/}
-                  </div>
-                  {/*<!-- /USER STATUS -->*/}
-                </a>
-                {/*<!-- /DROPDOWN BOX LIST ITEM -->*/}
-
-                {/*<!-- DROPDOWN BOX LIST ITEM -->*/}
-                <a className="dropdown-box-list-item" href="/game/musical-booklet-vol-2">
-                  {/*<!-- USER STATUS -->*/}
-                  <div className="user-status no-padding-top">
-                    {/*<!-- USER STATUS AVATAR -->*/}
-                    <div className="user-status-avatar">
-                      {/*<!-- PICTURE -->*/}
-                      <figure className="picture small round liquid">
-                        <img src="/img/launcher/marketplace/items/03.jpg" className="object-cover rounded-lg" alt="item-07" />
-                      </figure>
-                      {/*<!-- /PICTURE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS AVATAR -->*/}
-
-                    {/*<!-- USER STATUS TITLE -->*/}
-                    <p className="user-status-title"><span className="bold">Gorillaz Music Booklet</span></p>
-                    {/*<!-- /USER STATUS TITLE -->*/}
-
-                    {/*<!-- USER STATUS TEXT -->*/}
-                    <p className="user-status-text">Cromy Exclusive</p>
-                    {/*<!-- /USER STATUS TEXT -->*/}
-
-                    {/*<!-- USER STATUS ICON -->*/}
-                    <div className="user-status-icon">
-                      {/*<!-- ICON MARKETPLACE -->*/}
-                      <svg className="icon-marketplace">
-                        <use xlinkHref="#svg-quests"></use>
-                      </svg>
-                      {/*<!-- /ICON MARKETPLACE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS ICON -->*/}
-                  </div>
-                  {/*<!-- /USER STATUS -->*/}
-                </a>
-                {/*<!-- /DROPDOWN BOX LIST ITEM -->*/}
-
-                {/*<!-- DROPDOWN BOX LIST ITEM -->*/}
-                <a className="dropdown-box-list-item" href="/game/iota-mural">
-                  {/*<!-- USER STATUS -->*/}
-                  <div className="user-status no-padding-top">
-                    {/*<!-- USER STATUS AVATAR -->*/}
-                    <div className="user-status-avatar">
-                      {/*<!-- PICTURE -->*/}
-                      <figure className="picture small round liquid">
-                        <img src="/img/launcher/marketplace/items/04.jpg" className="object-cover rounded-lg" alt="item-07" />
-                      </figure>
-                      {/*<!-- /PICTURE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS AVATAR -->*/}
-
-                    {/*<!-- USER STATUS TITLE -->*/}
-                    <p className="user-status-title"><span className="bold">IOTA Mural</span></p>
-                    {/*<!-- /USER STATUS TITLE -->*/}
-
-                    {/*<!-- USER STATUS TEXT -->*/}
-                    <p className="user-status-text">Art Collaborations</p>
-                    {/*<!-- /USER STATUS TEXT -->*/}
-
-                    {/*<!-- USER STATUS ICON -->*/}
-                    <div className="user-status-icon">
-                      {/*<!-- ICON MARKETPLACE -->*/}
-                      <svg className="icon-marketplace">
-                        <use xlinkHref="#svg-quests"></use>
-                      </svg>
-                      {/*<!-- /ICON MARKETPLACE -->*/}
-                    </div>
-                    {/*<!-- /USER STATUS ICON -->*/}
-                  </div>
-                  {/*<!-- /USER STATUS -->*/}
-                </a>
-                {/*<!-- /DROPDOWN BOX LIST ITEM -->*/}
-              </div>
-              {/*<!-- /DROPDOWN BOX LIST -->*/}
-            </div>
-            {/*<!-- /DROPDOWN BOX -->*/}
-          </div>
-          {/*<!-- /HEADER ACTIONS -->*/}
-
-          {/*<!-- HEADER ACTIONS -->*/}
-          <div className="header-actions" style={{ visibility: 'hidden'}}>
-            {/*<!-- PROGRESS STAT -->*/}
-            <div className="progress-stat">
-              {/*<!-- BAR PROGRESS WRAP -->*/}
-              <div className="bar-progress-wrap">
-                {/*<!-- BAR PROGRESS INFO -->*/}
-                <p className="bar-progress-info">Next: <span className="bar-progress-text"></span></p>
-                {/*<!-- /BAR PROGRESS INFO -->*/}
-              </div>
-              {/*<!-- /BAR PROGRESS WRAP -->*/}
-
-              {/*<!-- PROGRESS STAT BAR -->*/}
-              <div id="logged-user-level" className="progress-stat-bar"></div>
-              {/*<!-- /PROGRESS STAT BAR -->*/}
-            </div>
-            {/*<!-- /PROGRESS STAT -->*/}
-          </div>
-          {/*<!-- /HEADER ACTIONS -->*/}
-
-          {/*<!-- HEADER ACTIONS -->*/}
-          <div className="header-actions">
-            {/*<!-- ACTION LIST -->*/}
-            <div className="action-list light">
-              {/*<!-- CONNECT WALLET -->*/}
-              <div className="my-auto">
-                <ConnectWallet />
-              </div>
-              {/*<!-- /CONNECT WALLET -->*/}
-            </div>
-            {/*<!-- /ACTION LIST -->*/}
-
-          </div>
-          {/*<!-- /HEADER ACTIONS -->*/}
-        </header>
+        <Header />
         {/*<!-- /HEADER -->*/}
-
-        {/*<!-- FLOATY BAR -->*/}
-        <aside className="floaty-bar bg-gradient-to-t from-red-500 to-red-600">
-          {/*<!-- BAR ACTIONS -->*/}
-          <div className="bar-actions">
-            {/*<!-- PROGRESS STAT -->*/}
-            <div className="progress-stat">
-              {/*<!-- BAR PROGRESS WRAP -->*/}
-              <div className="bar-progress-wrap">
-                {/*<!-- BAR PROGRESS INFO -->*/}
-                <p className="bar-progress-info">Next: <span className="bar-progress-text"></span></p>
-                {/*<!-- /BAR PROGRESS INFO -->*/}
-              </div>
-              {/*<!-- /BAR PROGRESS WRAP -->*/}
-
-              {/*<!-- PROGRESS STAT BAR -->*/}
-              <div id="logged-user-level-cp" className="progress-stat-bar"></div>
-              {/*<!-- /PROGRESS STAT BAR -->*/}
-            </div>
-            {/*<!-- /PROGRESS STAT -->*/}
-          </div>
-          {/*<!-- /BAR ACTIONS -->*/}
-
-          {/*<!-- BAR ACTIONS -->*/}
-          <div className="bar-actions">
-            {/*<!-- ACTION LIST -->*/}
-            <div className="action-list dark">
-              {/*<!-- CONNECT WALLET -->*/}
-              <div className="my-auto">
-                <ConnectWallet />
-              </div>
-              {/*<!-- /CONNECT WALLET -->*/}
-
-            </div>
-            {/*<!-- /ACTION LIST -->*/}
-
-          </div>
-          {/*<!-- /BAR ACTIONS -->*/}
-        </aside>
-        {/*<!-- /FLOATY BAR -->*/}
 
         {/*<!-- CONTENT GRID -->*/}
         <div className="content-grid">
+
           {/*<!-- SECTION BANNER -->*/}
-          <div className="section-banner">
-            {/*<!-- SECTION BANNER ICON -->*/}
-            <img className="section-banner-icon" src="/img/launcher/banner/marketplace-icon.png" alt="marketplace-icon" />
-            {/*<!-- /SECTION BANNER ICON -->*/}
-
-            {/*<!-- SECTION BANNER TITLE -->*/}
-            <p className="section-banner-title">DAPPSTER</p>
-            {/*<!-- /SECTION BANNER TITLE -->*/}
-
-            {/*<!-- SECTION BANNER TEXT -->*/}
-            <p className="section-banner-text">Start now to collect and play!</p>
-            {/*<!-- /SECTION BANNER TEXT -->*/}
-          </div>
+          <SectionBanner
+            title="DAPP Launcher"
+            description="Start playing now!"
+          />
           {/*<!-- /SECTION BANNER -->*/}
 
           {/*<!-- SECTION HEADER -->*/}
@@ -457,7 +98,7 @@ const Launcher = (props) => {
               {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
               {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag mt-4">5 Collections</p>
+              <p className="product-category-box-tag">5 Collections</p>
               {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
             </a>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
@@ -963,27 +604,6 @@ const Launcher = (props) => {
         <Footer />
       </div>
       {/*<!-- /FOOTER -->*/}
-    {/*<!-- app -->*/}
-    <script src="/launcher/js/utils/app.js"></script>
-    {/*<!-- page loader -->*/}
-    <script src="/launcher/js/utils/page-loader.js"></script>
-    {/*<!-- simplebar -->*/}
-    <script src="/launcher/js/vendor/simplebar.min.js"></script>
-    {/*<!-- liquidify -->*/}
-    <script src="/launcher/js/utils/liquidify.js"></script>
-    {/*<!-- XM_Plugins -->*/}
-    <script src="/launcher/js/vendor/xm_plugins.min.js"></script>
-    {/*<!-- global.tooltips -->*/}
-    <script src="/launcher/js/global/global.tooltips.js"></script>
-    {/*<!-- header -->*/}
-    <script src="/launcher/js/header/header.js"></script>
-    {/*<!-- sidebar -->*/}
-    <script src="/launcher/js/sidebar/sidebar.js"></script>
-    {/*<!-- form.utils -->*/}
-    <script src="/launcher/js/form/form.utils.js"></script>
-    {/*<!-- SVG icons -->*/}
-    <script src="/launcher/js/utils/svg-loader.js"></script>
-
     </>
   )
 }

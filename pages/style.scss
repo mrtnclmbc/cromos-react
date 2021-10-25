@@ -11,7 +11,6 @@
 .page {
     background-color: #fdfaf7;
     color: #785e3a;
-
     overflow: hidden;
 
     .page-container {
@@ -197,4 +196,13 @@ input[type="range"] {
 
 .swiper-pagination-bullet-active {
   background: #ef4444!important;
+}
+
+img {
+  border: 0!important;
+}
+
+.swiper-container {
+  background-color: rgba(0, 0, 0, 0);
+  padding-bottom: 10px;
 }

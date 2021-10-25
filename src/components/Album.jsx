@@ -1,4 +1,4 @@
-import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider } from './';
+import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider, SectionBanner } from './';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Keyboard } from "swiper";
@@ -65,7 +65,7 @@ const Album = (props) => {
 
   useEffect(() => {
     const onboardingDoneSetting = localStorage.getItem('onboardingDone');
-    
+
     if (onboardingDone === undefined && !onboardingDoneSetting && !modalOpen) {
       setOnboardingDone(onboardingDoneSetting);
       setModalOpen(true);
@@ -140,7 +140,7 @@ const Album = (props) => {
         </div>
       </Page>
     ));
-  
+
     const cover = (
       <Ratio
         style={{ width: "100%" }}
@@ -191,7 +191,8 @@ const Album = (props) => {
                 />
               </Modal>
             }
-            <AlbumHeader
+            <SectionBanner
+              standalone
               title={album?.title}
               description={album?.description}
             />
@@ -236,7 +237,7 @@ const Album = (props) => {
                     }}
                   >
                     {album.pages.map((page, index) => (
-                      <div number={index} key={`page-${index}`}>
+                      <div key={`page-${index}`}>
                         {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                         <div style={{ flex: 1 }}>
                           {album && page.assets?.columns?.map((columns, index) => (

@@ -1,22 +1,24 @@
-import dynamic from 'next/dynamic';
-import Footer from './Footer';
 import AlbumHeader from './AlbumHeader';
-import Navbar from './Navbar';
 import Asset from './Asset';
-import LoadingIndicator from './LoadingIndicator';
-import SearchBar from './SearchBar';
-import HeroSection from './HeroSection';
-import FeaturedRow from './FeaturedRow';
-import ServicesRow from './ServicesRow';
-import SubscribeRow from './SubscribeRow';
-import GameCard from './GameCard';
-import ComingSoon from './ComingSoon';
-import AudioPlayer from './AudioPlayer';
 import AssetInfo from './AssetInfo';
+import AudioPlayer from './AudioPlayer';
+import ComingSoon from './ComingSoon';
+import FeaturedRow from './FeaturedRow';
+import Footer from './Footer';
+import GameCard from './GameCard';
+import Header from './Header';
+import HeroSection from './HeroSection';
+import Launcher from './Launcher';
+import LoadingIndicator from './LoadingIndicator';
 import Modal from './Modal';
 import ModalContent from './ModalContent';
-import Launcher from './Launcher';
+import Navbar from './Navbar';
 import OnboardingSlider from './OnboardingSlider';
+import SearchBar from './SearchBar';
+import SectionBanner from './SectionBanner';
+import ServicesRow from './ServicesRow';
+import SubscribeRow from './SubscribeRow';
+import dynamic from 'next/dynamic';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -48,4 +50,6 @@ export {
   ModalContent,
   Launcher,
   OnboardingSlider,
+  Header,
+  SectionBanner,
 };

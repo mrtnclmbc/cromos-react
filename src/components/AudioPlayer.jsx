@@ -137,8 +137,8 @@ const AudioPlayer = (props) => {
                     alt={`track artwork for ${title} by ${artist}`}
                   />
                 }
-                <h2 className="font-semibold truncate text-xs md:text-md text-shadow-sm">{title}</h2>
-                <h3 className="artist mb-1 sm:mb-2 md:mb-3 truncate text-xs md:text-md text-shadow-sm">{artist}</h3>
+                <h2 className="font-semibold truncate text-xs md:text-md text-shadow-sm text-white">{title}</h2>
+                <h3 className="artist mb-1 sm:mb-2 md:mb-3 truncate text-xs md:text-md text-shadow-sm text-white">{artist}</h3>
                 {!isNFT || isOwned ? (
                   <>
                     <AudioControls
