@@ -1,4 +1,5 @@
-import { AlbumHeader, Asset, AudioPlayer, LoadingIndicator, Modal, OnboardingSlider, SectionBanner } from './';
+import { Asset, LoadingIndicator, Modal, OnboardingSlider, SectionBanner } from './';
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Keyboard } from "swiper";
@@ -8,6 +9,7 @@ import { ApplicationContext } from '../state/store';
 import Ratio from 'react-ratio/lib/Ratio';
 import { getAlbum } from '../services/collectionsService';
 import slidesArray from '../onboardingSlides';
+import { Howl } from 'howler';
 
 SwiperCore.use([EffectCoverflow, Keyboard]);
 
@@ -35,11 +37,24 @@ const Album = (props) => {
   const [isPreviewMode, setPreviewMode] = useState(true);
   const [wantToExitPreviewMode, setWantToExitPreviewMode] = useState(false);
   const [assetsCheckerIntervalId, setAssetsCheckerIntervalId] = useState(null);
+  const [dappHeightOverflow, setDappHeightOverflow] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const fullScreenHandle = useFullScreenHandle();
+  const [howl, setHowl] = useState(null);
+
+  const openAssetInfoModal = () => {
+    // Hack to show modal on full screen mode
+    const fullScreenContainerElement = document.getElementById('fullscreen-container');
+    const div = document.createElement('div');
+    div.setAttribute("id", "headlessui-portal-root");
+    fullScreenContainerElement.appendChild(div);
+    setModalOpen(true);
+  };
 
   // Hooks
   useEffect(async () => {
     // Get album
-    if(props.albumId) {
+    if (props.albumId) {
       const album = await getAlbum(props.albumId);
       setAlbum(album);
     }
@@ -91,7 +106,17 @@ const Album = (props) => {
       setAssetsCheckerIntervalId(null)
     }
 
-    if(album) { setLoading(false); }
+    if (album) {
+      if (album?.backgroundSound) {
+        setHowl(new Howl({
+          src: [album?.backgroundSound == "default" ? "/audios/loop1.wav" : album?.backgroundSound],
+          volume: 0.1,
+          loop: true,
+          interrupt: true
+        }))
+      }
+      setLoading(false);
+    }
   }, [album, currentAddress]);
 
   useEffect(() => {
@@ -162,7 +187,7 @@ const Album = (props) => {
                   audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                   cover={asset?.image_url || ownedAsset?.image_url}
                   isOwned={ownedAsset ? ownedAsset : false}
-                  setModalOpen={setModalOpen}
+                  setModalOpen={openAssetInfoModal}
                   setSelectedAsset={setSelectedAsset}
                   asset={asset || null}
                 />
@@ -193,85 +218,123 @@ const Album = (props) => {
     );
 
     return [...(album?.cover?.image ? [cover] : []), ...(pages || []), ...(album?.back?.image ? [back] : [])];
-  }, [albumAssets, isPreviewMode, walletAssets]);
+  }, [albumAssets, isPreviewMode, walletAssets, isFullScreen]);
+
+  const checkDappOverflow = () => {
+    setTimeout(() => {
+      const height = document.getElementById('dapp-container').clientHeight;
+  
+      if (height > window.outerHeight) {
+        setDappHeightOverflow(true);
+      }
+    }, 100)
+  }
+
+  const toggleIsFullScreen = (state) => {
+    setIsFullScreen(state);
+    if (!album?.backgroundSound) {
+      return;
+    }
+    if (state) {
+      howl?.play();
+      howl?.fade(0, 0.05, 1000);
+    } else {
+      howl?.fade(0.05, 0, 1000);
+      setTimeout(() => {
+        howl?.stop();
+      }, 1000);
+    }
+  };
+
+  const toggleFullScreen = () => {
+    if (!isFullScreen) {
+      fullScreenHandle.enter();
+      checkDappOverflow();
+    } else {
+      fullScreenHandle.exit();
+    }
+  }
 
   return (
     <div>
-      {loading ? <LoadingIndicator /> :
-        (
-          <>
-            {selectedAsset &&
-              <Modal
-                open={modalOpen}
-                setOpen={setModalOpen}
-                selectedAsset={selectedAsset}
-                okButtonText="Get NFT!"
-                cancelButtonText="Cancel"
-              />
-            }
-            {!onboardingDone && !selectedAsset &&
-              <Modal
-                open={modalOpen}
-                setOpen={setModalOpen}
-                showFooter={false}
-                isOnboarding
-                handleOnboardingEnd={handleOnboardingEnd}
-              >
-                <OnboardingSlider
-                  slidesArray={slidesArray}
-                  setOpen={setModalOpen}
-                  handleOnboardingEnd={handleOnboardingEnd}
-                />
-              </Modal>
-            }
-            <SectionBanner
-              standalone
-              title={album?.title}
-              description={album?.description}
+      {loading ? <LoadingIndicator /> : (
+        <>
+          {selectedAsset &&
+            <Modal
+              open={modalOpen}
+              setOpen={setModalOpen}
+              selectedAsset={selectedAsset}
+              okButtonText="Get NFT!"
+              cancelButtonText="Cancel"
             />
-            {isPreviewMode && onboardingDone && (
-              <div className="transition transform fixed z-100 bottom-0 inset-x-0 pb-2 sm:pb-5 opacity-100 scale-100 translate-y-0 ease-out duration-500" style={{ zIndex: 999999 }}>
-                <div className="fade-animation-loop bg-opacity-0 max-w-screen-xl mx-auto mx-2 sm:mx-4">
-                  <div className="float-animation-loop p-2 rounded-lg bg-red-600 shadow-lg sm:p-3 sm:m-5 mx-5">
-                    <div className="flex items-center justify-between flex-wrap">
-                      <div className="flex-1 flex items-center">
-                        <img className="h-7 ml-1" src="/icons/silence.png" alt="" />
-                        <p className="ml-2 font-medium text-white">
-                          <span className="lg:hidden sm:inline">
-                            <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
-                            <span className="text-gray-200">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
-                          </span>
-                          <span className="hidden lg:inline text-gray-400">
-                            <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
-                            <span className="text-gray-200 xl:hidden">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
-                            <span className="text-gray-200 hidden xl:inline">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
-                          </span>
-                        </p>
-                      </div>
-                      <div className="order-3 mt-2 w-full sm:order-2 sm:mt-0 sm:w-auto">
-                        <div className="rounded-md shadow-sm" onClick={() => {
-                          if (walletConnected) { 
-                            setPreviewMode(false);
-                          } else {
-                            setIsTourOpen(isTourOpen => !isTourOpen);
-                            setWantToExitPreviewMode(true)
-                          }
-                        }}>
-                          <button className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
-                            <strong>Start Collecting Now 👾</strong>
-                          </button>
+          }
+          {!onboardingDone && !selectedAsset &&
+            <Modal
+              open={modalOpen}
+              setOpen={setModalOpen}
+              showFooter={false}
+              isOnboarding
+              handleOnboardingEnd={handleOnboardingEnd}
+            >
+              <OnboardingSlider
+                slidesArray={slidesArray}
+                setOpen={setModalOpen}
+                handleOnboardingEnd={handleOnboardingEnd}
+              />
+            </Modal>
+          }
+          <SectionBanner
+            standalone
+            title={album?.title}
+            description={album?.description}
+          />
+          <section className="pt-0 pb-0 w-full dark:bg-coolGray-800 dark:text-coolGray-50 mx-auto">
+            <FullScreen handle={fullScreenHandle} onChange={(state) => toggleIsFullScreen(state)}>
+              {isPreviewMode && onboardingDone && (
+                <div className="transition transform fixed z-100 bottom-0 inset-x-0 pb-2 sm:pb-5 opacity-100 scale-100 translate-y-0 ease-out duration-500" style={{ zIndex: 999999 }}>
+                  <div className="fade-animation-loop bg-opacity-0 max-w-screen-xl mx-auto mx-2 sm:mx-4">
+                    <div className="float-animation-loop p-2 rounded-lg bg-red-600 shadow-lg sm:p-3 sm:m-5 mx-5">
+                      <div className="flex items-center justify-between flex-wrap">
+                        <div className="flex-1 flex items-center">
+                          <img className="h-7 ml-1" src="/icons/silence.png" alt="" />
+                          <p className="ml-2 font-medium text-white">
+                            <span className="lg:hidden sm:inline">
+                              <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
+                              <span className="text-gray-200">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                            </span>
+                            <span className="hidden lg:inline text-gray-400">
+                              <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
+                              <span className="text-gray-200 xl:hidden">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                              <span className="text-gray-200 hidden xl:inline">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                            </span>
+                          </p>
+                        </div>
+                        <div className="order-3 mt-2 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                          <div className="rounded-md shadow-sm" onClick={() => {
+                            if (walletConnected) { 
+                              setPreviewMode(false);
+                            } else {
+                              setIsTourOpen(isTourOpen => !isTourOpen);
+                              setWantToExitPreviewMode(true)
+                              if (isFullScreen) {
+                                toggleFullScreen();
+                              }
+                            }
+                          }}>
+                            <button className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
+                              <strong>Start Collecting Now 👾</strong>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-            <section className="pt-0 pb-0 w-full dark:bg-coolGray-800 dark:text-coolGray-50 mx-auto">
-              <div className={album?.type === 'mural' ? 'grid grid-cols-19 overflow-scroll mx-auto' : 'w-full'}>
+              )}
+              <div id="fullscreen-container" onDoubleClick={() => toggleFullScreen()} style={{ display: album?.type === 'mural' ? "auto" : "flex", overflow: "scroll", alignItems: dappHeightOverflow ? "flex-start" : "center" }} className={(isFullScreen ? 'h-full ' : '') + (album?.type === 'mural' ? 'grid grid-cols-19 overflow-scroll mx-auto' : 'w-full')}>
                 {album?.type !== 'mural' ? (
                   slides?.length > 1 ? (
-                    <div style={{ width: "100%" }}>
+                    <div id="dapp-container" style={{ width: "100%" }}>
                       <Swiper
                         spaceBetween={0}
                         slidesPerView={isSmallScreen ? 1 : 2.3}
@@ -302,6 +365,7 @@ const Album = (props) => {
                   ) : <LoadingIndicator />
                 ) : (
                   <div
+                    id="dapp-container"
                     style={{
                       minWidth: album.width * album.sizeMultiplier / 2,
                       minHeight: album.height * album.sizeMultiplier / 2,
@@ -343,7 +407,7 @@ const Album = (props) => {
                                     coverSize={columnAsset.coverSize}
                                     backgroundType={columnAsset.backgroundType}
                                     isOwned={ownedAsset ? ownedAsset : false}
-                                    setModalOpen={setModalOpen}
+                                    setModalOpen={openAssetInfoModal}
                                     setSelectedAsset={setSelectedAsset}
                                     asset={asset || null}
                                   />
@@ -356,7 +420,13 @@ const Album = (props) => {
                     ))}
                   </div>
                 )}
-            </div>
+              </div>
+              {isFullScreen && album?.backgroundVideo && (
+                <video autoPlay muted loop id="myVideo" style={{ position: 'absolute', left: 0, top: 0, minHeight: '100%', minWidth: '100%', objectFit: 'cover', opacity: 0.2, zIndex: -10 }}>
+                  <source src={album?.backgroundVideo == "default" ? "/videos/neontrack.mp4" : album?.backgroundVideo} type="video/mp4" />
+                </video>
+              )}
+            </FullScreen>
           </section>
         </>
       )}
