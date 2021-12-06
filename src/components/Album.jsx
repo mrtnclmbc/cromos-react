@@ -19,17 +19,22 @@ const Page = React.forwardRef(({ title, children, number }, ref) => {
   );
 });
 
+const startCollectAudio = new Audio("/audios/start.ogg")
+
 const Album = (props) => {
   const [album, setAlbum] = useState(null);
   const [albumAssets, setAlbumAssets] = useState([]);
   const [walletAssets, setWalletAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [walletConnected, setWalletConnected] = useState(false);
-  const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
+  const { currentAddress, setIsTourOpen } = useContext(ApplicationContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [onboardingDone, setOnboardingDone] = useState();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isPreviewMode, setPreviewMode] = useState(true);
+  const [wantToExitPreviewMode, setWantToExitPreviewMode] = useState(false);
+  const [assetsCheckerIntervalId, setAssetsCheckerIntervalId] = useState(null);
 
   // Hooks
   useEffect(async () => {
@@ -49,15 +54,41 @@ const Album = (props) => {
 
     if (!currentAddress) {
       setWalletAssets([]);
+      setWalletConnected(false);
+      setPreviewMode(true);
+    }
+
+    if (currentAddress) {
+      setWalletConnected(true);
+      if (wantToExitPreviewMode) {
+        setPreviewMode(false);
+        setWantToExitPreviewMode(false);
+      }  
     }
   }, [currentAddress, album, props.albumId]);
+
+  useEffect(() => {
+    if (!isPreviewMode) {
+      startCollectAudio.play();
+    }
+  }, [isPreviewMode]);
 
   useEffect(async () => {
     // Get NFTs
     if (album && currentAddress) {
-      const walletAssets = await getAssets(currentAddress);
-      setWalletAssets(walletAssets);
+      const checkAssets = async () => {
+        const walletAssets = await getAssets(currentAddress);
+        setWalletAssets(walletAssets);
+      };
+      const intervalId = setInterval(checkAssets, 30000);
+      setAssetsCheckerIntervalId(intervalId);
+      await checkAssets();
       setWalletConnected(true);
+    }
+
+    if (!currentAddress && assetsCheckerIntervalId) {
+      clearInterval(assetsCheckerIntervalId);
+      setAssetsCheckerIntervalId(null)
     }
 
     if(album) { setLoading(false); }
@@ -67,8 +98,10 @@ const Album = (props) => {
     const onboardingDoneSetting = localStorage.getItem('onboardingDone');
 
     if (onboardingDone === undefined && !onboardingDoneSetting && !modalOpen) {
-      setOnboardingDone(onboardingDoneSetting);
+      setOnboardingDone(false);
       setModalOpen(true);
+    } else {
+      setOnboardingDone(true);
     }
 
     const handleResize = () => {
@@ -88,8 +121,8 @@ const Album = (props) => {
 
   // Helper functions
   const handleOnboardingEnd = () => {
-    const onboardingDone = localStorage.setItem('onboardingDone', 1);
-    setOnboardingDone(onboardingDone);
+    const onboardingDone = localStorage.setItem('onboardingDone', true);
+    setOnboardingDone(true);
     setModalOpen(false);
   }
 
@@ -109,8 +142,8 @@ const Album = (props) => {
                 <Asset
                   key={`asset-${index}`}
                   size={columnAsset.size}
-                  image={ownedAsset ? ownedAsset.image_url : null}
-                  backgroundImage={columnAsset?.backgroundImage || asset?.image_url}
+                  image={ownedAsset || isPreviewMode ? asset?.image_url : null}
+                  backgroundImage={asset?.image_url}
                   tokenId={columnAsset.token_id}
                   addressId={columnAsset.address}
                   padding={columnAsset.padding}
@@ -160,7 +193,7 @@ const Album = (props) => {
     );
 
     return [...(album?.cover?.image ? [cover] : []), ...(pages || []), ...(album?.back?.image ? [back] : [])];
-  }, [albumAssets, walletAssets]);
+  }, [albumAssets, isPreviewMode, walletAssets]);
 
   return (
     <div>
@@ -196,8 +229,46 @@ const Album = (props) => {
               title={album?.title}
               description={album?.description}
             />
+            {isPreviewMode && onboardingDone && (
+              <div className="transition transform fixed z-100 bottom-0 inset-x-0 pb-2 sm:pb-5 opacity-100 scale-100 translate-y-0 ease-out duration-500" style={{ zIndex: 999999 }}>
+                <div className="fade-animation-loop bg-opacity-0 max-w-screen-xl mx-auto mx-2 sm:mx-4">
+                  <div className="float-animation-loop p-2 rounded-lg bg-red-600 shadow-lg sm:p-3 sm:m-5 mx-5">
+                    <div className="flex items-center justify-between flex-wrap">
+                      <div className="flex-1 flex items-center">
+                        <img className="h-7 ml-1" src="/icons/silence.png" alt="" />
+                        <p className="ml-2 font-medium text-white">
+                          <span className="lg:hidden sm:inline">
+                            <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
+                            <span className="text-gray-200">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                          </span>
+                          <span className="hidden lg:inline text-gray-400">
+                            <strong className="text-white font-semibold mr-1">Sshhh! — You are in preview mode.</strong>
+                            <span className="text-gray-200 xl:hidden">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                            <span className="text-gray-200 hidden xl:inline">That means you now see the complete experience, but you are <strong>not</strong> the owner of the NFTs.</span>
+                          </span>
+                        </p>
+                      </div>
+                      <div className="order-3 mt-2 w-full sm:order-2 sm:mt-0 sm:w-auto">
+                        <div className="rounded-md shadow-sm" onClick={() => {
+                          if (walletConnected) { 
+                            setPreviewMode(false);
+                          } else {
+                            setIsTourOpen(isTourOpen => !isTourOpen);
+                            setWantToExitPreviewMode(true)
+                          }
+                        }}>
+                          <button className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-gray-800 focus:outline-none focus:underline">
+                            <strong>Start Collecting Now 👾</strong>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             <section className="pt-0 pb-0 w-full dark:bg-coolGray-800 dark:text-coolGray-50 mx-auto">
-              <div className={album?.type === 'mural' ? 'container grid grid-cols-19 overflow-scroll mx-auto' : 'w-full'}>
+              <div className={album?.type === 'mural' ? 'grid grid-cols-19 overflow-scroll mx-auto' : 'w-full'}>
                 {album?.type !== 'mural' ? (
                   slides?.length > 1 ? (
                     <div style={{ width: "100%" }}>
@@ -249,7 +320,7 @@ const Album = (props) => {
                                   <Asset
                                     key={`asset-${index}`}
                                     size={columnAsset.size}
-                                    image={ownedAsset ? ownedAsset.image_url : null}
+                                    image={ownedAsset || isPreviewMode ? asset?.image_url : null}
                                     backgroundImage={asset?.image_url}
                                     tokenId={columnAsset.token_id}
                                     addressId={columnAsset.address}

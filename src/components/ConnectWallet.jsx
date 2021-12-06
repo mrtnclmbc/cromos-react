@@ -11,8 +11,7 @@ const ConnectWallet = () => {
   // const [walletNotDetected, setWalletNotDetected] = useState(false)
 
   const { connectWallet, disconnectWallet, provider, error } = useWeb3Modal();
-
-  const { currentAddress, setCurrentAddress } = useContext(ApplicationContext);
+  const { currentAddress, setCurrentAddress, setIsTourOpen } = useContext(ApplicationContext);
 
   useEffect(() => {
     const getAddress = async () => {
@@ -28,6 +27,7 @@ const ConnectWallet = () => {
   }, [provider]);
 
   const handleClickConnect = async () => {
+    setIsTourOpen(false);
     await connectWallet();
   };
 

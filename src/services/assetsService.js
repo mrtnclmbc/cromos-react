@@ -6,6 +6,10 @@ import axios from 'axios';
 // const OPEN_SEA_BASE_URL = process.env.OPEN_SEA_BASE_URL;
 const OPEN_SEA_BASE_URL = 'https://testnets-api.opensea.io/api/v1';
 
+const randomCase = (string) => string.split('').map((v) =>
+  Math.round(Math.random()) ? v.toUpperCase() : v.toLowerCase()
+).join('');
+
 const getAssets = (owner, limit = 50) => {
   // Compose URL
   const url = `${OPEN_SEA_BASE_URL}/assets`;
@@ -14,10 +18,10 @@ const getAssets = (owner, limit = 50) => {
   rax.attach();
   return axios.get(url, {
     params: {
-      owner,
+      owner: randomCase(owner),
       limit,
       order_direction: 'desc',
-      offset: '0',
+      offset: 0
     }
   })
   .then(function (response) {
@@ -48,13 +52,15 @@ const getAsset = async (contractAddress, tokenId) => {
   });
 }
 
-const getAssetsInfo = async (contractAddress, tokenIds) => {
+const getAssetsInfo = async (contractAddress, tokenIds, limit = 50) => {
   // Compose URL
   const url = `${OPEN_SEA_BASE_URL}/assets?asset_contract_address=${contractAddress}${tokenIds.reduce((acc, tokenId) => acc + `&token_ids=${tokenId}`, '')}`;
 
   // Fetch!
   rax.attach();
-  return axios.get(url)
+  return axios.get(url, {
+    params: { limit }
+  })
   .then(function (response) {
     return response.data;
   })

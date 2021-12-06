@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Tilt from 'react-parallax-tilt';
 import { Footer, Header, SectionBanner } from './';
 
 const Launcher = (props) => {
@@ -47,10 +47,12 @@ const Launcher = (props) => {
         <div className="content-grid">
 
           {/*<!-- SECTION BANNER -->*/}
-          <SectionBanner
-            title="DAPP Launcher"
-            description="Start playing now!"
-          />
+          <Tilt>
+            <SectionBanner
+              title="Experience Crypto Collectibles"
+              description="Select your NFT experience in our DAPPSTER® and start playing now in the CromyVerse!"
+            />
+          </Tilt>
           {/*<!-- /SECTION BANNER -->*/}
 
           {/*<!-- SECTION HEADER -->*/}
@@ -58,11 +60,11 @@ const Launcher = (props) => {
             {/*<!-- SECTION HEADER INFO -->*/}
             <div className="section-header-info">
               {/*<!-- SECTION PRETITLE -->*/}
-              <p className="section-pretitle">Search what you want!</p>
+              <p className="section-pretitle">Cromy Dappster®</p>
               {/*<!-- /SECTION PRETITLE -->*/}
 
               {/*<!-- SECTION TITLE -->*/}
-              <h2 className="section-title">DAPPs & NFTs</h2>
+              <h2 className="section-title">Experiences & Collections</h2>
               {/*<!-- /SECTION TITLE -->*/}
             </div>
             {/*<!-- /SECTION HEADER INFO -->*/}
@@ -72,35 +74,39 @@ const Launcher = (props) => {
           {/*<!-- GRID -->*/}
           <div className="grid grid-half centered">
             {/*<!-- PRODUCT CATEGORY BOX -->*/}
-            <a className="product-category-box category-all" href="#">
-              {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
-              <p className="product-category-box-title">DApps</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
+            <Tilt>
+              <a className="product-category-box category-all" href="#">
+                {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
+                <p className="product-category-box-title">NFT Experiences</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
-              {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
-              <p className="product-category-box-text">Check out all our own & 3rd party NFT DApps.</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
+                {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
+                <p className="product-category-box-text">Check out all our own & 3rd party NFT Experiences.</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
-              {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag">4 dApps</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
-            </a>
+                {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
+                <p className="product-category-box-tag">4 Experiences</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
+              </a>
+            </Tilt>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
 
             {/*<!-- PRODUCT CATEGORY BOX -->*/}
-            <a className="product-category-box category-featured" href="#">
-              {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
-              <p className="product-category-box-title">NFTs</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
+            <Tilt>
+              <a className="product-category-box category-featured" href="#">
+                {/*<!-- PRODUCT CATEGORY BOX TITLE -->*/}
+                <p className="product-category-box-title">NFT Collections</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TITLE -->*/}
 
-              {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
-              <p className="product-category-box-text"><b>Cromy®</b> seal of quality ensures that each collection <br /> has attained our quality standard.</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
+                {/*<!-- PRODUCT CATEGORY BOX TEXT -->*/}
+                <p className="product-category-box-text"><b>Cromy®</b> seal of quality ensures that each collection <br /> has attained our quality standard.</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TEXT -->*/}
 
-              {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
-              <p className="product-category-box-tag">5 Collections</p>
-              {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
-            </a>
+                {/*<!-- PRODUCT CATEGORY BOX TAG -->*/}
+                <p className="product-category-box-tag">5 Collections</p>
+                {/*<!-- /PRODUCT CATEGORY BOX TAG -->*/}
+              </a>
+            </Tilt>
             {/*<!-- /PRODUCT CATEGORY BOX -->*/}
           </div>
           {/*<!-- /GRID -->*/}
@@ -110,11 +116,11 @@ const Launcher = (props) => {
             {/*<!-- SECTION HEADER INFO -->*/}
             <div className="section-header-info">
               {/*<!-- SECTION PRETITLE -->*/}
-              <p className="section-pretitle">See what's new!</p>
+              <p className="section-pretitle">See what's new in the Cromy Metaverse!</p>
               {/*<!-- /SECTION PRETITLE -->*/}
 
               {/*<!-- SECTION TITLE -->*/}
-              <h2 className="section-title">Latest DAPPs</h2>
+              <h2 className="section-title">Latest NFT Experiences</h2>
               {/*<!-- /SECTION TITLE -->*/}
             </div>
             {/*<!-- /SECTION HEADER INFO -->*/}
@@ -132,467 +138,599 @@ const Launcher = (props) => {
           {/*<!-- GRID -->*/}
           <div className="grid grid-3-3-3-3 centered">
             {/*<!-- PRODUCT PREVIEW -->*/}
-            <div className="product-preview">
-              {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
-              <a href="game/comic">
-                <figure className="product-preview-image liquid">
-                  <img src="/img/launcher/marketplace/items/01.jpg" alt="item-01" />
-                </figure>
-              </a>
-              {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
+            <Tilt>
+              <div className="product-preview">
+                {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
+                <a href="game/comic">
+                  <figure className="product-preview-image liquid">
+                    <img src="/img/launcher/marketplace/items/01.jpg" alt="item-01" />
+                  </figure>
+                </a>
+                {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
 
-              {/*<!-- PRODUCT PREVIEW INFO -->*/}
-              <div className="product-preview-info">
-                {/*<!-- TEXT STICKER -->*/}
-                <p className="text-sticker"><span className="highlighted"></span>Limited edition</p>
-                {/*<!-- /TEXT STICKER -->*/}
+                {/*<!-- PRODUCT PREVIEW INFO -->*/}
+                <div className="product-preview-info">
+                  {/*<!-- TEXT STICKER -->*/}
+                  <p className="text-sticker"><span className="highlighted"></span>Limited Edition</p>
+                  {/*<!-- /TEXT STICKER -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TITLE -->*/}
-                <p className="product-preview-title"><a href="game/comic">The Walking Dead</a></p>
-                {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
+                  {/*<!-- PRODUCT PREVIEW TITLE -->*/}
+                  <p className="product-preview-title"><a href="game/comic">The Walking Dead</a></p>
+                  {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
 
-                {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
-                <p className="product-preview-category digital"><a href="game/comic">Comic</a></p>
-                {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
+                  {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
+                  <p className="product-preview-category digital"><a href="game/comic">Comic</a></p>
+                  {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TEXT -->*/}
-                <p className="product-preview-text">
-                  The world we knew is gone. Collect this awesome comic to survive the zombie apocalypse!
-                </p>
-                {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
-              </div>
-              {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+                  {/*<!-- PRODUCT PREVIEW TEXT -->*/}
+                  <div className="product-preview-text-container">
+                    <p className="product-preview-text">
+                      The world we knew is gone. Collect this awesome comic to survive the zombie apocalypse!
+                    </p>
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
+                </div>
+                {/*<!-- /PRODUCT PREVIEW INFO -->*/}
 
-              {/*<!-- PRODUCT PREVIEW META -->*/}
-              <div className="product-preview-meta">
-                {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
-                <div className="product-preview-author pl-10">
-                  {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
-                  <a className="product-preview-author-image user-avatar micro no-border" href="game/comic">
-                    {/*<!-- USER AVATAR CONTENT -->*/}
-                    <div className="user-avatar-content w-8 h-8">
-                      {/*<!-- HEXAGON -->*/}
-                        <img src="img/cromy-avatar.png" />
-                      {/*<!-- /HEXAGON -->*/}
+                {/*<!-- PRODUCT PREVIEW META -->*/}
+                <div className="product-preview-meta">
+                  {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
+                  <div className="product-preview-author pl-10">
+                    {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    <a className="product-preview-author-image user-avatar micro no-border" href="game/comic">
+                      {/*<!-- USER AVATAR CONTENT -->*/}
+                      <div className="user-avatar-content w-8 h-8">
+                        {/*<!-- HEXAGON -->*/}
+                          <img src="img/cromy-avatar.png" />
+                        {/*<!-- /HEXAGON -->*/}
+                      </div>
+                      {/*<!-- /USER AVATAR CONTENT -->*/}
+                    </a>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    <p className="product-preview-author-title">Published By</p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    <p className="product-preview-author-text"><a href="game/comic">Cromy</a></p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
+
+                  {/*<!-- RATING LIST -->*/}
+                  <div className="rating-list">
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
                     </div>
-                    {/*<!-- /USER AVATAR CONTENT -->*/}
-                  </a>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
-                  <p className="product-preview-author-title">Published By</p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
-                  <p className="product-preview-author-text"><a href="game/comic">Cromy</a></p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+                  </div>
+                  {/*<!-- /RATING LIST -->*/}
                 </div>
-                {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
-
-                {/*<!-- RATING LIST -->*/}
-                <div className="rating-list">
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-                </div>
-                {/*<!-- /RATING LIST -->*/}
+                {/*<!-- /PRODUCT PREVIEW META -->*/}
               </div>
-              {/*<!-- /PRODUCT PREVIEW META -->*/}
-            </div>
+            </Tilt>
             {/*<!-- /PRODUCT PREVIEW -->*/}
 
             {/*<!-- PRODUCT PREVIEW -->*/}
-            <div className="product-preview">
-              {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
-              <a href="game/sticker-album">
-                <figure className="product-preview-image liquid">
-                  <img src="/img/launcher/marketplace/items/02.jpg" alt="item-02" />
-                </figure>
-              </a>
-              {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
+            <Tilt>
+              <div className="product-preview">
+                {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
+                <a href="game/sticker-album">
+                  <figure className="product-preview-image liquid">
+                    <img src="/img/launcher/marketplace/items/02.jpg" alt="item-02" />
+                  </figure>
+                </a>
+                {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
 
-              {/*<!-- PRODUCT PREVIEW INFO -->*/}
-              <div className="product-preview-info">
-                {/*<!-- TEXT STICKER -->*/}
-                <p className="text-sticker"><span className="highlighted"></span>Artist collection</p>
-                {/*<!-- /TEXT STICKER -->*/}
+                {/*<!-- PRODUCT PREVIEW INFO -->*/}
+                <div className="product-preview-info">
+                  {/*<!-- TEXT STICKER -->*/}
+                  <p className="text-sticker"><span className="highlighted"></span>Artist Collection</p>
+                  {/*<!-- /TEXT STICKER -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TITLE -->*/}
-                <p className="product-preview-title"><a href="game/sticker-album">Bizarrap Sticker Album</a></p>
-                {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
+                  {/*<!-- PRODUCT PREVIEW TITLE -->*/}
+                  <p className="product-preview-title"><a href="game/sticker-album">Bizarrap Sticker Album</a></p>
+                  {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
 
-                {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
-                <p className="product-preview-category digital"><a href="game/sticker-album">Sticker album</a></p>
-                {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
+                  {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
+                  <p className="product-preview-category digital"><a href="game/sticker-album">Sticker album</a></p>
+                  {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TEXT -->*/}
-                <p className="product-preview-text">
-                  Bizarrap joined forces with Cromy to create this incredible sticker album. Grab your sticker packs here!
-                </p>
-                {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
-              </div>
-              {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+                  {/*<!-- PRODUCT PREVIEW TEXT -->*/}
+                  <div className="product-preview-text-container">
+                    <p className="product-preview-text">
+                      Bizarrap joined forces with Cromy to create this incredible sticker album. Grab your sticker packs here!
+                    </p>
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
+                </div>
+                {/*<!-- /PRODUCT PREVIEW INFO -->*/}
 
-              {/*<!-- PRODUCT PREVIEW META -->*/}
-              <div className="product-preview-meta">
-                {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
-                <div className="product-preview-author pl-10">
-                  {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
-                  <a className="product-preview-author-image user-avatar micro no-border" href="game/sticker-album">
-                    {/*<!-- USER AVATAR CONTENT -->*/}
-                    <div className="user-avatar-content w-8 h-8">
-                      {/*<!-- HEXAGON -->*/}
-                        <img src="img/cromy-avatar.png" />
-                      {/*<!-- /HEXAGON -->*/}
+                {/*<!-- PRODUCT PREVIEW META -->*/}
+                <div className="product-preview-meta">
+                  {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
+                  <div className="product-preview-author pl-10">
+                    {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    <a className="product-preview-author-image user-avatar micro no-border" href="game/sticker-album">
+                      {/*<!-- USER AVATAR CONTENT -->*/}
+                      <div className="user-avatar-content w-8 h-8">
+                        {/*<!-- HEXAGON -->*/}
+                          <img src="img/cromy-avatar.png" />
+                        {/*<!-- /HEXAGON -->*/}
+                      </div>
+                      {/*<!-- /USER AVATAR CONTENT -->*/}
+                    </a>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    <p className="product-preview-author-title">Published By</p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    <p className="product-preview-author-text"><a href="game/sticker-album">Cromy</a></p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
+
+                  {/*<!-- RATING LIST -->*/}
+                  <div className="rating-list">
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
                     </div>
-                    {/*<!-- /USER AVATAR CONTENT -->*/}
-                  </a>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
-                  <p className="product-preview-author-title">Published By</p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
-                  <p className="product-preview-author-text"><a href="game/sticker-album">Cromy</a></p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+                  </div>
+                  {/*<!-- /RATING LIST -->*/}
                 </div>
-                {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
-
-                {/*<!-- RATING LIST -->*/}
-                <div className="rating-list">
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-                </div>
-                {/*<!-- /RATING LIST -->*/}
+                {/*<!-- /PRODUCT PREVIEW META -->*/}
               </div>
-              {/*<!-- /PRODUCT PREVIEW META -->*/}
-            </div>
+            </Tilt>
             {/*<!-- /PRODUCT PREVIEW -->*/}
 
             {/*<!-- PRODUCT PREVIEW -->*/}
-            <div className="product-preview">
-              {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
-              <a href="game/musical-booklet-vol-2">
-                <figure className="product-preview-image liquid">
-                  <img src="/img/launcher/marketplace/items/03.jpg" alt="item-01" />
-                </figure>
-              </a>
-              {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
+            <Tilt>
+              <div className="product-preview">
+                {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
+                <a href="game/musical-booklet-vol-2">
+                  <figure className="product-preview-image liquid">
+                    <img src="/img/launcher/marketplace/items/03.jpg" alt="item-01" />
+                  </figure>
+                </a>
+                {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
 
-              {/*<!-- PRODUCT PREVIEW INFO -->*/}
-              <div className="product-preview-info">
-                {/*<!-- TEXT STICKER -->*/}
-                <p className="text-sticker"><span className="highlighted"></span>Cromy Exclusive</p>
-                {/*<!-- /TEXT STICKER -->*/}
+                {/*<!-- PRODUCT PREVIEW INFO -->*/}
+                <div className="product-preview-info">
+                  {/*<!-- TEXT STICKER -->*/}
+                  <p className="text-sticker"><span className="highlighted"></span>Cromy Exclusive</p>
+                  {/*<!-- /TEXT STICKER -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TITLE -->*/}
-                <p className="product-preview-title"><a href="game/musical-booklet-vol-2">Gorillaz music booklet</a></p>
-                {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
+                  {/*<!-- PRODUCT PREVIEW TITLE -->*/}
+                  <p className="product-preview-title"><a href="game/musical-booklet-vol-2">Gorillaz Music Booklet</a></p>
+                  {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
 
-                {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
-                <p className="product-preview-category digital"><a href="game/musical-booklet-vol-2">Music booklet</a></p>
-                {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
+                  {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
+                  <p className="product-preview-category digital"><a href="game/musical-booklet-vol-2">Music booklet</a></p>
+                  {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TEXT -->*/}
-                <p className="product-preview-text">
-                  Exclusive gorillaz NFTs collection in collaboration with Cromy. Get your unique Gorillaz NFTs!
-                </p>
-                {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
-              </div>
-              {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+                  {/*<!-- PRODUCT PREVIEW TEXT -->*/}
+                  <div className="product-preview-text-container">
+                    <p className="product-preview-text">
+                      Exclusive gorillaz NFTs collection in collaboration with Cromy. Get your unique Gorillaz NFTs!
+                    </p>
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
 
-              {/*<!-- PRODUCT PREVIEW META -->*/}
-              <div className="product-preview-meta">
-                {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
-                <div className="product-preview-author pl-10">
-                  {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
-                  <a className="product-preview-author-image user-avatar micro no-border" href="game/musical-booklet-vol-2">
-                    {/*<!-- USER AVATAR CONTENT -->*/}
-                    <div className="user-avatar-content w-8 h-8">
-                      {/*<!-- HEXAGON -->*/}
-                        <img src="img/cromy-avatar.png" />
-                      {/*<!-- /HEXAGON -->*/}
+                </div>
+                {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+
+                {/*<!-- PRODUCT PREVIEW META -->*/}
+                <div className="product-preview-meta">
+                  {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
+                  <div className="product-preview-author pl-10">
+                    {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    <a className="product-preview-author-image user-avatar micro no-border" href="game/musical-booklet-vol-2">
+                      {/*<!-- USER AVATAR CONTENT -->*/}
+                      <div className="user-avatar-content w-8 h-8">
+                        {/*<!-- HEXAGON -->*/}
+                          <img src="img/cromy-avatar.png" />
+                        {/*<!-- /HEXAGON -->*/}
+                      </div>
+                      {/*<!-- /USER AVATAR CONTENT -->*/}
+                    </a>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    <p className="product-preview-author-title">Published By</p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    <p className="product-preview-author-text"><a href="game/musical-booklet-vol-2">Cromy</a></p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
+
+                  {/*<!-- RATING LIST -->*/}
+                  <div className="rating-list">
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
                     </div>
-                    {/*<!-- /USER AVATAR CONTENT -->*/}
-                  </a>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
-                  <p className="product-preview-author-title">Published By</p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
-                  <p className="product-preview-author-text"><a href="game/musical-booklet-vol-2">Cromy</a></p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+                  </div>
+                  {/*<!-- /RATING LIST -->*/}
                 </div>
-                {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
-
-                {/*<!-- RATING LIST -->*/}
-                <div className="rating-list">
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-                </div>
-                {/*<!-- /RATING LIST -->*/}
+                {/*<!-- /PRODUCT PREVIEW META -->*/}
               </div>
-              {/*<!-- /PRODUCT PREVIEW META -->*/}
-            </div>
+            </Tilt>
             {/*<!-- /PRODUCT PREVIEW -->*/}
 
             {/*<!-- PRODUCT PREVIEW -->*/}
-            <div className="product-preview">
-              {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
-              <a href="game/iota-mural">
-                <figure className="product-preview-image liquid">
-                  <img src="/img/launcher/marketplace/items/04.jpg" alt="item-04" />
-                </figure>
-              </a>
-              {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
+            <Tilt>
+              <div className="product-preview">
+                {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
+                <a href="game/iota-mural">
+                  <figure className="product-preview-image liquid">
+                    <img src="/img/launcher/marketplace/items/04.jpg" alt="item-04" />
+                  </figure>
+                </a>
+                {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
 
-              {/*<!-- PRODUCT PREVIEW INFO -->*/}
-              <div className="product-preview-info">
-                {/*<!-- TEXT STICKER -->*/}
-                <p className="text-sticker"><span className="highlighted"></span>Art Collaborations</p>
-                {/*<!-- /TEXT STICKER -->*/}
+                {/*<!-- PRODUCT PREVIEW INFO -->*/}
+                <div className="product-preview-info">
+                  {/*<!-- TEXT STICKER -->*/}
+                  <p className="text-sticker"><span className="highlighted"></span>Art Collaborations</p>
+                  {/*<!-- /TEXT STICKER -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TITLE -->*/}
-                <p className="product-preview-title"><a href="game/iota-mural">IOTA Mural</a></p>
-                {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
+                  {/*<!-- PRODUCT PREVIEW TITLE -->*/}
+                  <p className="product-preview-title"><a href="game/iota-mural">IOTA Mural</a></p>
+                  {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
 
-                {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
-                <p className="product-preview-category digital"><a href="game/iota-mural">Mural</a></p>
-                {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
+                  {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
+                  <p className="product-preview-category digital"><a href="game/iota-mural">Mural</a></p>
+                  {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
 
-                {/*<!-- PRODUCT PREVIEW TEXT -->*/}
-                <p className="product-preview-text">
-                  Collect all the parts to uncover and own this awesome IOTA Cromy collectible made by the community.
-                </p>
-                {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
-              </div>
-              {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+                  {/*<!-- PRODUCT PREVIEW TEXT -->*/}
+                  <div className="product-preview-text-container">
+                    <p className="product-preview-text">
+                      Collect all the parts to uncover and own this awesome IOTA Cromy collectible made by the community.
+                    </p>
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
 
-              {/*<!-- PRODUCT PREVIEW META -->*/}
-              <div className="product-preview-meta">
-                {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
-                <div className="product-preview-author pl-10">
-                  {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
-                  <a className="product-preview-author-image user-avatar micro no-border" href="game/iota-mural">
-                    {/*<!-- USER AVATAR CONTENT -->*/}
-                    <div className="user-avatar-content w-8 h-8">
-                      {/*<!-- HEXAGON -->*/}
-                        <img src="img/cromy-avatar.png" />
-                      {/*<!-- /HEXAGON -->*/}
+                </div>
+                {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+
+                {/*<!-- PRODUCT PREVIEW META -->*/}
+                <div className="product-preview-meta">
+                  {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
+                  <div className="product-preview-author pl-10">
+                    {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    <a className="product-preview-author-image user-avatar micro no-border" href="game/iota-mural">
+                      {/*<!-- USER AVATAR CONTENT -->*/}
+                      <div className="user-avatar-content w-8 h-8">
+                        {/*<!-- HEXAGON -->*/}
+                          <img src="img/cromy-avatar.png" />
+                        {/*<!-- /HEXAGON -->*/}
+                      </div>
+                      {/*<!-- /USER AVATAR CONTENT -->*/}
+                    </a>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    <p className="product-preview-author-title">Published By</p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    <p className="product-preview-author-text"><a href="game/iota-mural">Cromy</a></p>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
+
+                  {/*<!-- RATING LIST -->*/}
+                  <div className="rating-list">
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
                     </div>
-                    {/*<!-- /USER AVATAR CONTENT -->*/}
-                  </a>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
-                  <p className="product-preview-author-title">Published By</p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
 
-                  {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
-                  <p className="product-preview-author-text"><a href="game/iota-mural">Cromy</a></p>
-                  {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+
+                    {/*<!-- RATING -->*/}
+                    <div className="rating filled">
+                      {/*<!-- RATING ICON -->*/}
+                      <svg className="rating-icon icon-star">
+                        <use xlinkHref="#svg-star"></use>
+                      </svg>
+                      {/*<!-- /RATING ICON -->*/}
+                    </div>
+                    {/*<!-- /RATING -->*/}
+                  </div>
+                  {/*<!-- /RATING LIST -->*/}
                 </div>
-                {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
-
-                {/*<!-- RATING LIST -->*/}
-                <div className="rating-list">
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-
-                  {/*<!-- RATING -->*/}
-                  <div className="rating filled">
-                    {/*<!-- RATING ICON -->*/}
-                    <svg className="rating-icon icon-star">
-                      <use xlinkHref="#svg-star"></use>
-                    </svg>
-                    {/*<!-- /RATING ICON -->*/}
-                  </div>
-                  {/*<!-- /RATING -->*/}
-                </div>
-                {/*<!-- /RATING LIST -->*/}
+                {/*<!-- /PRODUCT PREVIEW META -->*/}
               </div>
-              {/*<!-- /PRODUCT PREVIEW META -->*/}
-            </div>
+            </Tilt>
+            {/*<!-- /PRODUCT PREVIEW -->*/}
+
+            {/*<!-- PRODUCT PREVIEW -->*/}
+            <a href="mailto:hello@cromy.io">
+              <Tilt>
+                <div className="product-preview">
+                  {/*<!-- PRODUCT PREVIEW IMAGE -->*/}
+                    <figure className="product-preview-image liquid bg-gray-300" />
+                  {/*<!-- /PRODUCT PREVIEW IMAGE -->*/}
+
+                  {/*<!-- PRODUCT PREVIEW INFO -->*/}
+                  <div className="product-preview-info">
+                    {/*<!-- TEXT STICKER -->*/}
+                    <p className="text-sticker"><span className="highlighted"></span>To Be Defined</p>
+                    {/*<!-- /TEXT STICKER -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW TITLE -->*/}
+                    <p className="product-preview-title">Build your NFT experience!</p>
+                    {/*<!-- /PRODUCT PREVIEW TITLE -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW CATEGORY -->*/}
+                    <p className="product-preview-category digital">To be defined</p>
+                    {/*<!-- /PRODUCT PREVIEW CATEGORY -->*/}
+
+                    {/*<!-- PRODUCT PREVIEW TEXT -->*/}
+                    <div className="product-preview-text-container">
+                      <p className="product-preview-text">
+                        Do you have a license or brand and want to monetize your community through NFTs? Let's build your NFT experience together!
+                      </p>
+                    </div>
+                    {/*<!-- /PRODUCT PREVIEW TEXT -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW INFO -->*/}
+
+                  {/*<!-- PRODUCT PREVIEW META -->*/}
+                  <div className="product-preview-meta">
+                    {/*<!-- PRODUCT PREVIEW AUTHOR -->*/}
+                    <div className="product-preview-author pl-10">
+                      {/*<!-- PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+                      <a className="product-preview-author-image user-avatar micro no-border">
+                        {/*<!-- USER AVATAR CONTENT -->*/}
+                        <div className="user-avatar-content w-8 h-8 bg-gray-300 rounded-full" />
+                        {/*<!-- /USER AVATAR CONTENT -->*/}
+                      </a>
+                      {/*<!-- /PRODUCT PREVIEW AUTHOR IMAGE -->*/}
+
+                      {/*<!-- PRODUCT PREVIEW AUTHOR TITLE -->*/}
+                      <p className="product-preview-author-title">Published By</p>
+                      {/*<!-- /PRODUCT PREVIEW AUTHOR TITLE -->*/}
+
+                      {/*<!-- PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                      <p className="product-preview-author-text">You</p>
+                      {/*<!-- /PRODUCT PREVIEW AUTHOR TEXT -->*/}
+                    </div>
+                    {/*<!-- /PRODUCT PREVIEW AUTHOR -->*/}
+
+                    {/*<!-- RATING LIST -->*/}
+                    <div className="rating-list">
+                      {/*<!-- RATING -->*/}
+                      <div className="rating filled">
+                        {/*<!-- RATING ICON -->*/}
+                        <svg className="rating-icon icon-star">
+                          <use xlinkHref="#svg-star"></use>
+                        </svg>
+                        {/*<!-- /RATING ICON -->*/}
+                      </div>
+                      {/*<!-- /RATING -->*/}
+
+                      {/*<!-- RATING -->*/}
+                      <div className="rating filled">
+                        {/*<!-- RATING ICON -->*/}
+                        <svg className="rating-icon icon-star">
+                          <use xlinkHref="#svg-star"></use>
+                        </svg>
+                        {/*<!-- /RATING ICON -->*/}
+                      </div>
+                      {/*<!-- /RATING -->*/}
+
+                      {/*<!-- RATING -->*/}
+                      <div className="rating filled">
+                        {/*<!-- RATING ICON -->*/}
+                        <svg className="rating-icon icon-star">
+                          <use xlinkHref="#svg-star"></use>
+                        </svg>
+                        {/*<!-- /RATING ICON -->*/}
+                      </div>
+                      {/*<!-- /RATING -->*/}
+
+                      {/*<!-- RATING -->*/}
+                      <div className="rating filled">
+                        {/*<!-- RATING ICON -->*/}
+                        <svg className="rating-icon icon-star">
+                          <use xlinkHref="#svg-star"></use>
+                        </svg>
+                        {/*<!-- /RATING ICON -->*/}
+                      </div>
+                      {/*<!-- /RATING -->*/}
+
+                      {/*<!-- RATING -->*/}
+                      <div className="rating filled">
+                        {/*<!-- RATING ICON -->*/}
+                        <svg className="rating-icon icon-star">
+                          <use xlinkHref="#svg-star"></use>
+                        </svg>
+                        {/*<!-- /RATING ICON -->*/}
+                      </div>
+                      {/*<!-- /RATING -->*/}
+                    </div>
+                    {/*<!-- /RATING LIST -->*/}
+                  </div>
+                  {/*<!-- /PRODUCT PREVIEW META -->*/}
+                </div>
+              </Tilt>
+            </a>
             {/*<!-- /PRODUCT PREVIEW -->*/}
 
         </div>

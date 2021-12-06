@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ConnectWallet } from './';
+import { useRect } from '@reactour/utils'
+import Mask from '@reactour/mask'
+import { ApplicationContext } from '../state/store';
 
 const Header = (props) => {
+  const { isTourOpen, setIsTourOpen } = useContext(ApplicationContext);
+  const refConnectWalletButton = useRef(null);
+  const [updater, setUpdater] = useState([])
+  const [scrolled, setScrolled] = useState(0)
+  const sizes = useRect(refConnectWalletButton, updater);
+
+  useEffect(() => {
+    setTimeout(() => setUpdater([]), 1000);
+    window.addEventListener('scroll', () => {
+      setUpdater([]);
+      setScrolled(window.scrollY);
+    });
+    return () => window.removeEventListener('scroll', null);
+  }, []);
+
   return (
     <>
       {/*<!-- HEADER -->*/}
@@ -300,7 +318,7 @@ const Header = (props) => {
           {/*<!-- ACTION LIST -->*/}
           <div className="action-list light">
             {/*<!-- CONNECT WALLET -->*/}
-            <div className="my-auto">
+            <div className="my-auto" ref={refConnectWalletButton}>
               <ConnectWallet />
             </div>
             {/*<!-- /CONNECT WALLET -->*/}
@@ -351,6 +369,12 @@ const Header = (props) => {
         {/*<!-- /BAR ACTIONS -->*/}
       </aside>
       {/*<!-- /FLOATY BAR -->*/}
+      {isTourOpen ? <Mask sizes={sizes} onClick={() => setIsTourOpen(false)} /> : null}
+      {isTourOpen && (
+        <div className="text-center text-xs pt-1 pb-1 pl-2 pr-2" style={{ position: 'absolute', top: sizes.bottom + scrolled + 20, left: sizes.left + 5, backgroundColor: 'black', borderRadius: 1000, zIndex: 99999 }}>
+          <a className="text-white">👆 Connect your wallet to start</a>
+        </div>
+      )}
     </>
   );
 }
