@@ -19,6 +19,7 @@ import SectionBanner from './SectionBanner';
 import ServicesRow from './ServicesRow';
 import SubscribeRow from './SubscribeRow';
 import dynamic from 'next/dynamic';
+import Faq from './Faq';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -52,4 +53,5 @@ export {
   OnboardingSlider,
   Header,
   SectionBanner,
+  Faq
 };

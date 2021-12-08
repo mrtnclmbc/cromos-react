@@ -5831,25 +5831,24 @@ figure > img {
     95. SIDEBAR MENU HEADER
 ---------------------------------*/
 .sidebar-menu-header {
-  height: 112px;
-  padding: 28px 26px 0 60px;
+  padding: 20px 26px 20px 60px;
   background-color: #fff;
   cursor: pointer;
   position: relative;
 }
 
 .sidebar-menu-header .sidebar-menu-header-icon {
-  fill: #23d2e2;
+  fill: #e43618;
   position: absolute;
-  top: 28px;
-  left: 28px;
+  top: 17px;
+  left: 25px;
 }
 
 .sidebar-menu-header .sidebar-menu-header-control-icon .sidebar-menu-header-control-icon-open,
 .sidebar-menu-header .sidebar-menu-header-control-icon .sidebar-menu-header-control-icon-closed {
   fill: #3e3f5e;
   position: absolute;
-  top: 32px;
+  top: 25px;
   right: 28px;
 }
 

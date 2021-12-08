@@ -56,6 +56,10 @@ const App = ({ Component, pageProps }) => {
       <script src="/launcher/js/vendor/xm_plugins.min.js"></script>
       {/*<!-- global.tooltips -->*/}
       <script src="/launcher/js/global/global.tooltips.js"></script>
+      {/*<!-- global.accordions -->*/}
+      <script src="/launcher/js/global/global.accordions.js"></script>
+      {/*<!-- global.hexagons -->*/}
+      <script src="/launcher/js/global/global.hexagons.js"></script>
       {/*<!-- header -->*/}
       <script src="/launcher/js/header/header.js"></script>
       {/*<!-- sidebar -->*/}
@@ -63,6 +67,10 @@ const App = ({ Component, pageProps }) => {
       {/*<!-- form.utils -->*/}
       <script src="/launcher/js/form/form.utils.js"></script>
       {/*<!-- SVG icons -->*/}
+      <script src="/launcher/js/utils/svg-loader.js"></script>
+      {/* <!-- sidebar --> */}
+      <script src="/launcher/js/sidebar/sidebar.js"></script>
+      {/* <!-- SVG icons --> */}
       <script src="/launcher/js/utils/svg-loader.js"></script>
     </>
   );

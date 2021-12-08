@@ -91,7 +91,7 @@ const Header = (props) => {
               {/*<!-- MENU MAIN ITEM -->*/}
               <li className="menu-main-item">
                 {/*<!-- MENU MAIN ITEM LINK -->*/}
-                <a className="menu-main-item-link" href="#">FAQs</a>
+                <a className="menu-main-item-link" href="/faq">FAQs</a>
                 {/*<!-- /MENU MAIN ITEM LINK -->*/}
               </li>
               {/*<!-- /MENU MAIN ITEM -->*/}
