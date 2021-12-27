@@ -4,21 +4,30 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import '../public/launcher/css/styles.css';
 
-import { Footer, Navbar } from '../src/components';
+import { Footer, LoadingIndicator, Navbar } from '../src/components';
 import React, { useEffect, useState } from 'react';
 
 import ApplicationProvider from '../src/state/store';
 import Head from 'next/head';
+import Script from 'next/script';
 
 const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAuth, setIsAuth] = useState(null);
+  const [isWrongPass, setIsWrongPass] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     // Setup darkmode
     setDarkMode(
       localStorage.getItem('mode') ? parseInt(localStorage.getItem('mode')) : 0,
     );
+
+    // Check if authorized
+    setIsAuth(localStorage.getItem('authorized') === 'true');
+    
     // Naive check for mobile
     setIsMobile(
       navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i),
@@ -41,37 +50,60 @@ const App = ({ Component, pageProps }) => {
           />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+                {/*<!-- app -->*/}
+                {/*<!-- liquidify -->*/}
         </Head>
-        <Component {...pageProps} isMobile={isMobile} />
+        {isAuth === null ? <LoadingIndicator /> :
+        isAuth && !isLoading ? <Component {...pageProps} isMobile={isMobile} /> : (
+          <div>
+            <div style={{ height: '100vh' }} className=" w-50 flex items-center justify-center flex-col">
+              <div style={{ width: 300 }} >
+                <a style={{ fontWeight: 600 }}>Restricted access.</a>
+              </div>
+              <div style={{ width: 300 }} className="relative">
+                <input style={{ height: 45, borderRadius: 5 }} type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="w-full h-full bg-red-100 bg-opacity-30 placeholder-white rounded focus:bg-opacity-50 text-sm outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+              </div>
+              <button style={{ width: 300 }} onClick={() => {
+                setIsWrongPass(false)
+                if (password === "LaCromyNeta2022") {
+                  localStorage.setItem('authorized', true);
+                  setIsLoading(true);
+                  setIsAuth(true);
+                  window.location.reload(false);
+                } else {
+                  setIsWrongPass(true)
+                }
+              }} className="w-50 text-black mt-3 hover:text-white border-0 py-2 px-6 focus:outline-none bg-white hover:bg-red-600 hover:shadow-lg rounded">Login</button>
+              {isWrongPass && (
+                <div style={{ width: 300, marginTop: 5}}>
+                  <a style={{ fontWeight: 600, fontSize: 13 }} className="text-red-600">Wrong password.</a>
+                </div>)}
+            </div>
+          </div>
+        )}
       </ApplicationProvider>
-      {/*<!-- app -->*/}
       <script src="/launcher/js/utils/app.js"></script>
+      <Script strategy="afterInteractive" src="/launcher/js/utils/liquidify.js" async></Script>
       {/*<!-- page loader -->*/}
-      <script src="/launcher/js/utils/page-loader.js"></script>
+      <Script src="/launcher/js/utils/page-loader.js"></Script>
       {/*<!-- simplebar -->*/}
       <script src="/launcher/js/vendor/simplebar.min.js"></script>
-      {/*<!-- liquidify -->*/}
-      <script src="/launcher/js/utils/liquidify.js"></script>
       {/*<!-- XM_Plugins -->*/}
       <script src="/launcher/js/vendor/xm_plugins.min.js"></script>
       {/*<!-- global.tooltips -->*/}
-      <script src="/launcher/js/global/global.tooltips.js"></script>
+      <Script src="/launcher/js/global/global.tooltips.js"></Script>
       {/*<!-- global.accordions -->*/}
-      <script src="/launcher/js/global/global.accordions.js"></script>
+      <Script src="/launcher/js/global/global.accordions.js"></Script>
       {/*<!-- global.hexagons -->*/}
-      <script src="/launcher/js/global/global.hexagons.js"></script>
+      <Script src="/launcher/js/global/global.hexagons.js"></Script>
       {/*<!-- header -->*/}
-      <script src="/launcher/js/header/header.js"></script>
+      <Script src="/launcher/js/header/header.js"></Script>
       {/*<!-- sidebar -->*/}
-      <script src="/launcher/js/sidebar/sidebar.js"></script>
+      <Script src="/launcher/js/sidebar/sidebar.js"></Script>
       {/*<!-- form.utils -->*/}
-      <script src="/launcher/js/form/form.utils.js"></script>
+      <Script src="/launcher/js/form/form.utils.js"></Script>
       {/*<!-- SVG icons -->*/}
-      <script src="/launcher/js/utils/svg-loader.js"></script>
-      {/* <!-- sidebar --> */}
-      <script src="/launcher/js/sidebar/sidebar.js"></script>
-      {/* <!-- SVG icons --> */}
-      <script src="/launcher/js/utils/svg-loader.js"></script>
+      <Script src="/launcher/js/utils/svg-loader.js"></Script>
     </>
   );
 };

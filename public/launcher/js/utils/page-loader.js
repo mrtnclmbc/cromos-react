@@ -6,4 +6,6 @@ app.querySelector('.page-loader', function (el) {
   };
 
   window.addEventListener('load', hidePageLoader);
+
+  setTimeout(hidePageLoader, 1500);
 });

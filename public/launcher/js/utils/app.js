@@ -56,12 +56,14 @@ const app = {
     }
   },
   liquidify: function (el) {
-    const image = el.querySelector('img'),
-          imageSrc = image.getAttribute('src');
+    const image = el.querySelector('img');
+    if (image) {
+      const imageSrc = image.getAttribute('src');
   
-    image.style.display = 'none';
-    el.style.background = `url("${imageSrc}") no-repeat center`;
-    el.style.backgroundSize = 'cover';
+      image.style.display = 'none';
+      el.style.background = `url("${imageSrc}") no-repeat center`;
+      el.style.backgroundSize = 'cover';  
+    }
   },
   liquidifyStatic: function (figure, image) {
     image.style.display = 'none';

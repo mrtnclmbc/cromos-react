@@ -22,7 +22,7 @@ const Launcher = (props) => {
     <>
       {/*<!-- /STYLES -->*/}
         {/*<!-- PAGE LOADER -->*/}
-        <div className="page-loader page-loader bg-gradient-to-bl from-yellow-400 via-red-500 to-red-800">
+        <div className="page-loader bg-gradient-to-bl from-yellow-400 via-red-500 to-red-800">
           {/*<!-- PAGE LOADER DECORATION -->*/}
             <img className="lg:w-2/6 md:w-3/6 w-5/6 mb-0 object-cover object-center rounded" alt="hero" src="/img/cromy-logo-full.png" />
           {/*<!-- /PAGE LOADER DECORATION -->*/}
