@@ -51,7 +51,7 @@ const Asset = (props) => {
           setSelectedAsset(asset)
           }) : null}
       >
-        <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter drop-shadow-lg' : ''} h-full w-full ${padding ? `p-${padding}` : ''}`}>
+        <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter' : ''} h-full w-full ${padding ? `p-${padding}` : ''}`}>
           <div className="group relative h-full z-0 ">
             {type !== 'empty' && isNFT && (
               <div className={`${rounded && 'rounded-lg'} hidden sm:flex absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10`}>
