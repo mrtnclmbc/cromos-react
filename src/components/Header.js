@@ -4,7 +4,7 @@ import { useRect } from '@reactour/utils'
 import Mask from '@reactour/mask'
 import { ApplicationContext } from '../state/store';
 
-const Header = (props) => {
+const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
   const { isTourOpen, setIsTourOpen } = useContext(ApplicationContext);
   const refConnectWalletButton = useRef(null);
   const [updater, setUpdater] = useState([])
@@ -23,7 +23,7 @@ const Header = (props) => {
   return (
     <>
       {/*<!-- HEADER -->*/}
-      <header className="header bg-gradient-to-b from-red-500 to-red-600">
+      <header style={!transparency && !(minorOpacityOnScroll && scrolled > 0) ? { backgroundColor: '#dc2626' } : {}} className={"header" + ((transparency && scrolled >= 520) ? ' sticky' : (minorOpacityOnScroll && scrolled > 0) ? ' sticky-transparent' : '')}>
         {/*<!-- HEADER ACTIONS -->*/}
         <div className="header-actions">
           {/*<!-- HEADER BRAND -->*/}
@@ -47,7 +47,8 @@ const Header = (props) => {
         {/*<!-- /HEADER ACTIONS -->*/}
 
         {/*<!-- HEADER ACTIONS -->*/}
-        <div className="header-actions">
+        {title === undefined && (
+          <div className="header-actions">
           {/*<!-- MOBILEMENU TRIGGER -->*/}
           <div className="mobilemenu-trigger navigation-widget-mobile-trigger">
             {/*<!-- BURGER ICON -->*/}
@@ -69,7 +70,8 @@ const Header = (props) => {
           {/*<!-- /MOBILEMENU TRIGGER -->*/}
 
           {/*<!-- NAVIGATION -->*/}
-          <nav className="navigation">
+          {title === undefined && (
+            <nav className="navigation">
             {/*<!-- MENU MAIN -->*/}
             <ul className="menu-main">
               {/*<!-- MENU MAIN ITEM -->*/}
@@ -98,13 +100,16 @@ const Header = (props) => {
 
             </ul>
             {/*<!-- /MENU MAIN -->*/}
-          </nav>
+            </nav>
+          )}
           {/*<!-- /NAVIGATION -->*/}
-        </div>
+          </div>
+        )}
         {/*<!-- /HEADER ACTIONS -->*/}
 
         {/*<!-- HEADER ACTIONS -->*/}
-        <div className="header-actions search-bar">
+        {title === undefined && (
+          <div className="header-actions search-bar">
           {/*<!-- INTERACTIVE INPUT -->*/}
           <div className="interactive-input light">
             <input type="text" id="search-main" name="search_main" placeholder="Search here for NFT games & Experiences..." />
@@ -290,11 +295,21 @@ const Header = (props) => {
             {/*<!-- /DROPDOWN BOX LIST -->*/}
           </div>
           {/*<!-- /DROPDOWN BOX -->*/}
-        </div>
+          </div>
+        )}
         {/*<!-- /HEADER ACTIONS -->*/}
 
         {/*<!-- HEADER ACTIONS -->*/}
-        <div className="header-actions" style={{ visibility: 'hidden'}}>
+        {title?.length && (
+          <div id="header-title" className="flex items-center justify-center header-title flex-col" style={{ marginLeft: 80 }}>
+            <span className="text-white font-bold">{title}</span>
+            {subtitle?.length && <span style={{ fontSize: '0.8em', marginTop: 0 }} className="text-white">{subtitle}</span>}
+          </div>
+        )}
+        {/*<!-- /HEADER ACTIONS -->*/}
+
+        {/*<!-- HEADER ACTIONS -->*/}
+        <div className="header-actions" style={{ display: 'none'}}>
           {/*<!-- PROGRESS STAT -->*/}
           <div className="progress-stat">
             {/*<!-- BAR PROGRESS WRAP -->*/}

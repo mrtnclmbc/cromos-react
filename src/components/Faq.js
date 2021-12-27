@@ -1,46 +1,42 @@
 import React from 'react';
-import Tilt from 'react-parallax-tilt';
-import { SectionBanner } from '.';
 
 const Item = ({ question, answer }) => (
-   <div class="sidebar-menu-item">
-      <div class="sidebar-menu-header accordion-trigger-linked">
-         <svg class="sidebar-menu-header-icon icon-profile">
+   <div className="sidebar-menu-item">
+      <div className="sidebar-menu-header accordion-trigger-linked">
+         <svg className="sidebar-menu-header-icon icon-profile">
             <use xlinkHref="#svg-info"></use>
          </svg>
 
-         <div class="sidebar-menu-header-control-icon">
-            <svg class="sidebar-menu-header-control-icon-open icon-minus-small">
+         <div className="sidebar-menu-header-control-icon">
+            <svg className="sidebar-menu-header-control-icon-open icon-minus-small">
                <use xlinkHref="#svg-minus-small"></use>
             </svg>
 
-            <svg class="sidebar-menu-header-control-icon-closed icon-plus-small">
+            <svg className="sidebar-menu-header-control-icon-closed icon-plus-small">
                <use xlinkHref="#svg-plus-small"></use>
             </svg>
          </div>
 
-         <p class="sidebar-menu-header-title">{question}</p>
+         <p className="sidebar-menu-header-title">{question}</p>
       </div>
 
-      <div class="sidebar-menu-body accordion-content-linked accordion-open px-2">
-         <p class="px-7 pb-4 sidebar-menu-link">{answer}</p>
+      <div className="sidebar-menu-body accordion-content-linked accordion-open px-2">
+         <p className="px-6 pb-2">{answer}</p>
       </div>
    </div>
 );
 
 const Faq = () => (
-   <div className="content-grid" style={{ paddingBottom: 60 }}>
-      <Tilt>
-         <SectionBanner
-            title="Frequently Asked Questions"
-            description="Learn more about Cromy.io"
-         />
-      </Tilt>
-      <section className='w-full rounded-lg overflow-hidden mx-auto'>
-         <div class="grid medium-space">
-            <div class="account-hub-sidebar">
-               <div class="sidebar-box no-padding">
-                  <div class="sidebar-menu">
+   <div className="content-grid centered" style={{ paddingTop: 102, paddingBottom: 60 }}>
+      <section style={{ paddingLeft: 50, paddingRight: 50 }} className='w-full rounded-lg overflow-hidden mx-auto'>
+         <div className="section-header-info text-center">
+            <p className="section-pretitle">Learn more about Cromy.io</p>
+            <h2 className="section-title">Frequently Asked Questions 🤔</h2>
+         </div>
+         <div style={{ marginTop: 30 }} className="grid medium-space">
+            <div className="account-hub-sidebar">
+               <div className="sidebar-box no-padding">
+                  <div className="sidebar-menu">
                      <Item
                         question="What is Cromy.io?"
                         answer="Cromy.io is a NFT social gaming platform that combines storytelling and gamification to make NFTs useful through collect & play to earn mini-games."

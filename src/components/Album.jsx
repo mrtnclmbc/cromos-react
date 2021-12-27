@@ -1,4 +1,4 @@
-import { Asset, LoadingIndicator, Modal, OnboardingSlider, SectionBanner } from './';
+import { Asset, LoadingIndicator, Modal, OnboardingSlider } from './';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -23,8 +23,7 @@ const Page = React.forwardRef(({ title, children, number }, ref) => {
 
 const startCollectAudio = new Audio("/audios/start.ogg")
 
-const Album = (props) => {
-  const [album, setAlbum] = useState(null);
+const Album = ({ album, albumId }) => {
   const [albumAssets, setAlbumAssets] = useState([]);
   const [walletAssets, setWalletAssets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,12 +52,6 @@ const Album = (props) => {
 
   // Hooks
   useEffect(async () => {
-    // Get album
-    if (props.albumId) {
-      const album = await getAlbum(props.albumId);
-      setAlbum(album);
-    }
-
     if (album && album?.pages?.length) {
       const contractAddress = album?.address;
       let tokenIds = [];
@@ -80,7 +73,7 @@ const Album = (props) => {
         setWantToExitPreviewMode(false);
       }  
     }
-  }, [currentAddress, album, props.albumId]);
+  }, [currentAddress, album, albumId]);
 
   useEffect(() => {
     if (!isPreviewMode) {
@@ -283,11 +276,7 @@ const Album = (props) => {
               />
             </Modal>
           }
-          <SectionBanner
-            standalone
-            title={album?.title}
-            description={album?.description}
-          />
+          <div style={{ marginTop: 72 }} />
           <section className="pt-0 pb-0 w-full dark:bg-coolGray-800 dark:text-coolGray-50 mx-auto">
             <FullScreen handle={fullScreenHandle} onChange={(state) => toggleIsFullScreen(state)}>
               {isPreviewMode && onboardingDone && (
