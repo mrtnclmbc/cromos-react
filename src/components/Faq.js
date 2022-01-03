@@ -20,8 +20,8 @@ const Item = ({ question, answer }) => (
          <p className="sidebar-menu-header-title">{question}</p>
       </div>
 
-      <div className="sidebar-menu-body accordion-content-linked accordion-open px-2">
-         <p className="px-6 pb-2">{answer}</p>
+      <div className="accordion-content-linked accordion-open px-2 pt-3" style={{ backgroundColor: '#fcfcfd' }}>
+         <p className="px-5 pb-2">{answer}</p>
       </div>
    </div>
 );
