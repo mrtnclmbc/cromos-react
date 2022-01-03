@@ -53,10 +53,10 @@ const App = ({ Component, pageProps }) => {
                 {/*<!-- app -->*/}
                 {/*<!-- liquidify -->*/}
         </Head>
-        {isAuth === null ? <LoadingIndicator /> :
+        {isAuth === null ? null :
         isAuth && !isLoading ? <Component {...pageProps} isMobile={isMobile} /> : (
           <div>
-            <div style={{ height: '100vh' }} className=" w-50 flex items-center justify-center flex-col">
+            <div style={{ height: '100vh' }} className="flex items-center justify-center flex-col">
               <div style={{ width: 300 }} >
                 <a style={{ fontWeight: 600 }}>Restricted access.</a>
               </div>

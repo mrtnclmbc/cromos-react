@@ -7,7 +7,6 @@ import { getAssets, getAssetsInfo } from '../services/assetsService';
 
 import { ApplicationContext } from '../state/store';
 import Ratio from 'react-ratio/lib/Ratio';
-import { getAlbum } from '../services/collectionsService';
 import slidesArray from '../onboardingSlides';
 import { Howl } from 'howler';
 
@@ -52,11 +51,18 @@ const Album = ({ album, albumId }) => {
 
   // Hooks
   useEffect(async () => {
-    if (album && album?.pages?.length) {
-      const contractAddress = album?.address;
+    if (album && album.pages?.length) {
+      let contractAddress;
       let tokenIds = [];
-      album?.pages.map(page => page.assets?.columns?.reduce((assets, total) => [...total, ...assets], []).map(asset => tokenIds.push(asset.token_id)));
-      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds.filter(tokenId => tokenId));
+      album.pages
+        .map(page => page.assets?.rows?.reduce((assets, total) => [...total, ...assets], [])
+        .map(asset => {
+          if (!contractAddress && asset.address?.length) {
+            contractAddress = asset.address;
+          }
+          tokenIds.push(asset.tokenId);
+        }));
+      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds.filter(id => id !== undefined));
       setAlbumAssets(assetsInfo?.assets);
     }
 
@@ -151,32 +157,32 @@ const Album = ({ album, albumId }) => {
       <Page>
         {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} />}
         <div>
-          {album && page.assets?.columns?.map((columns, index) => (
-            <div className="flex" key={`column-container-${index}`}>
-              {columns.map((columnAsset, index) => {
-              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
-              const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
+          {album && page.assets?.rows?.map((rows, index) => (
+            <div className="flex" key={`row-container-${index}`}>
+              {rows.map((rowAsset, index) => {
+              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === rowAsset?.tokenId && walletAsset.asset_contract.address === rowAsset?.address);
+              const asset = albumAssets?.find((asset) => asset.token_id === rowAsset?.tokenId);
               return (
                 <Asset
                   key={`asset-${index}`}
-                  size={columnAsset.size}
+                  size={rowAsset?.size}
                   image={ownedAsset || isPreviewMode ? asset?.image_url : null}
                   backgroundImage={asset?.image_url}
-                  tokenId={columnAsset.token_id}
-                  addressId={columnAsset.address}
-                  padding={columnAsset.padding}
+                  tokenId={rowAsset?.token_id}
+                  addressId={rowAsset?.address}
+                  padding={rowAsset?.padding}
                   walletConnected={walletConnected}
-                  isNFT={columnAsset.isNFT}
+                  isNFT={rowAsset?.isNft}
                   sizeMultiplier={album?.sizeMultiplier}
-                  type={columnAsset.type}
-                  rounded={columnAsset.rounded}
-                  borderColor={columnAsset.borderColor}
-                  resource={columnAsset.resource}
-                  widthPercentage={columnAsset?.size?.width * 100 / album?.width}
-                  stickerBackgroundImage={columnAsset?.backgroundImage}
-                  title={columnAsset.title}
-                  artist={columnAsset.artist}
-                  color={columnAsset.color}
+                  type={rowAsset?.type}
+                  rounded={rowAsset?.rounded}
+                  borderColor={rowAsset?.borderColor}
+                  resource={rowAsset?.resource}
+                  widthPercentage={rowAsset?.size?.width * 100 / album?.width}
+                  stickerBackgroundImage={rowAsset?.backgroundImage}
+                  title={rowAsset?.title}
+                  artist={rowAsset?.artist}
+                  color={rowAsset?.color}
                   audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                   cover={asset?.image_url || ownedAsset?.image_url}
                   isOwned={ownedAsset ? ownedAsset : false}
@@ -197,7 +203,7 @@ const Album = ({ album, albumId }) => {
         style={{ width: "100%" }}
         className={`object-cover`}
         ratio={album?.width / album?.height}>
-        <img src={album?.cover?.image} style={{ height: "100%" }} />
+        <img src={album?.coverUrl} style={{ height: "100%" }} />
       </Ratio>
     );
 
@@ -206,11 +212,11 @@ const Album = ({ album, albumId }) => {
         style={{ width: "100%" }}
         className={`object-cover`}
         ratio={album?.width / album?.height}>
-        <img src={album?.back?.image} style={{ height: "100%" }} />
+        <img src={album?.backUrl} style={{ height: "100%" }} />
       </Ratio>
     );
 
-    return [...(album?.cover?.image ? [cover] : []), ...(pages || []), ...(album?.back?.image ? [back] : [])];
+    return [...(album?.coverUrl ? [cover] : []), ...(pages || []), ...(album?.backUrl ? [back] : [])];
   }, [albumAssets, isPreviewMode, walletAssets, isFullScreen]);
 
   const checkDappOverflow = () => {
@@ -240,6 +246,8 @@ const Album = ({ album, albumId }) => {
   };
 
   const toggleFullScreen = () => {
+    if (loading) return;
+    
     if (!isFullScreen) {
       fullScreenHandle.enter();
       checkDappOverflow();
@@ -364,37 +372,37 @@ const Album = ({ album, albumId }) => {
                       <div key={`page-${index}`}>
                         {page.backgroundImage && <img src={page.backgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
                         <div style={{ flex: 1 }}>
-                          {album && page.assets?.columns?.map((columns, index) => (
-                            <div className="flex" key={`column-container-${index}`}>
-                              {columns.map((columnAsset, index) => {
-                                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === columnAsset.token_id && walletAsset.asset_contract.address === columnAsset.address);
-                                const asset = albumAssets?.find((asset) => asset.token_id === columnAsset.token_id);
+                          {album && page.assets?.rows?.map((rows, index) => (
+                            <div className="flex" key={`row-container-${index}`}>
+                              {rows.map((rowAsset, index) => {
+                                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === rowAsset?.tokenId && walletAsset.asset_contract.address === rowAsset?.address);
+                                const asset = albumAssets?.find((asset) => asset.token_id === rowAsset?.tokenId);
                                 return (
                                   <Asset
                                     key={`asset-${index}`}
-                                    size={columnAsset.size}
+                                    size={rowAsset?.size}
                                     image={ownedAsset || isPreviewMode ? asset?.image_url : null}
                                     backgroundImage={asset?.image_url}
-                                    tokenId={columnAsset.token_id}
-                                    addressId={columnAsset.address}
-                                    padding={columnAsset.padding}
+                                    tokenId={rowAsset?.tokenId}
+                                    addressId={rowAsset?.address}
+                                    padding={rowAsset?.padding}
                                     walletConnected={walletConnected}
-                                    isNFT={columnAsset.isNFT}
+                                    isNFT={rowAsset?.isNft}
                                     sizeMultiplier={album.sizeMultiplier}
-                                    type={columnAsset.type}
-                                    rounded={columnAsset.rounded}
-                                    borderColor={columnAsset.borderColor}
-                                    resource={columnAsset.resource}
-                                    widthPercentage={columnAsset?.size?.width * 100 / album.width}
-                                    stickerBackgroundImage={columnAsset?.backgroundImage}
-                                    title={columnAsset.title}
-                                    artist={columnAsset.artist}
-                                    color={columnAsset.color}
+                                    type={rowAsset?.type}
+                                    rounded={rowAsset?.rounded}
+                                    borderColor={rowAsset?.boderColor}
+                                    resource={rowAsset?.resource}
+                                    widthPercentage={rowAsset?.size?.width * 100 / album.width}
+                                    stickerBackgroundImage={rowAsset?.backgroundImage}
+                                    title={rowAsset?.title}
+                                    artist={rowAsset?.artist}
+                                    color={rowAsset?.color}
                                     audioUrl={asset?.animation_url || ownedAsset?.animation_url}
                                     cover={asset?.image_url || ownedAsset?.image_url}
-                                    showCover={columnAsset.showCover}
-                                    coverSize={columnAsset.coverSize}
-                                    backgroundType={columnAsset.backgroundType}
+                                    showCover={rowAsset?.showCover}
+                                    coverSize={rowAsset?.coverSize}
+                                    backgroundType={rowAsset?.backgroundType}
                                     isOwned={ownedAsset ? ownedAsset : false}
                                     setModalOpen={openAssetInfoModal}
                                     setSelectedAsset={setSelectedAsset}

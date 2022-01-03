@@ -206,3 +206,14 @@ img {
   background-color: rgba(0, 0, 0, 0);
   padding-bottom: 10px;
 }
+
+.game-loading-title:first-child {
+  height: 16px !important;
+  margin-bottom: 42px !important;
+}
+
+.game-loading-author {
+  margin-bottom: 0px !important;
+  border-radius: 12px !important;
+  width: 100px;
+}

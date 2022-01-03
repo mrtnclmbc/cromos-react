@@ -11397,6 +11397,7 @@ figure > img {
   border-radius: 12px;
   background-color: #fff;
   box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+  overflow: hidden;
 }
 
 .product-preview.fixed-height {
@@ -11579,6 +11580,20 @@ figure > img {
   border-bottom-right-radius: 12px;
   background-color: #fcfcfd;
   border-top: 1px solid #eaeaf5;
+}
+
+.product-preview-meta-loading {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 53px;
+  padding: 0 28px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: #fcfcfd;
 }
 
 .product-preview .product-preview-author {

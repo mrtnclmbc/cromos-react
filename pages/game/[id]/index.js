@@ -1,5 +1,5 @@
 import { Album, Footer, Header } from '../../../src/components';
-import { getAlbum } from '../../../src/services/collectionsService';
+import { getDapp } from '../../../src/services/dappsService';
 
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
@@ -7,13 +7,15 @@ import { useRouter } from 'next/router';
 
 const Games = () => {
   const router = useRouter();
-  const { id } = router.query;
   const [album, setAlbum] = useState(null);
 
   useEffect(async () => {
-    const album = await getAlbum(id);
-    setAlbum(album);
-  }, [id])
+    const { id } = router.query;
+    if (id) {
+      const album = await getDapp(id);
+      setAlbum(album);
+    }
+  }, [router.query])
 
   return (
       <>
@@ -21,7 +23,7 @@ const Games = () => {
           <title>Cromy</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Header minorOpacityOnScroll title={album?.title} subtitle={album?.description} />
+        <Header minorOpacityOnScroll title={album?.title || 'Loading...'} subtitle={album?.description} />
         <div className="flex flex-col">
           <Album album={album} />
         </div>

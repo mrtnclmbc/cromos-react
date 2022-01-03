@@ -34,6 +34,7 @@
     "react-palette": "^1.0.2",
     "react-parallax-tilt": "^1.5.74",
     "react-ratio": "^0.1.5",
+    "react-shimmer-effects": "^1.0.2",
     "retry-axios": "^2.4.0",
     "sass": "^1.32.12",
     "swiper": "^6.8.4",

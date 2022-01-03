@@ -121,8 +121,6 @@ const AudioPlayer = (props) => {
     };
   }, []);
 
-  console.log(title, size.height < 350, size.height);
-
   return (
     <>
       { isNFT && !isOwned ? <AssetInfo tokenId={tokenId} addressId={addressId} backgroundImage={backgroundImage} />

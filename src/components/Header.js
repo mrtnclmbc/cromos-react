@@ -303,7 +303,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
         {title?.length && (
           <div id="header-title" className="flex items-center justify-center header-title flex-col" style={{ marginLeft: 80 }}>
             <span className="text-white font-bold">{title}</span>
-            {subtitle?.length && <span style={{ fontSize: '0.8em', marginTop: 0 }} className="text-white">{subtitle}</span>}
+            {subtitle?.length > 0 && <span style={{ fontSize: '0.8em', marginTop: 0 }} className="text-white">{subtitle}</span>}
           </div>
         )}
         {/*<!-- /HEADER ACTIONS -->*/}
