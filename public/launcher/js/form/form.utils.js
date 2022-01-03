@@ -4,7 +4,7 @@
 app.querySelector('.form-input', function (elements) {
   for (const el of elements) {
     if (el.classList.contains('always-active')) continue;
-    
+
     const input = el.querySelector('input'),
           textarea = el.querySelector('textarea'),
           activeClass = 'active';

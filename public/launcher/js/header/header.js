@@ -14,7 +14,7 @@ app.querySelector('#search-main', function (el) {
     controlToggle: true,
     closeOnWindowClick: false
   });
-  
+
   const searchInput = el[0],
         breakpointWidth = 960;
 
@@ -47,6 +47,8 @@ app.querySelector('#search-main', function (el) {
     window.removeEventListener('keydown', hideSearchDropdownOnKey);
     previousValue = '';
   };
+
+  app.hideSearchDropdown = hideSearchDropdown;
 
   if (window.innerWidth > breakpointWidth) {
     searchInput.addEventListener('input', toggleSearchDropdown);

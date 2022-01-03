@@ -1,17 +1,6 @@
 import React from 'react';
-import { capitalizeString } from '../helpers/formatHelper';
+import { capitalizeString, typeToCoolText } from '../helpers/formatHelper';
 import { ShimmerText, ShimmerTitle, ShimmerThumbnail } from 'react-shimmer-effects';
-
-const typeToCoolText = (type) => {
-  switch (type) {
-    case "album":
-      return "Sticker Album"
-    case "audio":
-      return "Music Box"
-    default:
-      return type;
-  }
-}
 
 const GameCard = ({ id, featuredImage, featuredText, featuredTag, type, isLoading, title, author }) => (
   <div className="product-preview">

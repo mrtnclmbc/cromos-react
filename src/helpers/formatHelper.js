@@ -6,4 +6,15 @@ const capitalizeString = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export { truncateString, capitalizeString };
+const typeToCoolText = (type) => {
+  switch (type) {
+    case "album":
+      return "Sticker Album"
+    case "audio":
+      return "Music Box"
+    default:
+      return type;
+  }
+}
+
+export { truncateString, capitalizeString, typeToCoolText };

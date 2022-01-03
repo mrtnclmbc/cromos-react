@@ -28,4 +28,22 @@ const getDapps = async (limit = 6, offset = 0) => {
     });
 }
 
-export { getDapp, getDapps };
+const searchDapps = async (query, signal) => {
+  const url = `${PUBLIC_API_BASE_URL}/search`;
+
+  const trimmedQuery = query.trim().toLowerCase();
+
+  return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+      },
+      signal,
+      body: JSON.stringify({ query: trimmedQuery })
+    })
+    .then(res => res.json());
+}
+
+export { getDapp, getDapps, searchDapps };
