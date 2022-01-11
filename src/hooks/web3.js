@@ -8,13 +8,13 @@ const providerOptions = {
     package: WalletConnectProvider,
     options: {
       infuraId: '196440d5d02d41dfa2a8ee5bfd2e96bd',
+      chainId: 4
     },
   },
 };
 
 const web3Modal = new Web3Modal({
-  network: 'rinkeby',
-  cacheProvider: true,
+  cacheProvider: false,
   providerOptions,
 });
 
@@ -22,8 +22,6 @@ export function useWeb3Modal() {
   const [provider, setProvider] = useState(undefined);
   const [error, setError] = useState(null);
 
-  // Automatically connect if the provider is cashed but has not yet
-  // been set (e.g. page refresh)
   if (web3Modal.cachedProvider && !provider) {
     connectWallet();
   }

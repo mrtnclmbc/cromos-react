@@ -3,6 +3,7 @@ import 'tailwindcss/tailwind.css';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import '../public/launcher/css/styles.css';
+import '../public/launcher/css/vendor/tiny-slider.css';
 
 import { Footer, LoadingIndicator, Navbar } from '../src/components';
 import React, { useEffect, useState } from 'react';
@@ -88,8 +89,14 @@ const App = ({ Component, pageProps }) => {
       <Script src="/launcher/js/utils/page-loader.js"></Script>
       {/*<!-- simplebar -->*/}
       <script src="/launcher/js/vendor/simplebar.min.js"></script>
+      {/*<!-- page loader -->*/}
+      <script src="/launcher/js/utils/page-loader.js" />
+      {/*<!-- simplebar -->*/}
+      <script src="/launcher/js/vendor/simplebar.min.js" />
+      {/*<!-- liquidify -->*/}
+      <script src="/launcher/js/utils/liquidify.js" />
       {/*<!-- XM_Plugins -->*/}
-      <script src="/launcher/js/vendor/xm_plugins.min.js"></script>
+      <script src="/launcher/js/vendor/xm_plugins.min.js" />
       {/*<!-- global.tooltips -->*/}
       <Script src="/launcher/js/global/global.tooltips.js"></Script>
       {/*<!-- global.accordions -->*/}
@@ -104,6 +111,9 @@ const App = ({ Component, pageProps }) => {
       <Script src="/launcher/js/form/form.utils.js"></Script>
       {/*<!-- SVG icons -->*/}
       <Script src="/launcher/js/utils/svg-loader.js"></Script>
+      {/*<!-- Slider -->*/}
+      <script src="/launcher/js/vendor/tiny-slider.min.js" />
+      <Script src="/launcher/js/content/content.js"></Script>
     </>
   );
 };

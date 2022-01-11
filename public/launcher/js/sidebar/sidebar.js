@@ -45,12 +45,9 @@ app.querySelector('.content-grid', function (el) {
     }
   };
 
+  setGridTransitions();
   updateGridPositions();
-  window.addEventListener('DOMContentLoaded', (event) => {
-    window.setTimeout(updateGridPositions, 10);
-  });
   window.addEventListener('resize', updateGridPositions);
-  // delay transition setup to avoid loading animation
-  window.setTimeout(setGridTransitions, 300);
+
 
 });

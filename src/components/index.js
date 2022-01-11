@@ -18,8 +18,10 @@ import SearchBar from './SearchBar';
 import SectionBanner from './SectionBanner';
 import ServicesRow from './ServicesRow';
 import SubscribeRow from './SubscribeRow';
+import ImageSlider from './ImageSlider';
 import dynamic from 'next/dynamic';
 import Faq from './Faq';
+import BoosterPackCard from './BoosterPackCard';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -27,6 +29,10 @@ const Album = dynamic(() => import('./Album'), {
 });
 
 const ConnectWallet = dynamic(() => import('./ConnectWallet'), {
+  ssr: false,
+});
+
+const Collectible = dynamic(() => import('./Collectible'), {
   ssr: false,
 });
 
@@ -53,5 +59,8 @@ export {
   OnboardingSlider,
   Header,
   SectionBanner,
-  Faq
+  Faq,
+  ImageSlider,
+  BoosterPackCard,
+  Collectible
 };

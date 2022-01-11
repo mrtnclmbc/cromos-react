@@ -63,15 +63,20 @@ const SearchBar = () => {
   );
 
   const renderSuggestionsContainer = ({ containerProps, children, query }) => {
+    const dappsLength = suggestions?.dapps?.length || 0;
+    const collectiblesLength = suggestions?.nfts?.length || 0;
+    const resultsLength = dappsLength + collectiblesLength;
     return (
       <div {...containerProps} className="dropdown-box header-search-dropdown" style={{ paddingBottom: 0 }}>
         <div className="dropdown-box-list small no-scroll">
-          {!searching && suggestions?.dapps?.length ? (
+          {!searching && resultsLength > 0 ? (
             <>
-              <div className="dropdown-box-category">
-                <p className="dropdown-box-category-title">Experiences</p>
-              </div>
-              {suggestions?.dapps.map(dapp => (
+              {dappsLength > 0 && (
+                <div className="dropdown-box-category">
+                  <p className="dropdown-box-category-title">Experiences</p>
+                </div>
+              )}
+              {dappsLength > 0 && suggestions?.dapps.map(dapp => (
                 <>
                   <a className="dropdown-box-list-item" href={`/game/${dapp.id}`} key={dapp.id}>
                     <div className="user-status no-padding-top">
@@ -82,12 +87,26 @@ const SearchBar = () => {
                       </div>
                       <p className="user-status-title"><span className="bold">{dapp.title}</span></p>
                       <p className="user-status-text">{capitalizeString(typeToCoolText(dapp.type))}</p>
-
-                      <div className="user-status-icon">
-                        <svg className="icon-marketplace">
-                          <use xlinkHref="#svg-quests"></use>
-                        </svg>
+                    </div>
+                  </a>
+                </>
+              ))}
+              {collectiblesLength > 0 && (
+                <div className="dropdown-box-category">
+                  <p className="dropdown-box-category-title">Collectibles</p>
+                </div>
+              )}
+              {collectiblesLength > 0 && suggestions?.nfts.map(nft => (
+                <>
+                  <a className="dropdown-box-list-item" href={`/collectible/${nft.id}`} key={nft.id}>
+                    <div className="user-status no-padding-top">
+                      <div className="user-status-avatar">
+                        <figure className="picture small round liquid m-0">
+                          <img src={nft.assetUrl} className="object-cover rounded-lg" alt="item-07" />
+                        </figure>
                       </div>
+                      <p className="user-status-title"><span className="bold">{nft.title}</span></p>
+                      <p className="user-status-text">{nft.category}</p>
                     </div>
                   </a>
                 </>

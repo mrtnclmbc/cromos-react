@@ -77,7 +77,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
               {/*<!-- MENU MAIN ITEM -->*/}
               <li className="menu-main-item">
                 {/*<!-- MENU MAIN ITEM LINK -->*/}
-                <a className="menu-main-item-link" href="#">Join us!</a>
+                <a className="menu-main-item-link" href="#">Explore</a>
                 {/*<!-- /MENU MAIN ITEM LINK -->*/}
               </li>
               {/*<!-- /MENU MAIN ITEM -->*/}
@@ -85,7 +85,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
               {/*<!-- MENU MAIN ITEM -->*/}
               <li className="menu-main-item">
                 {/*<!-- MENU MAIN ITEM LINK -->*/}
-                <a className="menu-main-item-link" href="#">About Cromy</a>
+                <a className="menu-main-item-link" href="https://blog.cromy.io">About</a>
                 {/*<!-- /MENU MAIN ITEM LINK -->*/}
               </li>
               {/*<!-- /MENU MAIN ITEM -->*/}

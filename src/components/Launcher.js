@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Fade } from "react-awesome-reveal";
 
-import { Footer, Header } from './';
-import GameCard from './GameCard';
+import { Footer, Header, BoosterPackCard, GameCard } from './';
 import { getDapps } from '../services/dappsService';
+import { getCollectibles } from '../services/collectiblesService';
 
 const Launcher = (props) => {
   const [experienceTextOpacity, setExperienceTextOpacity] = useState(0)
@@ -13,6 +13,8 @@ const Launcher = (props) => {
   const [windowHeight, setWindowHeight] = useState(700)
   const [isLoadingDapps, setIsLoadingDapps] = useState(true)
   const [dapps, setDapps] = useState([])
+  const [isLoadingCollectibles, setIsLoadingCollectibles] = useState(true)
+  const [collectibles, setCollectibles] = useState([])
   const contentDivRef = useRef(null)
   
   useEffect(async () => {
@@ -21,8 +23,12 @@ const Launcher = (props) => {
     setTimeout(() => setCollectiblesTextOpacity(1), 4000);
     setWindowHeight(window?.innerHeight);
     const dapps = await getDapps();
-    setDapps(dapps || [])
-    setIsLoadingDapps(false)
+    setDapps(dapps || []);
+    setIsLoadingDapps(false);
+    const collectibles = await getCollectibles();
+    setCollectibles(collectibles || []);
+    setIsLoadingCollectibles(false);
+    window.app.updateGridPosition();
   }, [])
 
   return (
@@ -86,36 +92,6 @@ const Launcher = (props) => {
 
         {/*<!-- CONTENT GRID -->*/}
         <div ref={contentDivRef} className="content-grid">
-
-          {/* <div className="p-7 rounded-2xl ">
-            <Fade direction="up" fraction={0.8} triggerOnce>
-              <div id="start" className="section-header justify-center">
-                <div className="section-header-info text-center">
-                  <p className="section-pretitle">Welcome To The CromyVerse 👋</p>
-                  <h2 className="section-title">Choose Your Destiny</h2>
-                </div>
-              </div>
-            </Fade>
-            <Fade direction="up" fraction={1} triggerOnce>
-              <div className="grid grid-half centered lg:px-12">
-                <Tilt>
-                  <a className="product-category-box category-all rounded-full shadow-lg" href="#">
-                    <p className="product-category-box-title">Browse NFT Experiences</p>
-                    <p className="product-category-box-text">Check out all our own & 3rd party NFT Experiences.</p>
-                    <p className="product-category-box-tag">4 Experiences</p>
-                  </a>
-                </Tilt>
-                <Tilt>
-                  <a className="product-category-box category-featured" href="#">
-                    <p className="product-category-box-title">Browse NFT Collections</p>
-                    <p className="product-category-box-text"><b>Cromy®</b> seal of quality ensures that each collection <br /> has attained our quality standard.</p>
-                    <p className="product-category-box-tag">5 Collections</p>
-                  </a>
-                </Tilt>
-              </div>
-            </Fade>
-          </div> */}
-
           <Fade triggerOnce>
             <div className="section-header justify-center flex p-5 rounded-2xl">
               <div className="section-header-info text-center">
@@ -260,6 +236,44 @@ const Launcher = (props) => {
               )}
             </div>
           </Fade>
+
+          <Fade triggerOnce>
+            <div className="section-header justify-center flex p-5 rounded-2xl">
+              <div className="section-header-info text-center">
+                <p className="section-pretitle">Start Collecting... Wen? Now!</p>
+                <h2 className="section-title">Cromy Booster Packs</h2>
+              </div>
+            </div>
+          </Fade>
+
+          <Fade triggerOnce>
+            <div className="grid grid-3-3-3-3 centered">
+              {isLoadingCollectibles ? (
+                <>
+                  <BoosterPackCard isLoading={true} />
+                  <BoosterPackCard isLoading={true} />
+                  <BoosterPackCard isLoading={true} />
+                  <BoosterPackCard isLoading={true} />
+                </>
+              ) : (
+                <>
+                  {collectibles.map(collectible => (
+                    <Tilt>
+                      <BoosterPackCard
+                        id={collectible?.id}
+                        title={collectible?.title}
+                        description={collectible?.description}
+                        featuredImage={collectible?.assetUrl}
+                        price={collectible?.price}
+                        currency={collectible?.currency}
+                      />
+                    </Tilt>
+                  ))}
+                </>
+              )}
+            </div>
+          </Fade>
+
 
         {/*<!-- BUILDER SECTION -->*/}
         <Fade direction="left" triggerOnce>
