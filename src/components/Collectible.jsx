@@ -27,9 +27,9 @@ const Collectible = ({ collectible }) => {
         const web3 = new Web3(provider);
         const chainId = await web3.eth.getChainId();
         setCurrentChainId(chainId);
-        if (chainId !== networkChainIds[collectible?.network]) {
-          await changeNetwork();
-        }
+        // if (chainId !== networkChainIds[collectible?.network]) {
+        //   await changeNetwork();
+        // }
       } catch (e) {
         console.log(e)
       }
