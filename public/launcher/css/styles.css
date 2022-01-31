@@ -11624,6 +11624,48 @@ figure > img {
   border-top: 1px solid #eaeaf5;
 }
 
+.booster-pack-preview {
+  border: 1px solid #eaeaf5;
+}
+
+.booster-pack-preview .booster-pack-preview-call-to-action {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.booster-pack-preview .booster-pack-preview-image {
+  min-height: 180px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.obtained-nft-preview {
+  border: 1px solid #eaeaf5;
+}
+
+.obtained-nft-preview .obtained-nft-preview-call-to-action {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.obtained-nft-preview .obtained-nft-preview-image {
+  min-height: 180px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
 .product-preview-meta-loading {
   display: -ms-flexbox;
   display: flex;
@@ -16344,4 +16386,96 @@ figure > img {
 
 .hero {
   
+}
+
+/*----------------------
+    1. MODAL GRID
+----------------------*/
+.modal-grid {
+  padding: 0 30px 30px;
+}
+
+.modal-grid.full {
+  max-width: 100%;
+  padding: 80px 80px 0;
+}
+
+.modal-grid.medium {
+  max-width: 784px;
+  padding: 0 0 100px;
+}
+
+.modal-grid .section-navigation {
+  margin-top: 16px;
+}
+
+.modal-grid .section-navigation + .grid {
+  margin-top: 16px;
+}
+
+.modal-grid .table {
+  margin-top: 16px;
+}
+
+.modal-grid .table + .loader-bars {
+  margin-top: 52px;
+}
+
+.modal-grid .section-filters-bar {
+  margin-top: 30px;
+}
+
+.modal-grid .grid {
+  margin-top: 32px;
+}
+
+.modal-grid .grid.medium-space {
+  margin-top: 64px;
+}
+
+.modal-grid .grid.small-space {
+  margin-top: 16px;
+}
+
+.modal-grid .grid .grid {
+  margin-top: 0;
+}
+
+.modal-grid .photos-masonry,
+.modal-grid .section-slider {
+  margin-top: 32px;
+}
+
+.modal-grid .section,
+.modal-grid .section-header {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.modal-grid .section-banner + .section-filters-bar {
+  margin-top: 64px;
+}
+
+.modal-grid .calendar-widget {
+  margin-top: 16px;
+}
+
+.modal-grid .forum-content .quick-post {
+  margin-top: 60px;
+}
+
+.modal-grid .forum-sidebar {
+  padding-top: 40px;
+}
+
+.modal-grid .account-hub-content .section-header {
+  margin-bottom: 28px;
+}
+
+.modal-grid .account-hub-content .section-header:first-child {
+  margin-top: 0;
+}
+
+.modal-grid .notification-box-list + .loader-bars {
+  margin-top: 60px;
 }

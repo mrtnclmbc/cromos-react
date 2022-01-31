@@ -55,9 +55,9 @@ const Album = ({ album, albumId }) => {
       let contractAddress;
       let tokenIds = [];
       album.pages
-        .map(page => page.assets?.rows?.reduce((assets, total) => [...total, ...assets], [])
+        .map(page => page.assets?.rows?.reduce((assets, total) => [...assets, ...total], [])
         .map(asset => {
-          if (!contractAddress && asset.address?.length) {
+          if (!contractAddress && asset.isNft && asset.address?.length) {
             contractAddress = asset.address;
           }
           tokenIds.push(asset.tokenId);
@@ -160,37 +160,37 @@ const Album = ({ album, albumId }) => {
           {album && page.assets?.rows?.map((rows, index) => (
             <div className="flex" key={`row-container-${index}`}>
               {rows.map((rowAsset, index) => {
-              const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === rowAsset?.tokenId && walletAsset.asset_contract.address === rowAsset?.address);
-              const asset = albumAssets?.find((asset) => asset.token_id === rowAsset?.tokenId);
-              return (
-                <Asset
-                  key={`asset-${index}`}
-                  size={rowAsset?.size}
-                  image={ownedAsset || isPreviewMode ? asset?.image_url : null}
-                  backgroundImage={asset?.image_url}
-                  tokenId={rowAsset?.token_id}
-                  addressId={rowAsset?.address}
-                  padding={rowAsset?.padding}
-                  walletConnected={walletConnected}
-                  isNFT={rowAsset?.isNft}
-                  sizeMultiplier={album?.sizeMultiplier}
-                  type={rowAsset?.type}
-                  rounded={rowAsset?.rounded}
-                  borderColor={rowAsset?.borderColor}
-                  resource={rowAsset?.resource}
-                  widthPercentage={rowAsset?.size?.width * 100 / album?.width}
-                  stickerBackgroundImage={rowAsset?.backgroundImage}
-                  title={rowAsset?.title}
-                  artist={rowAsset?.artist}
-                  color={rowAsset?.color}
-                  audioUrl={asset?.animation_url || ownedAsset?.animation_url}
-                  cover={asset?.image_url || ownedAsset?.image_url}
-                  isOwned={ownedAsset ? ownedAsset : false}
-                  setModalOpen={openAssetInfoModal}
-                  setSelectedAsset={setSelectedAsset}
-                  asset={asset || null}
-                />
-              );
+                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id == rowAsset?.tokenId && walletAsset.asset_contract.address.toLowerCase() === rowAsset?.address.toLowerCase());
+                const asset = albumAssets?.find((asset) => asset.token_id == rowAsset?.tokenId);
+                return (
+                  <Asset
+                    key={`asset-${index}`}
+                    size={rowAsset?.size}
+                    image={ownedAsset || isPreviewMode ? asset?.image_url : null}
+                    backgroundImage={asset?.image_url}
+                    tokenId={rowAsset?.token_id}
+                    addressId={rowAsset?.address}
+                    padding={rowAsset?.padding}
+                    walletConnected={walletConnected}
+                    isNFT={rowAsset?.isNft}
+                    sizeMultiplier={album?.sizeMultiplier}
+                    type={rowAsset?.type}
+                    rounded={rowAsset?.rounded}
+                    borderColor={rowAsset?.borderColor}
+                    resource={rowAsset?.resource}
+                    widthPercentage={rowAsset?.size?.width * 100 / album?.width}
+                    stickerBackgroundImage={rowAsset?.backgroundImage}
+                    title={rowAsset?.title}
+                    artist={rowAsset?.artist}
+                    color={rowAsset?.color}
+                    audioUrl={asset?.animation_url || ownedAsset?.animation_url}
+                    cover={asset?.image_url || ownedAsset?.image_url}
+                    isOwned={ownedAsset ? ownedAsset : false}
+                    setModalOpen={openAssetInfoModal}
+                    setSelectedAsset={setSelectedAsset}
+                    asset={asset || null}
+                  />
+                );
               })}
             </div>
           ))}

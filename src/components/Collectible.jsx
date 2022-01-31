@@ -4,7 +4,7 @@ import Web3 from 'web3';
 
 import { Header, ImageSlider, LoadingIndicator } from '../components';
 import { ApplicationContext } from '../state/store';
-import LootboxABI from '../../contracts/abis/Lootbox';
+import BuyableBoosterPackABI from '../../contracts/abis/BuyableBoosterPack';
 import { networkChainIds, networkNames, networkChainIdsHexa, networkRpcUrls } from '../constants';
 import detectEthereumProvider from '@metamask/detect-provider'
 import { useWeb3Modal } from '../hooks/web3';
@@ -47,8 +47,8 @@ const Collectible = ({ collectible }) => {
   const updateTotalMinted = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(LootboxABI, collectible?.address)  
-      const total = await contract.methods.getTotal().call();
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+      const total = await contract.methods.totalSupply().call();
       setTotalMinted(total);  
     } catch (e) {
       console.error(e)
@@ -58,8 +58,8 @@ const Collectible = ({ collectible }) => {
   const updateMaxAmount = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(LootboxABI, collectible?.address)  
-      const maxTokens = await contract.methods.MAX_TOKENS().call();
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+      const maxTokens = await contract.methods.MAX_SUPPLY().call();
       setMaxAmount(maxTokens);
     } catch (e) {
       console.error(e)
@@ -69,7 +69,7 @@ const Collectible = ({ collectible }) => {
   const updatePrice = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(LootboxABI, collectible?.address)  
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
       const currentPrice = await contract.methods.CURRENT_PRICE().call();
       setPrice(currentPrice.length > 10 ? Web3.utils.fromWei(currentPrice, 'ether') : currentPrice);
     } catch (e) {
@@ -122,9 +122,9 @@ const Collectible = ({ collectible }) => {
             const web3 = new Web3(provider);
             const chainId = await web3.eth.getChainId();
             if (chainId === networkChainIds[collectible?.network]) {
-              const contract = new web3.eth.Contract(LootboxABI, collectible?.address)  
+              const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
               const currentPrice = await contract.methods.CURRENT_PRICE().call();
-              contract.methods.makeNFT().send({ from: currentAddress, value: currentPrice })
+              contract.methods.buyWithETH().send({ from: currentAddress, value: currentPrice })
                 .once('sending', async () => {
                   setBuyLoading(true);
                 })  

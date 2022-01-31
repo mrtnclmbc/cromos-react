@@ -22,6 +22,9 @@ import ImageSlider from './ImageSlider';
 import dynamic from 'next/dynamic';
 import Faq from './Faq';
 import BoosterPackCard from './BoosterPackCard';
+import OpenBoosterPacksModal from './OpenBoosterPacksModal';
+import OpenableBoosterPackCard from './OpenableBoosterPackCard';
+import ObtainedNftCard from './ObtainedNftCard';
 
 // Dynamic imports with server side rendering disabled
 const Album = dynamic(() => import('./Album'), {
@@ -62,5 +65,8 @@ export {
   Faq,
   ImageSlider,
   BoosterPackCard,
-  Collectible
+  Collectible,
+  OpenBoosterPacksModal,
+  OpenableBoosterPackCard,
+  ObtainedNftCard
 };

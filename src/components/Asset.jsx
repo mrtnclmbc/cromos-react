@@ -46,7 +46,7 @@ const Asset = (props) => {
         ratio={size.width / size.height}
         className={`object-cover`}
         style={{ width: widthPercentage + "%" }}
-        onClick={isNFT && !isOwned ? (() => {
+        onClick={isNFT ? (() => {
           setModalOpen(true);
           setSelectedAsset(asset)
           }) : null}

@@ -247,7 +247,7 @@ const Launcher = (props) => {
           </Fade>
 
           <Fade triggerOnce>
-            <div className="grid grid-3-3-3-3 centered">
+            <div id="collectibles" className="grid grid-3-3-3-3 centered">
               {isLoadingCollectibles ? (
                 <>
                   <BoosterPackCard isLoading={true} />
@@ -283,7 +283,7 @@ const Launcher = (props) => {
                 <div className="section-header-info text-center items-center flex flex-col">
                   <p style={{ color: 'white' }} className="section-pretitle">Coming Soon™</p>
                   <h2 style={{ fontSize: '2.9em' }} className="section-title text-white drop-shadow-md">Cromy Experience Builder 🧩</h2>
-                  <p className="mt-5 md:mb-0 text-white">With the Experience Builder, you will be able to create personalized NFT experiences for your community, enabling new possibilities. No coding skills required, just drag & drop.<br /><br /><b>Probably nothing.</b></p>
+                  <p className="mt-5 md:mb-0 text-white">With the Experience Builder, you will be able to create personalized NFT experiences for your community, enabling new possibilities. No coding skills required, just your creativity.<br /><br /><b>Probably nothing.</b></p>
                   <span style={{ marginTop: 50, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 150 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
                     <a className="text-white" href="mailto:hello@cromy.io">CONTACT US</a>
                   </span>

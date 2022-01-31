@@ -5,6 +5,7 @@ export const ApplicationContext = React.createContext(null);
 export default ({ children }) => {
     const [currentAddress, setCurrentAddress] = useState(null);
     const [isTourOpen, setIsTourOpen] = useState(false);
+    const [isOpenPacksModalOpen, setIsOpenPacksModalOpen] = useState(false);
     const refConnectWalletButton = useRef(null);
 
     const store = {
@@ -12,6 +13,8 @@ export default ({ children }) => {
       setCurrentAddress,
       isTourOpen,
       setIsTourOpen,
+      isOpenPacksModalOpen,
+      setIsOpenPacksModalOpen,
       refConnectWalletButton
     };
 
