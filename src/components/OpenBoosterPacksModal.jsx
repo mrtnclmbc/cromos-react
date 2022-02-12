@@ -15,6 +15,13 @@ import { OpenableBoosterPackCard, ObtainedNftCard } from '.';
 // TODO: Get from API endpoint
 const compatibleBoosterPacksArray = [
   {
+    address: '0x04BEf925CC0bc8e86CAc5184D60fD623Ff847667',
+    network: 'rinkeby',
+    dappId: 'sticker-album',
+    dappName: 'Bizarrap Sticker Album',
+    nft: 'bizai'
+  },
+  {
     address: '0x96e6d0B61B20230Ca53A63431f01364C3C6A9666',
     network: 'rinkeby',
     dappId: 'sticker-album',
@@ -49,15 +56,13 @@ const OpenBoosterPacksModal = (props) => {
       const boosterPack = compatibleBoosterPacks[n];
       const web3 = new Web3(networkRpcUrls[boosterPack.network]);
       const contract = new web3.eth.Contract(BuyableBoosterPackABI, boosterPack.address) 
-      const total = await contract.methods.totalSupply().call();
-
-      var ownedIds = [];
-      for (var i = 0; i < total; i++) {
-        const tokenId = i;
+      let incomingTokenTransferEvents = await contract.getPastEvents('Transfer', { filter: { 'to': currentAddress }, fromBlock: 0, toBlock: 'latest' })
+      const possibleOwnedTokenIds = incomingTokenTransferEvents.map(event => event.returnValues.tokenId);
+      for (var i = 0; i < possibleOwnedTokenIds.length; i++) {
+        const tokenId = possibleOwnedTokenIds[i];
         try {
           const owner = await contract.methods.ownerOf(tokenId).call();
           if (currentAddress === owner) {
-            ownedIds = [...ownedIds, tokenId];
             const tokenUri = await contract.methods.tokenURI(tokenId).call();
             const response = await axios.get(convertIpfsUrlToHttps(tokenUri));
             const title = extractTitleFromMetadata(response.data);
@@ -91,6 +96,7 @@ const OpenBoosterPacksModal = (props) => {
         const animation = extractAnimationFromMetadata(response.data);
         obtainedNFTs = [...obtainedNFTs, { tokenId, tokenUri, title, image, animation }];    
       } catch (e) {
+        console.error(e, "error");
         obtainedNFTs = [...obtainedNFTs, { tokenId, tokenUri, title: 'Unkown title', image: '', animation: '' }];    
       }
     }
@@ -179,7 +185,7 @@ const OpenBoosterPacksModal = (props) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className={`inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full ${showVideo ? 'bg-black' : 'bg-white'}`}>
               <div className="bg-transparent" style={{ paddingTop: !showVideo ? 15 : 0, paddingBottom: !showVideo ? 15 : 0 }}>
                 <div className="flex justify-center flex-col">
                   {!showVideo && (
@@ -200,7 +206,7 @@ const OpenBoosterPacksModal = (props) => {
                     </div>
                   ) : isOpeningPack && showVideo ? (
                     <>
-                      <video autoPlay id="myVideo" style={{ objectFit: 'contain' }}>
+                      <video autoPlay playsInline muted style={{ objectFit: 'contain' }}>
                         <source src="/videos/open_boosterpack.mp4" type="video/mp4" />
                       </video>
                     </>
