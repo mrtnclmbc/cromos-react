@@ -1,8 +1,4 @@
-import React from 'react';
-import HeartIcon from '../../public/icons/heart-outline.svg';
 import PlayRoundedIcon from '../../public/icons/search-icon.svg';
-import EllipsisIcon from '../../public/icons/ellipsis.svg';
-import { truncateString } from '../helpers/formatHelper';
 
 const AssetInfo = ({ addressId, tokenId, backgroundImage }) => {
   return (

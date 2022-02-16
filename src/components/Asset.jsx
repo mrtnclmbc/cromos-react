@@ -1,12 +1,11 @@
 import { AssetInfo, AudioPlayer } from './';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import EllipsisIcon from '../../public/icons/ellipsis.svg';
 import HeartIcon from '../../public/icons/heart-outline.svg';
 import PlayRoundedIcon from '../../public/icons/search-icon.svg';
 import Ratio from 'react-ratio';
-import { getAsset } from '../services/assetsService';
-import { truncateString } from '../helpers/formatHelper';
+import Skeleton from 'react-loading-skeleton';
 
 const Asset = (props) => {
   const {
@@ -22,6 +21,7 @@ const Asset = (props) => {
     isNFT,
     sizeMultiplier,
     title,
+    description,
     artist,
     color,
     audioUrl,
@@ -38,7 +38,12 @@ const Asset = (props) => {
     setModalOpen,
     asset,
     backgroundType,
+    traits,
+    totalSupply,
+    isLoading
   } = props;
+
+  const [imageLoading, setImageLoading] = useState(type === "image" && ((isNFT && !image) || (!isNFT && !resource)));
 
   return (
     <>
@@ -48,12 +53,17 @@ const Asset = (props) => {
         style={{ width: widthPercentage + "%" }}
         onClick={isNFT ? (() => {
           setModalOpen(true);
-          setSelectedAsset(asset)
-          }) : null}
+          setSelectedAsset({ ...asset, title, description, traits, totalSupply });
+        }) : null}
       >
         <div className={`${type === 'sticker' && ((isNFT && image) || (!isNFT && resource)) ? 'filter' : ''} h-full w-full ${padding ? `p-${padding}` : ''}`}>
           <div className="group relative h-full z-0 ">
-            {type !== 'empty' && isNFT && (
+            {(imageLoading || (type !== 'empty' && type !== 'sticker' && isLoading && isNFT)) && (
+              <div className="h-full w-full absolute overflow-hidden">
+                <Skeleton color="#000000" highlightColor="#ffbebe" className="h-full w-full absolute" />
+              </div>
+            )}
+            {type !== 'empty' && !isLoading && isNFT && (
               <div className={`${rounded && 'rounded-lg'} hidden sm:flex absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10`}>
                 <button className="hover:scale-110 text-white opacity-0 transform translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 transition">
                   <PlayRoundedIcon className="mx-auto h-10" fill="#fff" />
@@ -70,7 +80,13 @@ const Asset = (props) => {
                   </defs>
                 </svg>
                 <div className={`h-full w-full absolute overflow-hidden ${rounded && 'rounded-lg'}`}>
-                  {type === "image" && ((isNFT && !image) || (!isNFT && !resource)) && <img src={backgroundImage} className={`h-full w-full ${isNFT ? 'blurred' : null}`} />}
+                  {type === "image" && ((isNFT && !image) || (!isNFT && !resource)) && (
+                    <img
+                      src={backgroundImage}
+                      onLoad={() => setImageLoading(false)}
+                      className={`h-full w-full ${isNFT ? 'blurred' : null}`}
+                    />
+                  )}
                   {type === "sticker" && ((isNFT && !image) || (!isNFT && !resource)) && (
                     <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} className={`h-full w-full opacity-10 ${!stickerBackgroundImage ? 'bg-gray-800' : ''} ${borderColor && 'border-solid border-white border-4'} ${rounded && 'rounded-lg'}`}>
                       {stickerBackgroundImage && <img src={stickerBackgroundImage} style={{ position: 'absolute', left: 0, top: 0 }} />}
@@ -83,29 +99,31 @@ const Asset = (props) => {
                     />
                   )}
                 </div>
-                {image || !isNFT ? <img src={isNFT ? image : resource} className={`h-full w-full ${rounded && 'rounded-lg'} ${type === "sticker" && 'object-cover drop-shadow-md'}`} /> : (
+                {image || !isNFT ? <img src={isNFT ? image : resource} onLoad={() => setImageLoading(false)} className={`h-full w-full ${rounded && 'rounded-lg'} ${type === "sticker" && 'object-cover drop-shadow-md'}`} /> : (
                   <AssetInfo tokenId={tokenId} addressId={addressId} backgroundImage={type !== "sticker" && backgroundImage} />
                 )}
               </>
             )}
             {type === 'audio' && (
               <>
-                <AudioPlayer
-                  title={title}
-                  artist={artist}
-                  color={color}
-                  audioUrl={audioUrl}
-                  cover={cover}
-                  isNFT={isNFT}
-                  isOwned={isOwned}
-                  tokenId={tokenId}
-                  addressId={addressId}
-                  backgroundImage={backgroundImage}
-                  showCover={showCover}
-                  coverSize={coverSize}
-                  backgroundType={backgroundType}
-                  size={size}
-                />
+                {!isLoading ? (
+                  <AudioPlayer
+                    title={title}
+                    artist={artist}
+                    color={color}
+                    audioUrl={audioUrl}
+                    cover={cover}
+                    isNFT={isNFT}
+                    isOwned={isOwned}
+                    tokenId={tokenId}
+                    addressId={addressId}
+                    backgroundImage={backgroundImage || image}
+                    showCover={showCover}
+                    coverSize={coverSize}
+                    backgroundType={backgroundType}
+                    size={size}
+                  />
+                ) : <Skeleton color="#202020" highlightColor="#aaaaaa" className="h-full w-full absolute" />}
               </>
             )}
           </div>

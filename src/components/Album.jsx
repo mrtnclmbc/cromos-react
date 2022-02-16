@@ -1,14 +1,24 @@
 import { Asset, LoadingIndicator, Modal, OnboardingSlider } from './';
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { EffectCoverflow, Keyboard } from "swiper";
-import { getAssets, getAssetsInfo } from '../services/assetsService';
+import Queue from "queue-promise";
+import Ratio from 'react-ratio/lib/Ratio';
+import { Howl } from 'howler';
+import originalFetch from 'node-fetch';
+import Web3 from 'web3';
 
 import { ApplicationContext } from '../state/store';
-import Ratio from 'react-ratio/lib/Ratio';
+import { ERC1155 } from '../abis';
 import slidesArray from '../onboardingSlides';
-import { Howl } from 'howler';
+import { networkRpcUrls } from '../constants';
+import { extractAnimationFromMetadata, extractDescriptionFromMetadata, extractImageFromMetadata, extractTitleFromMetadata, extractTraitsFromMetadata, sanitizeTokenUriForId } from '../utils/metadataUtils';
+
+const fetch = require('fetch-retry')(originalFetch, {
+  retries: 100,
+  retryDelay: 0
+});
 
 SwiperCore.use([EffectCoverflow, Keyboard]);
 
@@ -24,7 +34,9 @@ const startCollectAudio = new Audio("/audios/start.ogg")
 
 const Album = ({ album, albumId }) => {
   const [albumAssets, setAlbumAssets] = useState([]);
-  const [walletAssets, setWalletAssets] = useState([]);
+  const [ownedTokens, setOwnedTokens] = useState({});
+  const [metadataMap, setMetadataMap] = useState({});
+  const [supplyMap, setSupplyMap] = useState({});
   const [loading, setLoading] = useState(true);
   const [walletConnected, setWalletConnected] = useState(false);
   const { currentAddress, setIsTourOpen } = useContext(ApplicationContext);
@@ -34,11 +46,15 @@ const Album = ({ album, albumId }) => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isPreviewMode, setPreviewMode] = useState(true);
   const [wantToExitPreviewMode, setWantToExitPreviewMode] = useState(false);
-  const [assetsCheckerIntervalId, setAssetsCheckerIntervalId] = useState(null);
   const [dappHeightOverflow, setDappHeightOverflow] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const fullScreenHandle = useFullScreenHandle();
   const [howl, setHowl] = useState(null);
+  const timerID = useRef();
+  const assetCheckRef = useRef(new Queue({
+    concurrent: 1,
+    interval: 5000
+  }));
 
   const openAssetInfoModal = () => {
     // Hack to show modal on full screen mode
@@ -49,37 +65,117 @@ const Album = ({ album, albumId }) => {
     setModalOpen(true);
   };
 
-  // Hooks
   useEffect(async () => {
-    if (album && album.pages?.length) {
-      let contractAddress;
-      let tokenIds = [];
-      album.pages
-        .map(page => page.assets?.rows?.reduce((assets, total) => [...assets, ...total], [])
-        .map(asset => {
-          if (!contractAddress && asset.isNft && asset.address?.length) {
-            contractAddress = asset.address;
-          }
-          tokenIds.push(asset.tokenId);
-        }));
-      const assetsInfo = await getAssetsInfo(contractAddress, tokenIds.filter(id => id !== undefined));
-      setAlbumAssets(assetsInfo?.assets);
-    }
-
-    if (!currentAddress) {
-      setWalletAssets([]);
-      setWalletConnected(false);
-      setPreviewMode(true);
-    }
-
     if (currentAddress) {
       setWalletConnected(true);
       if (wantToExitPreviewMode) {
         setPreviewMode(false);
         setWantToExitPreviewMode(false);
-      }  
+      }
+    } else {
+      setWalletConnected(false);
     }
-  }, [currentAddress, album, albumId]);
+  }, [currentAddress]);
+
+  useEffect(async () => {
+    if (album?.pages?.length) {
+      if (walletConnected) {
+        await checkAssets();
+      } else {
+        setOwnedTokens({});
+      }
+    }
+  }, [walletConnected, album, isPreviewMode]);
+
+  useEffect(async () => {
+    if (album && album.pages?.length) {
+      setLoading(true);
+
+      let tokenIds = [];
+      const web3 = new Web3(networkRpcUrls[album.network]);
+      const assets = album.pages.map(page => page.assets?.rows?.reduce((assets, total) => [...total, ...assets], [])).reduce((assets, total) => [...total, ...assets], []);
+      setAlbumAssets(assets);
+
+      const metadataQueue = new Queue({
+        concurrent: 100,
+        interval: 1
+      });
+
+      for (const asset of assets.reverse()) {
+        tokenIds.push(asset.tokenId);
+
+        if (asset.address && asset.tokenId) {
+          try {
+            // TODO: Add support for ERC-721 contracts
+            const contract = await new web3.eth.Contract(ERC1155, asset.address)
+            const tokenId = asset.tokenIdReplaceInHex ? hexNumber(asset.tokenId, 64) : asset.tokenId;
+
+            if (asset.isNft) {
+              let totalSupply;
+              try {
+                totalSupply = await contract.methods.totalSupply(tokenId).call();
+              } catch (e) {
+                console.warn(e);
+              }
+              setSupplyMap(previousValue => { return { ...previousValue, [asset.tokenId]: totalSupply ?? null }});
+            }
+
+            const tokenUri = await contract.methods.uri(asset.tokenId).call();
+            const sanitizedTokenUri = sanitizeTokenUriForId(tokenUri, tokenId);
+
+            metadataQueue.add(async () => {
+              const response = await fetch(sanitizedTokenUri, {
+                retryOn: [408, 429, 504]
+              });
+              if (metadataMap[asset.tokenId] === undefined) {
+                const metadata = await response.json();
+                setMetadataMap(previousValue => ({ ...previousValue, [asset.tokenId]: previousValue[asset.tokenId] || metadata }));  
+              }
+            });
+          } catch (e) {
+            console.warn(e);
+          }
+        }
+      }
+
+      setLoading(false);
+    }
+  }, [album]);
+
+  const getOwnedTokens = async () => {
+    let ownedTokenIds = [];
+
+    if (albumAssets.length) {
+      const web3 = new Web3(networkRpcUrls[album.network]);
+  
+      for (const asset of albumAssets) {
+        if (!currentAddress) {
+          ownedTokenIds = [];
+          break;
+        }
+        if (asset.address && asset.tokenId) {
+          try {
+            const contract = await new web3.eth.Contract(ERC1155, asset.address);
+            if (asset.isNft) {
+              const balance = await contract.methods.balanceOf(currentAddress, asset.tokenId).call();
+              if (balance > 0) {
+                ownedTokenIds.push(asset.tokenId);
+              }
+            }
+          } catch (e) {
+            console.warn(e);
+          }
+        }
+      }
+    }
+
+    return ownedTokenIds;
+  };
+
+  const checkAssets = async () => {
+    let ownedTokenIds = await getOwnedTokens();
+    setOwnedTokens({ [currentAddress]: ownedTokenIds});
+  };
 
   useEffect(() => {
     if (!isPreviewMode) {
@@ -88,23 +184,6 @@ const Album = ({ album, albumId }) => {
   }, [isPreviewMode]);
 
   useEffect(async () => {
-    // Get NFTs
-    if (album && currentAddress) {
-      const checkAssets = async () => {
-        const walletAssets = await getAssets(currentAddress);
-        setWalletAssets(walletAssets);
-      };
-      const intervalId = setInterval(checkAssets, 30000);
-      setAssetsCheckerIntervalId(intervalId);
-      await checkAssets();
-      setWalletConnected(true);
-    }
-
-    if (!currentAddress && assetsCheckerIntervalId) {
-      clearInterval(assetsCheckerIntervalId);
-      setAssetsCheckerIntervalId(null)
-    }
-
     if (album) {
       if (album?.backgroundSound) {
         setHowl(new Howl({
@@ -116,7 +195,7 @@ const Album = ({ album, albumId }) => {
       }
       setLoading(false);
     }
-  }, [album, currentAddress]);
+  }, [album, currentAddress, isPreviewMode]);
 
   useEffect(() => {
     const onboardingDoneSetting = localStorage.getItem('onboardingDone');
@@ -143,6 +222,17 @@ const Album = ({ album, albumId }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    assetCheckRef.current.stop();
+    assetCheckRef.current.clear();
+    assetCheckRef.current = new Queue({
+      concurrent: 1,
+      interval: 5000
+    });
+    timerID.current = setInterval(() => assetCheckRef.current.enqueue(() => checkAssets()), 5000);
+    return () => clearInterval(timerID.current);
+  }, [currentAddress, isPreviewMode]);
+
   // Helper functions
   const handleOnboardingEnd = () => {
     const onboardingDone = localStorage.setItem('onboardingDone', true);
@@ -151,7 +241,7 @@ const Album = ({ album, albumId }) => {
   }
 
   const slides = useMemo(() => {
-    if (!albumAssets?.length || !album || !walletAssets) return [];
+    if (!album) return [];
 
     const pages = album?.pages?.map((page, index) => (
       <Page>
@@ -160,15 +250,21 @@ const Album = ({ album, albumId }) => {
           {album && page.assets?.rows?.map((rows, index) => (
             <div className="flex" key={`row-container-${index}`}>
               {rows.map((rowAsset, index) => {
-                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id == rowAsset?.tokenId && walletAsset.asset_contract.address.toLowerCase() === rowAsset?.address.toLowerCase());
-                const asset = albumAssets?.find((asset) => asset.token_id == rowAsset?.tokenId);
+                const isOwned = (ownedTokens[currentAddress] || []).includes(rowAsset?.tokenId);
+                const assetMetadata = metadataMap ? metadataMap[rowAsset?.tokenId] : null;
+                const imageUrl = assetMetadata ? extractImageFromMetadata(assetMetadata) : null;
+                const animationUrl = assetMetadata ? extractAnimationFromMetadata(assetMetadata) : null;
+                const traits = assetMetadata ? extractTraitsFromMetadata(assetMetadata) : null;
+                const totalSupply = supplyMap ? supplyMap[rowAsset?.tokenId] : null;
+                const title = assetMetadata ? extractTitleFromMetadata(assetMetadata) : '';
+                const description = assetMetadata ? extractDescriptionFromMetadata(assetMetadata) : '';
                 return (
                   <Asset
                     key={`asset-${index}`}
                     size={rowAsset?.size}
-                    image={ownedAsset || isPreviewMode ? asset?.image_url : null}
-                    backgroundImage={asset?.image_url}
-                    tokenId={rowAsset?.token_id}
+                    image={isOwned || isPreviewMode ? imageUrl : null}
+                    backgroundImage={imageUrl}
+                    tokenId={rowAsset?.tokenId}
                     addressId={rowAsset?.address}
                     padding={rowAsset?.padding}
                     walletConnected={walletConnected}
@@ -180,15 +276,20 @@ const Album = ({ album, albumId }) => {
                     resource={rowAsset?.resource}
                     widthPercentage={rowAsset?.size?.width * 100 / album?.width}
                     stickerBackgroundImage={rowAsset?.backgroundImage}
-                    title={rowAsset?.title}
+                    title={title}
                     artist={rowAsset?.artist}
                     color={rowAsset?.color}
-                    audioUrl={asset?.animation_url || ownedAsset?.animation_url}
-                    cover={asset?.image_url || ownedAsset?.image_url}
-                    isOwned={ownedAsset ? ownedAsset : false}
+                    audioUrl={animationUrl}
+                    traits={traits}
+                    totalSupply={totalSupply}
+                    description={description}
+                    isLoading={assetMetadata === undefined}
+                    audioUrl={rowAsset?.resource || animationUrl}
+                    cover={imageUrl}
+                    isOwned={isOwned}
                     setModalOpen={openAssetInfoModal}
                     setSelectedAsset={setSelectedAsset}
-                    asset={asset || null}
+                    asset={rowAsset || null}
                   />
                 );
               })}
@@ -217,7 +318,7 @@ const Album = ({ album, albumId }) => {
     );
 
     return [...(album?.coverUrl ? [cover] : []), ...(pages || []), ...(album?.backUrl ? [back] : [])];
-  }, [albumAssets, isPreviewMode, walletAssets, isFullScreen]);
+  }, [album, currentAddress, metadataMap, ownedTokens, isPreviewMode, isFullScreen]);
 
   const checkDappOverflow = () => {
     setTimeout(() => {
@@ -267,6 +368,7 @@ const Album = ({ album, albumId }) => {
               selectedAsset={selectedAsset}
               okButtonText="Get NFT!"
               cancelButtonText="Cancel"
+              network={album?.network}
             />
           }
           {!onboardingDone && !selectedAsset &&
@@ -375,38 +477,46 @@ const Album = ({ album, albumId }) => {
                           {album && page.assets?.rows?.map((rows, index) => (
                             <div className="flex" key={`row-container-${index}`}>
                               {rows.map((rowAsset, index) => {
-                                const ownedAsset = walletAssets.find((walletAsset) => walletAsset.token_id === rowAsset?.tokenId && walletAsset.asset_contract.address === rowAsset?.address);
-                                const asset = albumAssets?.find((asset) => asset.token_id === rowAsset?.tokenId);
+                                const isOwned = (ownedTokens[currentAddress] || []).includes(rowAsset?.tokenId);
+                                const assetMetadata = metadataMap ? metadataMap[rowAsset?.tokenId] : null;
+                                const imageUrl = assetMetadata ? extractImageFromMetadata(assetMetadata) : null;
+                                const animationUrl = assetMetadata ? extractAnimationFromMetadata(assetMetadata) : null;
+                                const traits = assetMetadata ? extractTraitsFromMetadata(assetMetadata) : null;
+                                const totalSupply = supplyMap ? supplyMap[rowAsset?.tokenId] : null;
+                                const title = assetMetadata ? extractTitleFromMetadata(assetMetadata) : '';
+                                const description = assetMetadata ? extractDescriptionFromMetadata(assetMetadata) : '';
                                 return (
                                   <Asset
                                     key={`asset-${index}`}
                                     size={rowAsset?.size}
-                                    image={ownedAsset || isPreviewMode ? asset?.image_url : null}
-                                    backgroundImage={asset?.image_url}
+                                    image={isOwned || isPreviewMode ? imageUrl : null}
+                                    backgroundImage={imageUrl}
                                     tokenId={rowAsset?.tokenId}
                                     addressId={rowAsset?.address}
                                     padding={rowAsset?.padding}
                                     walletConnected={walletConnected}
                                     isNFT={rowAsset?.isNft}
-                                    sizeMultiplier={album.sizeMultiplier}
+                                    sizeMultiplier={album?.sizeMultiplier}
                                     type={rowAsset?.type}
                                     rounded={rowAsset?.rounded}
-                                    borderColor={rowAsset?.boderColor}
+                                    borderColor={rowAsset?.borderColor}
                                     resource={rowAsset?.resource}
-                                    widthPercentage={rowAsset?.size?.width * 100 / album.width}
+                                    widthPercentage={rowAsset?.size?.width * 100 / album?.width}
                                     stickerBackgroundImage={rowAsset?.backgroundImage}
-                                    title={rowAsset?.title}
+                                    title={title}
                                     artist={rowAsset?.artist}
                                     color={rowAsset?.color}
-                                    audioUrl={asset?.animation_url || ownedAsset?.animation_url}
-                                    cover={asset?.image_url || ownedAsset?.image_url}
-                                    showCover={rowAsset?.showCover}
-                                    coverSize={rowAsset?.coverSize}
-                                    backgroundType={rowAsset?.backgroundType}
-                                    isOwned={ownedAsset ? ownedAsset : false}
+                                    audioUrl={animationUrl}
+                                    traits={traits}
+                                    totalSupply={totalSupply}
+                                    description={description}
+                                    isLoading={assetMetadata === undefined}
+                                    audioUrl={rowAsset?.resource || animationUrl}
+                                    cover={imageUrl}
+                                    isOwned={isOwned}
                                     setModalOpen={openAssetInfoModal}
                                     setSelectedAsset={setSelectedAsset}
-                                    asset={asset || null}
+                                    asset={rowAsset || null}
                                   />
                                 );
                               })}

@@ -4,6 +4,7 @@ var db = [
   {
     // https://testnets.opensea.io/collection/comic-walking-dead
     album_id: "comic",
+    network: "rinkeby",
     title: 'The Walking Dead',
     description: 'The world we knew is gone.',
     backgroundVideo: 'default',
@@ -262,6 +263,7 @@ var db = [
   {
     // https://testnets.opensea.io/collection/comic-walking-dead
     album_id: "sticker-album",
+    network: "rinkeby",
     title: 'Bizarrap Sticker Album',
     description: 'Biza biza rap',
     backgroundVideo: 'default',
@@ -1421,6 +1423,7 @@ var db = [
   {
     // https://testnets.opensea.io/collection/gorrillaz-album-test
     album_id: "musical-booklet",
+    network: "rinkeby",
     title: 'Gorillaz',
     description: '',
     backgroundVideo: 'default',
@@ -1905,6 +1908,7 @@ var db = [
   {
     // https://testnets.opensea.io/collection/gorrillaz-album-test
     album_id: "musical-booklet-vol-2",
+    network: "rinkeby",
     title: 'Gorillaz Vol 2',
     description: 'The future is coming on 🎵',
     backgroundVideo: 'default',
@@ -2444,6 +2448,7 @@ var db = [
   {
     // https://testnets.opensea.io/collection/iota-mural-poc
     album_id: "iota-mural",
+    network: "rinkeby",
     title: 'IOTA Mural',
     description: 'An Open, Feeless Data and Value Transfer Protocol',
     backgroundVideo: 'default',

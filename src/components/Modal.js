@@ -3,6 +3,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import { CollectionIcon, XCircleIcon } from '@heroicons/react/outline'
 // import { truncateString } from '../helpers/formatHelper';
 import { ModalContent } from './';
+import { marketplaceUris } from '../constants';
+import { marketplaceLink } from '../helpers/formatHelper';
 
 // TO-DO: Decouple Asset information and Onboarding modals to different components.
 
@@ -17,6 +19,7 @@ const Modal = (props) => {
     showFooter = true,
     isOnboarding = false,
     handleOnboardingEnd,
+    network
   } = props;
 
   const okButtonRef = useRef();
@@ -30,6 +33,7 @@ const Modal = (props) => {
         initialFocus={okButtonRef}
         open={open}
         onClose={setOpen}
+        style={{ zIndex: 1000000 }}
       >
         <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -67,7 +71,7 @@ const Modal = (props) => {
                       </button>
                     </Dialog.Title>
                   </div>
-                  {selectedAsset ? <ModalContent selectedAsset={selectedAsset} /> : props.children}
+                  {selectedAsset ? <ModalContent selectedAsset={{ ...selectedAsset, network }} /> : props.children}
                 </div>
               </div>
               {showFooter &&
@@ -87,7 +91,7 @@ const Modal = (props) => {
                     </button>
                     <a
                       className="w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                      href={selectedAsset ? selectedAsset.permalink : null}
+                      href={selectedAsset ? marketplaceLink(marketplaceUris[network], selectedAsset.address, selectedAsset.tokenId) : null}
                       target="_blank"
                       ref={okButtonRef}
                       onClick={selectedAsset ? null : () => setOpen(false)}

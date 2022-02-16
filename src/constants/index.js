@@ -37,3 +37,10 @@ export const networkNames = {
   'avalanche': 'Avalanche',
   'iota-testnet': 'IOTA Testnet'
 };
+
+export const marketplaceUris = {
+  'ethereum': 'https://opensea.io/assets/{address}/{tokenId}',
+  'rinkeby': 'https://testnets.opensea.io/assets/{address}/{tokenId}',
+  'polygon': 'https://matic.opensea.io/assets/{address}/{tokenId}',
+  'iota-testnet': 'https://inspyrd.io/assets/{address}/{tokenId}'
+};
