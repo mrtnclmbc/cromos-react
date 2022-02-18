@@ -125,7 +125,7 @@ const Album = ({ album, albumId }) => {
 
             metadataQueue.add(async () => {
               const response = await fetch(sanitizedTokenUri, {
-                retryOn: [408, 429, 504]
+                retryOn: [408, 429, 503, 504]
               });
               if (metadataMap[asset.tokenId] === undefined) {
                 const metadata = await response.json();

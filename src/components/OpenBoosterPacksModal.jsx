@@ -4,13 +4,19 @@ import Web3 from 'web3';
 import { Fade } from "react-awesome-reveal";
 import axios from 'axios';
 import Tilt from 'react-parallax-tilt';
+import originalFetch from 'node-fetch';
 
 import { networkChainIds, networkRpcUrls } from '../constants';
-import { convertIpfsUrlToHttps, extractImageFromMetadata, extractTitleFromMetadata, extractAnimationFromMetadata } from '../utils/metadataUtils';
+import { convertIpfsUrlToHttps, extractImageFromMetadata, extractTitleFromMetadata, extractAnimationFromMetadata, sanitizeTokenUriForId } from '../utils/metadataUtils';
 import BuyableBoosterPackABI from '../../contracts/abis/BuyableBoosterPack';
 import CromyCollectibleABI from '../../contracts/abis/CromyCollectible';
 import { ApplicationContext } from '../state/store';
 import { OpenableBoosterPackCard, ObtainedNftCard } from '.';
+
+const fetch = require('fetch-retry')(originalFetch, {
+  retries: 10,
+  retryDelay: 1
+});
 
 // TODO: Get from API endpoint
 const compatibleBoosterPacksArray = [
@@ -64,10 +70,12 @@ const OpenBoosterPacksModal = (props) => {
           const owner = await contract.methods.ownerOf(tokenId).call();
           if (currentAddress === owner) {
             const tokenUri = await contract.methods.tokenURI(tokenId).call();
-            const response = await axios.get(convertIpfsUrlToHttps(tokenUri));
-            const title = extractTitleFromMetadata(response.data);
-            const image = extractImageFromMetadata(response.data);
-            const animation = extractAnimationFromMetadata(response.data);
+            const sanitizedTokenUri = sanitizeTokenUriForId(tokenUri, tokenId);
+            const response = await fetch(sanitizedTokenUri, { retryOn: [503, 504] });
+            const metadata = await response.json();
+            const title = extractTitleFromMetadata(metadata);
+            const image = extractImageFromMetadata(metadata);
+            const animation = extractAnimationFromMetadata(metadata);
             boosterPacks = [...boosterPacks, {...boosterPack, tokenId, tokenUri, title, image, animation}];
           }  
         } catch (e) {
@@ -90,10 +98,13 @@ const OpenBoosterPacksModal = (props) => {
       const tokenId = tokenIds[i];
       const tokenUri = await collectibleContract.methods.uri(tokenId).call();
       try {
-        const response = await axios.get(convertIpfsUrlToHttps(tokenUri));
-        const title = extractTitleFromMetadata(response.data);
-        const image = extractImageFromMetadata(response.data);
-        const animation = extractAnimationFromMetadata(response.data);
+        console.log("JERERER")
+        const sanitizedTokenUri = sanitizeTokenUriForId(tokenUri, tokenId);
+        const response = await fetch(sanitizedTokenUri, { retryOn: [503, 504] });
+        const metadata = await response.json();
+        const title = extractTitleFromMetadata(metadata);
+        const image = extractImageFromMetadata(metadata);
+        const animation = extractAnimationFromMetadata(metadata);
         obtainedNFTs = [...obtainedNFTs, { tokenId, tokenUri, title, image, animation }];    
       } catch (e) {
         console.error(e, "error");
