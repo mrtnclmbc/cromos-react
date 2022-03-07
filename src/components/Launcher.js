@@ -246,8 +246,8 @@ const Launcher = (props) => {
             </div>
           </Fade>
 
-          <Fade triggerOnce>
-            <div id="collectibles" className="grid grid-3-3-3-3 centered">
+          <Fade triggerOnce id="collectibles">
+            <div className="grid grid-3-3-3-3 centered">
               {isLoadingCollectibles ? (
                 <>
                   <BoosterPackCard isLoading={true} />

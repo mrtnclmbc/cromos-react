@@ -312,6 +312,14 @@ button {
   font-weight: 700;
 }
 
+.toast-button {
+  width: 60px !important;
+}
+
+.Toastify__close-button {
+  width: auto !important;
+}
+
 input[type="text"],
 input[type="password"],
 textarea,
@@ -11625,7 +11633,6 @@ figure > img {
 }
 
 .booster-pack-preview {
-  border: 1px solid #eaeaf5;
 }
 
 .booster-pack-preview .booster-pack-preview-call-to-action {
@@ -11641,8 +11648,6 @@ figure > img {
 
 .booster-pack-preview .booster-pack-preview-image {
   min-height: 180px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 
 .obtained-nft-preview {

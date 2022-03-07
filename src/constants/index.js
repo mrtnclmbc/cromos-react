@@ -19,8 +19,8 @@ export const networkChainIdsHexa = {
 };
 
 export const networkRpcUrls = {
-  'ethereum': 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
-  'rinkeby': 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161',
+  'ethereum': 'https://eth-mainnet.alchemyapi.io/v2/D2wLe5d-jpTaDYslZUHDlJd2hl4gnZMl',
+  'rinkeby': 'https://eth-rinkeby.alchemyapi.io/v2/D2wLe5d-jpTaDYslZUHDlJd2hl4gnZMl',
   'binance-smart-chain': 'https://bsc-dataseed.binance.org',
   'polygon': 'https://rpc-mainnet.maticvigil.com',
   'fantom': 'https://rpc.ftm.tools',

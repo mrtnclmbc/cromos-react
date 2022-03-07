@@ -48,7 +48,7 @@ export const extractTraitValueFromMetadata = (metadata, trait) => {
 };
 
 export const convertIpfsUrlToHttps = (ipfsUrl) => {
-  return ipfsUrl?.replace('ipfs://', 'https://ipfs.io/ipfs/');
+  return ipfsUrl?.replace('ipfs://', 'https://ipfs.infura.io/ipfs/');
 };
 
 export const sanitizeTokenUriForId = (tokenUri, tokenId) => {

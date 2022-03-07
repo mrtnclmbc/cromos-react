@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import lottie from 'lottie-web/build/player/lottie_light';
+import animationData from "../../public/animations/loading.json";
 
-const LoadingIndicator = () => {
+const LoadingIndicator = ({ customMessage }) => {
+  const animationContainer = useRef(null);
+  const anim = useRef(null);
+
+  useEffect(() => {
+    if (animationContainer.current) {
+      anim.current = lottie.loadAnimation({
+        container: animationContainer.current,
+        loop: true,
+        autoplay: true,
+        animationData,
+      });
+
+      return () => anim.current?.destroy();
+    }
+  }, []);
+
   return(
     <>
-      <div className="h-screen w-screen z-50 flex justify-center items-center">
-        <div class="flex items-center justify-center space-x-2 animate-pulse">
-          <div class="w-6 h-6 bg-red-400 rounded-full"></div>
-          <div class="w-6 h-6 bg-red-400 rounded-full"></div>
-          <div class="w-6 h-6 bg-red-400 rounded-full"></div>
-        </div>
+      <div className="flex flex-col justify-center items-center">
+        <div ref={animationContainer} style={{ width: 200, height: 200 }} />
+        <p>{customMessage ? customMessage : 'Loading...'}</p>
       </div>
     </>
   )

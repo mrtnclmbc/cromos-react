@@ -1,7 +1,10 @@
 import './style.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import 'tailwindcss/tailwind.css';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import '../public/launcher/css/styles.css';
 import '../public/launcher/css/vendor/tiny-slider.css';
 
@@ -11,6 +14,7 @@ import React, { useEffect, useState } from 'react';
 import ApplicationProvider from '../src/state/store';
 import Head from 'next/head';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
 
 const App = ({ Component, pageProps }) => {
   const [darkMode, setDarkMode] = useState(0);
@@ -82,6 +86,16 @@ const App = ({ Component, pageProps }) => {
             </div>
           </div>
         )}
+        <ToastContainer
+          position="top-right"
+          autoClose={10000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          style={{ zIndex: 99999999999999999, width: 400 }}
+        />
       </ApplicationProvider>
       <script src="/launcher/js/utils/app.js"></script>
       <Script strategy="afterInteractive" src="/launcher/js/utils/liquidify.js" async></Script>
@@ -114,6 +128,7 @@ const App = ({ Component, pageProps }) => {
       {/*<!-- Slider -->*/}
       <script src="/launcher/js/vendor/tiny-slider.min.js" />
       <Script src="/launcher/js/content/content.js"></Script>
+      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     </>
   );
 };

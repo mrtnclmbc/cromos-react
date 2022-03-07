@@ -8,6 +8,7 @@ import Ratio from 'react-ratio/lib/Ratio';
 import { Howl } from 'howler';
 import originalFetch from 'node-fetch';
 import Web3 from 'web3';
+import { toast } from 'react-toastify';
 
 import { ApplicationContext } from '../state/store';
 import { ERC1155 } from '../abis';
@@ -65,6 +66,37 @@ const Album = ({ album, albumId }) => {
     setModalOpen(true);
   };
 
+  const BuyPackMessage = ({ message, href }) => (
+    <div className="flex flex-row items-center">
+      <p style={{ lineHeight: '22px' }}>
+        {message}
+      </p>
+      {href?.length && <a className="text-black text-center text-bold" style={{ fontSize: 15 }} href={href}><strong>Buy Booster Pack</strong></a>}
+    </div>
+  );
+
+  const TextMessage = ({ message }) => (
+    <div className="flex flex-row items-center">
+      <p style={{ lineHeight: '22px' }}>
+        {message}
+      </p>
+    </div>
+  );
+
+  const showBuyPackMessage = (message, href) => {
+    toast(<BuyPackMessage message={message} href={href} />) 
+  };
+
+  const showTextMessage = (message) => {
+    toast(<TextMessage message={message} />) 
+  };
+
+  useEffect(() => {
+    if (album) {
+      showTextMessage(`👋 Hi, collector! Welcome to ${album?.title} — hope you enjoy this NFT Experience. And as my friend Ash says... gotta collect 'em all!`);
+    }
+  }, [album]);
+
   useEffect(async () => {
     if (currentAddress) {
       setWalletConnected(true);
@@ -80,7 +112,28 @@ const Album = ({ album, albumId }) => {
   useEffect(async () => {
     if (album?.pages?.length) {
       if (walletConnected) {
-        await checkAssets();
+        if (!isPreviewMode) {
+          showTextMessage(`👀 We will now retrieve your collection stats, please wait a second...`);
+        }
+        const ownedTokenIds = await checkAssets(isPreviewMode, false);
+        if (!isPreviewMode) {
+          const albumAssetsLength = albumAssets.filter(albumAsset => albumAsset.isNft).length;
+          if (ownedTokenIds.length) {
+            showBuyPackMessage(`🙋‍♂️ You own ${ownedTokenIds.length} out of ${albumAssetsLength} NFTs of this collection. Not bad!`, album.collectibleId && `${window.location.origin.toString()}/collectible/${album.collectibleId}`);
+          } else {
+            showBuyPackMessage(`You don't own any of the ${albumAssetsLength} NFTs of this collection 🥺`, album.collectibleId && `${window.location.origin.toString()}/collectible/${album.collectibleId}`);
+          }
+          const remainingTokens = albumAssetsLength - ownedTokenIds.length;
+          if (remainingTokens > 0 && remainingTokens < 6) {
+            setTimeout(() => showBuyPackMessage(`⏳ You just need ${remainingTokens} more NFT${remainingTokens > 1 ? 's' : ''} to complete the collection!`, album.collectibleId && `${window.location.origin.toString()}/collectible/${album.collectibleId}`), 2000); 
+          }
+          if (ownedTokenIds.length === albumAssets.filter(albumAssets => albumAssets.isNft).length) {
+            window.completed = true;
+            setTimeout(() => showTextMessage(`Congratulations! You have completed the entire collection`), 2000);
+          } else {
+            window.completed = false;
+          }
+        }
       } else {
         setOwnedTokens({});
       }
@@ -172,9 +225,39 @@ const Album = ({ album, albumId }) => {
     return ownedTokenIds;
   };
 
-  const checkAssets = async () => {
+  const checkAssets = async (isPreviewMode, checkCompletion) => {
     let ownedTokenIds = await getOwnedTokens();
+    if (!isPreviewMode) {
+      const currentOwnedTokens = window.ownedTokens;
+      const albumAssetsLength = albumAssets.filter(albumAssets => albumAssets.isNft).length;
+      if (currentOwnedTokens?.length) {
+        console.log(ownedTokenIds);
+        const removedTokens = currentOwnedTokens.filter(ownedToken => !ownedTokenIds.includes(ownedToken));
+        const addedTokens = ownedTokenIds.filter(ownedToken => !currentOwnedTokens.includes(ownedToken));
+        if (removedTokens.length > 0) {
+          showTextMessage(`You loosed ownership of ${removedTokens.length} collectible${removedTokens.length > 1 ? 's' : ''}`);
+        }
+        if (addedTokens.length > 0) {
+          showTextMessage(`You got ${addedTokens.length} new collectible${removedTokens.length > 1 ? 's' : ''}!`);
+        }
+        if (removedTokens.length > 0 || addedTokens.length > 0) {
+          const remainingTokens = albumAssetsLength - ownedTokenIds.length;
+          if (remainingTokens > 0 && remainingTokens < 6) {
+            setTimeout(() => showBuyPackMessage(`⏳ You just need ${remainingTokens} more NFT${remainingTokens > 1 ? 's' : ''} to complete the collection!`, album.collectibleId && `${window.location.origin.toString()}/collectible/${album.collectibleId}`), 2000); 
+          }
+        }
+      }
+      if (checkCompletion) {
+        if (!window.completed && ownedTokenIds.length === albumAssetsLength) {
+          setOwnedTokens({ [currentAddress]: ownedTokenIds});
+          window.completed = true;
+          showTextMessage(`Congratulations! You have completed the entire collection`);
+        }
+      }
+    }
     setOwnedTokens({ [currentAddress]: ownedTokenIds});
+    window.ownedTokens = ownedTokenIds;
+    return ownedTokenIds;
   };
 
   useEffect(() => {
@@ -229,7 +312,7 @@ const Album = ({ album, albumId }) => {
       concurrent: 1,
       interval: 5000
     });
-    timerID.current = setInterval(() => assetCheckRef.current.enqueue(() => checkAssets()), 5000);
+    timerID.current = setInterval(() => assetCheckRef.current.enqueue(() => checkAssets(isPreviewMode, true)), 5000);
     return () => clearInterval(timerID.current);
   }, [currentAddress, isPreviewMode]);
 
@@ -357,9 +440,15 @@ const Album = ({ album, albumId }) => {
     }
   }
 
+  const Loading = () => (
+    <div className="h-screen w-screen z-50 flex justify-center items-center">
+      <LoadingIndicator customMessage="Loading your experience. Please wait..." />
+    </div>
+  );
+
   return (
     <div>
-      {loading ? <LoadingIndicator /> : (
+      {loading ? <Loading /> : (
         <>
           {selectedAsset &&
             <Modal

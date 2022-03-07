@@ -3,9 +3,34 @@
   --active-color: #00aeb0;
 }
 
+.swiper-wrapper,
+.swiper-slide {
+   -moz-transform-style: flat;
+   -webkit-transform-style: flat;
+   -ms-transform-style: flat;
+   transform-style: flat;
+}
+
+.react-loading-skeleton {
+  border-radius: 0 !important;
+}
+
 .blurred {
   filter: blur(20px);
-  transform: scale(1.10);
+  // transform: scale(1.10);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translateZ(0);
+  -moz-backface-visibility: hidden;
+  -moz-perspective: 1000;
+  -moz-transform: translate3d(0,0,0);
+  -moz-transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: translate3d(0,0,0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .page {

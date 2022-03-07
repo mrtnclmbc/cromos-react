@@ -11,6 +11,7 @@ import { convertIpfsUrlToHttps, extractImageFromMetadata, extractTitleFromMetada
 import BuyableBoosterPackABI from '../../contracts/abis/BuyableBoosterPack';
 import CromyCollectibleABI from '../../contracts/abis/CromyCollectible';
 import { ApplicationContext } from '../state/store';
+import { LoadingIndicator } from '../components';
 import { OpenableBoosterPackCard, ObtainedNftCard } from '.';
 
 const fetch = require('fetch-retry')(originalFetch, {
@@ -46,7 +47,7 @@ const OpenBoosterPacksModal = (props) => {
   } = props;
 
   const { currentAddress } = useContext(ApplicationContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isOpeningPack, setIsOpeningPack] = useState(false);
   const [boosterPacks, setBoosterPacks] = useState([]);
   const [obtainedNFTs, setObtainedNFTs] = useState([]);
@@ -56,7 +57,6 @@ const OpenBoosterPacksModal = (props) => {
   const okButtonRef = useRef();
 
   const requestUserOwnedBoosterPacks = async () => {
-    setLoading(true);
     let boosterPacks = [];
     for (var n = 0; n < compatibleBoosterPacks.length; n++) {
       const boosterPack = compatibleBoosterPacks[n];
@@ -71,7 +71,7 @@ const OpenBoosterPacksModal = (props) => {
           if (currentAddress === owner) {
             const tokenUri = await contract.methods.tokenURI(tokenId).call();
             const sanitizedTokenUri = sanitizeTokenUriForId(tokenUri, tokenId);
-            const response = await fetch(sanitizedTokenUri, { retryOn: [503, 504] });
+            const response = await fetch(sanitizedTokenUri, { retryOn: [408, 429, 503, 504] });
             const metadata = await response.json();
             const title = extractTitleFromMetadata(metadata);
             const image = extractImageFromMetadata(metadata);
@@ -98,9 +98,8 @@ const OpenBoosterPacksModal = (props) => {
       const tokenId = tokenIds[i];
       const tokenUri = await collectibleContract.methods.uri(tokenId).call();
       try {
-        console.log("JERERER")
         const sanitizedTokenUri = sanitizeTokenUriForId(tokenUri, tokenId);
-        const response = await fetch(sanitizedTokenUri, { retryOn: [503, 504] });
+        const response = await fetch(sanitizedTokenUri, { retryOn: [408, 429, 503, 504] });
         const metadata = await response.json();
         const title = extractTitleFromMetadata(metadata);
         const image = extractImageFromMetadata(metadata);
@@ -196,24 +195,22 @@ const OpenBoosterPacksModal = (props) => {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className={`inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full ${showVideo ? 'bg-black' : 'bg-white'}`}>
+            <div className={`inline-block align-bottom rounded-sm text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full ${showVideo ? 'bg-black' : 'bg-white'}`}>
               <div className="bg-transparent" style={{ paddingTop: !showVideo ? 15 : 0, paddingBottom: !showVideo ? 15 : 0 }}>
                 <div className="flex justify-center flex-col">
                   {!showVideo && (
                     <div className="text-center">
                       <Dialog.Title as="div" className="text-lg leading-6 font-medium text-gray-900 flex items-center justify-center mt-2">
                         <h2 style={{ fontSize: '1.8em' }} className="section-title text-black drop-shadow-xl">
-                          {isOpeningPack && obtainedNFTs?.length > 0 ? `Congratulations! You got ${obtainedNFTs.length} incredible NFTs 🎉` : isOpeningPack && obtainedNFTs?.length === 0 ? `Opening ${openingPack?.title} #${openingPack?.tokenId}. Please wait...` : 'Your booster packs'}
+                          {isOpeningPack && obtainedNFTs?.length > 0 ? `Congratulations! You got ${obtainedNFTs.length} incredible NFTs 🎉` : isOpeningPack && obtainedNFTs?.length === 0 ? `Opening ${openingPack?.title} #${openingPack?.tokenId}. Please wait...` : 'Your Booster Packs'}
                         </h2>
                       </Dialog.Title>
                     </div>
                   )}
                   <button></button>
                   {loading ? (
-                    <div class="flex items-center justify-center space-x-2 animate-pulse p-7">
-                      <div class="w-2 h-2 bg-red-400 rounded-full"></div>
-                      <div class="w-2 h-2 bg-red-400 rounded-full"></div>
-                      <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                    <div class="flex items-center justify-center" style={{ height: 300, paddingBottom: 20 }}>
+                      <LoadingIndicator customMessage="Loading your packs. Please wait..." />
                     </div>
                   ) : isOpeningPack && showVideo ? (
                     <>
@@ -267,7 +264,7 @@ const OpenBoosterPacksModal = (props) => {
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center mt-5">
-                        <p>You don't have any booster pack. Buy a booster pack to obtain awesome experienceable NFTs!</p>
+                        <p className="flex items-center" style={{ height: 70, fontSize: 16 }}>You don't have any Booster Pack. Buy a Booster Pack to complete your favorite NFT Experience!</p>
                         <a href="#collectibles" onClick={() => setOpen(false)} style={{ height: 50, fontWeight: 600 }} className="rounded-full self-center border border-solid bg-red-500 text-white flex items-center justify-center px-5 mb-2 mt-5">
                           Buy Booster Packs
                         </a>

@@ -7,6 +7,7 @@ import {
 } from '../src/components';
 
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
 export default function Home() {
   return (

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Web3 from 'web3';
+import { toast } from 'react-toastify';
 
 import { Header, ImageSlider, LoadingIndicator } from '../components';
 import { ApplicationContext } from '../state/store';
@@ -14,10 +15,23 @@ const Collectible = ({ collectible }) => {
   const [maxAmount, setMaxAmount] = useState(0);
   const [totalMinted, setTotalMinted] = useState(0);
   const [price, setPrice] = useState(null);
-  const [buyLoading, setBuyLoading] = useState(false);
+  const [buyLoading, setBuyLoading] = useState('no');
   const [currentChainId, setCurrentChainId] = useState(0);
-  const { currentAddress, setIsTourOpen } = useContext(ApplicationContext);
+  const { currentAddress, setIsTourOpen, setIsOpenPacksModalOpen } = useContext(ApplicationContext);
   const { provider, error } = useWeb3Modal();
+
+  const SuccessMessage = ({ collectible }) => (
+    <div className="flex flex-row justify-center">
+      <p style={{ lineHeight: '22px' }}>
+        <strong className="">🎉 Congratulations! </strong> You bought a <strong className="text-red-600">{`${collectible?.title}`}</strong> 
+      </p>
+      <button className="text-black toast-button" style={{ minWidth: 65, fontSize: 14 }} onClick={() => setIsOpenPacksModalOpen(true)}>Open It</button>
+    </div>
+  );
+
+  const showSuccessMessage = () => {
+    toast(<SuccessMessage collectible={collectible} />) 
+  };
 
   useEffect(async () => {
     if (collectible) {
@@ -112,7 +126,7 @@ const Collectible = ({ collectible }) => {
   }
 
   const buyCollectible = async () => {
-    if (!buyLoading) {
+    if (buyLoading === 'no') {
       if (!currentAddress) {
         setIsTourOpen(isTourOpen => !isTourOpen);
       } else {
@@ -126,15 +140,19 @@ const Collectible = ({ collectible }) => {
               const currentPrice = await contract.methods.CURRENT_PRICE().call();
               contract.methods.buyWithETH().send({ from: currentAddress, value: currentPrice })
                 .once('sending', async () => {
-                  setBuyLoading(true);
-                })  
+                  setBuyLoading('Loading');
+                })
+                .on('transactionHash', async () => {
+                  setBuyLoading('Processing');
+                })
                 .on('receipt', async () => {
                   await updateTotalMinted();
-                  setBuyLoading(false);
+                  showSuccessMessage();
+                  setBuyLoading('no');
                 })
                 .on('error', async (error) => {
                   console.log(error)
-                  setBuyLoading(false);
+                  setBuyLoading('no');
                 });
             } else {
               await changeNetwork(async () => await buyCollectible());
@@ -149,9 +167,15 @@ const Collectible = ({ collectible }) => {
     }
   };
 
+  const Loading = () => (
+    <div className="h-screen w-screen z-50 flex justify-center items-center">
+      <LoadingIndicator />
+    </div>
+  );
+
   return (
     <>
-      {loading ? <LoadingIndicator /> : (
+      {loading ? <Loading /> : (
         <div className="content-grid" style={{ paddingTop: 70, paddingLeft: 60, paddingRight: 60, paddingBottom: 30 }}>
         <div className="grid grid-9-3">
           <div className="marketplace-content grid-column">
@@ -172,7 +196,7 @@ const Collectible = ({ collectible }) => {
                     <p className="tab-box-item-title">{collectible?.title}</p>
                     <p className="tab-box-item-paragraph">{collectible?.description}</p>
                     <p className="tab-box-item-title">How does it work?</p>
-                    <p className="tab-box-item-paragraph">This booster pack is an ERC-721 compliant NFT. You can open it to discover what is inside. Once opened, this booster pack will be destroyed and you will get new ERC-721 or ERC-1155 NFTs compatible with {collectible?.relatedDappName}.</p>
+                    <p className="tab-box-item-paragraph">This booster pack is an ERC-721 compliant NFT. You can open it to discover what is inside. Once opened, this booster pack will be destroyed and you will get new ERC-1155 NFTs compatible with {collectible?.relatedDappName}.</p>
                     {collectible?.holdingIncreasesValue && (
                       <>
                         <p className="tab-box-item-title">Extra Capabilities</p>
@@ -207,11 +231,11 @@ const Collectible = ({ collectible }) => {
                 </div>
 
                 <p className="button primary flex items-center justify-center"
-                    style={{ cursor: !buyLoading ? 'pointer' : 'auto' }}
+                    style={{ cursor: buyLoading === 'no' ? 'pointer' : 'auto' }}
                     onClick={() => buyCollectible()}>
-                      {!buyLoading ? "Buy now" : (
+                      {buyLoading === 'no' ? "Buy now" : (
                       <>
-                        <div className="animate-pulse mr-1">Loading</div> 
+                        <div className="animate-pulse mr-1">{buyLoading}</div> 
                         <div className="pt-1 flex items-center justify-center space-x-1 animate-pulse">
                           <div className="w-1 h-1 bg-white rounded-full"></div>
                           <div className="w-1 h-1 bg-white rounded-full"></div>
