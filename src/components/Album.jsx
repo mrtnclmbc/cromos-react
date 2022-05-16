@@ -346,6 +346,7 @@ const Album = ({ album, albumId }) => {
                     key={`asset-${index}`}
                     size={rowAsset?.size}
                     image={isOwned || isPreviewMode ? imageUrl : null}
+                    isPreviewMode={isPreviewMode}
                     backgroundImage={imageUrl}
                     tokenId={rowAsset?.tokenId}
                     addressId={rowAsset?.address}
@@ -362,12 +363,18 @@ const Album = ({ album, albumId }) => {
                     title={title}
                     artist={rowAsset?.artist}
                     color={rowAsset?.color}
-                    audioUrl={animationUrl}
                     traits={traits}
                     totalSupply={totalSupply}
                     description={description}
                     isLoading={assetMetadata === undefined}
                     audioUrl={rowAsset?.resource || animationUrl}
+                    videoUrl={rowAsset?.resource || animationUrl}
+                    videoProps={{
+                      loop: rowAsset?.loopVideo,
+                      muted: rowAsset?.muteVideo,
+                      controls: rowAsset?.showVideoControls,
+                      autoPlay: rowAsset?.autoPlayVideo
+                    }}
                     cover={imageUrl}
                     isOwned={isOwned}
                     setModalOpen={openAssetInfoModal}
@@ -579,6 +586,7 @@ const Album = ({ album, albumId }) => {
                                     key={`asset-${index}`}
                                     size={rowAsset?.size}
                                     image={isOwned || isPreviewMode ? imageUrl : null}
+                                    isPreviewMode={isPreviewMode}
                                     backgroundImage={imageUrl}
                                     tokenId={rowAsset?.tokenId}
                                     addressId={rowAsset?.address}
@@ -595,12 +603,18 @@ const Album = ({ album, albumId }) => {
                                     title={title}
                                     artist={rowAsset?.artist}
                                     color={rowAsset?.color}
-                                    audioUrl={animationUrl}
                                     traits={traits}
                                     totalSupply={totalSupply}
                                     description={description}
                                     isLoading={assetMetadata === undefined}
                                     audioUrl={rowAsset?.resource || animationUrl}
+                                    videoUrl={rowAsset?.resource || animationUrl}
+                                    videoProps={{
+                                      loop: rowAsset?.loopVideo,
+                                      muted: rowAsset?.muteVideo,
+                                      controls: rowAsset?.showVideoControls,
+                                      autoPlay: rowAsset?.autoPlayVideo
+                                    }}
                                     cover={imageUrl}
                                     isOwned={isOwned}
                                     setModalOpen={openAssetInfoModal}

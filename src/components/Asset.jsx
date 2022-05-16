@@ -25,6 +25,9 @@ const Asset = (props) => {
     artist,
     color,
     audioUrl,
+    videoUrl,
+    videoProps,
+    isPreviewMode,
     cover,
     showCover,
     coverSize,
@@ -64,7 +67,7 @@ const Asset = (props) => {
                   <Skeleton style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }} />
                 </div>
               )}
-              {type !== 'empty' && !isLoading && isNFT && (
+              {type !== 'empty' && !isLoading && isNFT && (type === 'video' && (!isOwned && !isPreviewMode)) && (
                 <div className={`${rounded && 'rounded-lg'} hidden sm:flex absolute bg-black bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly z-10`}>
                   <button className="hover:scale-110 text-white opacity-0 transform translate-y-1 group-hover:translate-y-0 group-hover:opacity-100 transition">
                     <PlayRoundedIcon className="mx-auto h-10" fill="#fff" />
@@ -103,6 +106,31 @@ const Asset = (props) => {
                   {image || !isNFT ? <img src={isNFT ? image : resource} onLoad={() => setImageLoading(false)} className={`h-full w-full ${rounded && 'rounded-lg'} ${type === "sticker" && 'object-cover drop-shadow-md'}`} /> : (
                     <AssetInfo tokenId={tokenId} addressId={addressId} backgroundImage={type !== "sticker" && backgroundImage} />
                   )}
+                </>
+              )}
+              {(type === 'video' && videoUrl) && (
+                <>
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="0">
+                    <defs>
+                      <filter id="f1">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+                      </filter>
+                    </defs>
+                  </svg>
+                  <div className={`h-full w-full absolute overflow-hidden ${isNFT && !isOwned && !isPreviewMode ? 'bg-black' : ''} ${rounded && 'rounded-lg'}`}>
+                    <video
+                      className={`h-full w-full object-cover ${isNFT && !isOwned && !isPreviewMode ? 'blurred' : ''}`}
+                      autoPlay={videoProps?.autoPlay !== undefined ? videoProps?.autoPlay : true}
+                      playsInline={true}
+                      muted={videoProps?.muted !== undefined ? videoProps?.muted : true}
+                      loop={videoProps?.loop !== undefined ? videoProps?.loop : true}
+                      controls={videoProps?.controls !== undefined ? videoProps?.controls : false}
+                      onLoad={() => setImageLoading(false)}
+                    >
+                      <source src={videoUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 </>
               )}
               {type === 'audio' && (
