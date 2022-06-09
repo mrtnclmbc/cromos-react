@@ -11587,6 +11587,13 @@ figure > img {
   padding-bottom: 10px;
 }
 
+.product-preview .product-preview-info .blog-post-text-container {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
 .product-preview .product-preview-info .product-preview-text-container-small {
   height: 85px;
   align-items: center;
@@ -14962,7 +14969,6 @@ figure > img {
 .header .header-brand .logo {
   margin-left: 26px;
   width: 96px;
-  height: 36.47px;
 }
 
 .header .header-brand .header-brand-text {

@@ -79,7 +79,7 @@ const Modal = (props) => {
                   <div className="bg-gray-50 px-4 py-3 flex flex-row items-center justify-end">
                     <img
                       className="h-6 w-auto hidden sm:block absolute left-8 transition duration-500 ease-in-out transform hover:scale-110"
-                      src="/logo.svg"
+                      src="/cromy-evolution-logo-light.png"
                       alt="Cromy Logo"
                     />
                     <button

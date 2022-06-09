@@ -293,7 +293,7 @@ const Collectible = ({ collectible }) => {
 
               <div className="sidebar-box-items">
                 <div className="social-links small align-left">
-                  <a target="_blank" href={`https://twitter.com/share?text=Check%20out%20this%20NFT%20Booster%20Pack%20from%20Cromy!%20${collectible?.title.split(" ").join("%20")}&url=${window.location.href}`} className="social-link small twitter">
+                  <a target="_blank" href={`https://twitter.com/share?text=Check%20out%20this%20NFT%20Smart%20Pack%20from%20%40CromyNFT!%20${collectible?.title.split(" ").join("%20")}&url=${window.location.href}`} className="social-link small twitter">
                     <svg className="social-link-icon icon-twitter">
                       <use xlinkHref="#svg-twitter"></use>
                     </svg>

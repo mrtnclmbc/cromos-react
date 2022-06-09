@@ -70,7 +70,7 @@ const App = ({ Component, pageProps }) => {
               </div>
               <button style={{ width: 300 }} onClick={() => {
                 setIsWrongPass(false)
-                if (password === "LaCromyNeta2022") {
+                if (password === "TheCromyNeta2022") {
                   localStorage.setItem('authorized', true);
                   setIsLoading(true);
                   setIsAuth(true);

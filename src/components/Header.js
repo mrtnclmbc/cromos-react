@@ -34,7 +34,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
               <a href="/">
                 <img
                   className="h-auto w-24"
-                  src="/logo.svg"
+                  src="/cromy-evolution-logo-light.png"
                   alt="Cromy logo"
                 />
               </a>

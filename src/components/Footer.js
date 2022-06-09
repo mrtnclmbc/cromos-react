@@ -7,10 +7,10 @@ const Footer = (props) => {
       <footer className="text-gray-600 body-font">
         <div className="bg-gray-100">
           <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-            <a href="/" className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+            <a href="/" style={{ maxWidth: 100 }} className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
               <img
-                className="h-8 w-auto sm:h-10 cursor-pointer"
-                src="/logo.svg"
+                className="cursor-pointer"
+                src="/cromy-evolution-logo-dark.png"
                 alt="Cromy Logo"
               />
             </a>

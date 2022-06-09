@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 import { Footer, Header, BoosterPackCard, GameCard } from './';
 import { getDapps } from '../services/dappsService';
 import { getCollectibles } from '../services/collectiblesService';
+import { getAllPostsForHome } from '../services/blogService';
 
 const Launcher = (props) => {
   const [experienceTextOpacity, setExperienceTextOpacity] = useState(0)
@@ -15,8 +16,10 @@ const Launcher = (props) => {
   const [dapps, setDapps] = useState([])
   const [isLoadingCollectibles, setIsLoadingCollectibles] = useState(true)
   const [collectibles, setCollectibles] = useState([])
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true)
+  const [posts, setPosts] = useState([])
   const contentDivRef = useRef(null)
-  
+
   useEffect(async () => {
     setTimeout(() => setExperienceTextOpacity(1), 2000);
     setTimeout(() => setCryptoTextOpacity(1), 3000);
@@ -28,8 +31,13 @@ const Launcher = (props) => {
     const collectibles = await getCollectibles();
     setCollectibles(collectibles || []);
     setIsLoadingCollectibles(false);
+
+    const posts = (await getAllPostsForHome(true)) || []
+    if (posts) {
+      setPosts(posts);
+    }
     window.app.updateGridPosition();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -73,7 +81,7 @@ const Launcher = (props) => {
           <div className="overlay bg-gradient-to-tl from-yellow-300 via-red-500 to-red-800"></div>
 
           <video playsInline autoPlay muted loop id="hero-section-video">
-            <source src={"/videos/hero_background.mp4"} type="video/mp4" />
+            <source src="https://www.cromy.io/nft/assets/video/cromy-hero-video.mp4" type="video/mp4" />
           </video>
 
           <div className="hero-content flex flex-col items-center justify-center">
@@ -309,29 +317,40 @@ const Launcher = (props) => {
           </div>
 
           <div className="grid blog centered">
-            <Tilt>
-              <div className="product-preview shadow-xl" style={{ width: 400 }}>
-                <a>
-                  <figure className="product-preview-image liquid bg-gray-300" />
-                </a>
+            {posts?.length ? posts?.map(post => (
+              <Tilt>
+                <div className="product-preview shadow-xl" style={{ width: 400 }}>
+                  <a href="https://blog.cromy.io" target="_blank">
+                    <figure className="product-preview-image liquid bg-gray-300">
+                      <img src={post.coverImage?.url} style={{ objectFit: 'cover' }} />
+                    </figure>
+                  </a>
 
-                <div className="product-preview-info">
-                  <p className="product-preview-title text-center"><a>Coming Soon</a></p>
-                  <div className="product-preview-text-container">
-                    <p className="product-preview-text text-center">
-                      There are no posts yet. Stay tuned to be the first one to know about new entries in our blog!
-                    </p>
+                  <div className="product-preview-info">
+                    <p className="product-preview-title text-center"><a href="https://blog.cromy.io" target="_blank">{post.title}</a></p>
+                    <div className="blog-post-text-container">
+                      <a href="https://blog.cromy.io" target="_blank">
+                        <p className="product-preview-text text-center">
+                          {post.excerpt}
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="product-preview-meta">
+                    <div style={{ paddingLeft: 0 }} className="product-preview-author">
+                      <a href="https://blog.cromy.io" target="_blank" className="product-preview-author-image user-avatar">
+                        <img src={post?.author?.picture?.url} className="w-8 h-8 bg-gray-100 rounded-full" />
+                      </a>
+                      <div style={{ paddingLeft: 30 }}>
+                        <p className="product-preview-author-title">Published By</p>
+                        <p className="product-preview-author-text"><a>{post?.author?.name}</a></p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div className="product-preview-meta">
-                  <div style={{ paddingLeft: 0 }} className="product-preview-author">
-                    <p className="product-preview-author-title">Published By</p>
-                    <p className="product-preview-author-text"><a>Brian Sztamfater</a></p>
-                  </div>
-                </div>
-              </div>
-            </Tilt>
+              </Tilt>
+            )) : <div className="text-center text-gray-400">There are no blog posts yet!</div>}
           </div>
         </Fade>
         {/*<!-- /BLOG SECTION -->*/}
@@ -343,7 +362,7 @@ const Launcher = (props) => {
               <div style={{ height: 280, background: 'linear-gradient(to right, #eb3136, #eb4f35)' }} className="flex justify-center items-center self-center px-5 rounded-2xl shadow-lg">
                 <div className="section-header-info flex flex-col items-center">
                   <h2 style={{ fontSize: '2.5em' }} className="section-title drop-shadow-md text-white">Contact us</h2>
-                  <p className="mt-5 md:mb-0 text-white text-center">We would love to meet you and help you to make gamified NFT experiences. We are sure you'll join Cromy family.</p>
+                  <p className="mt-5 md:mb-0 text-white text-center">We would love to meet you and help your brand or community to enter the Metaverse through gamified NFT experiences. We are sure you'll join Cromy family.</p>
                   <span style={{ marginTop: 30, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 130 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
                     <a className="text-white" href="mailto:hello@cromy.io">Get in touch</a>
                   </span>
@@ -356,11 +375,14 @@ const Launcher = (props) => {
                 <h2 style={{ fontSize: '2.5em' }} className="section-title drop-shadow-md text-white text-center">Join the community</h2>
                 <p className="mt-5 md:mb-0 text-white text-center">Feel free to join our community on Discord and Telegram. We need you to be involved to build the best platform possible.</p>
                 <div className="flex flex-row">
-                  <span style={{ marginTop: 30, marginRight: 5, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 130 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
-                    <a className="text-white">Discord</a>
+                  <span style={{ marginTop: 30, marginRight: 5, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 115 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
+                    <a href="https://discord.gg/3nbDVC8Ypr" className="text-white">Discord</a>
                   </span>
-                  <span style={{ marginTop: 30, marginLeft: 5, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 130 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
-                    <a className="text-white">Telegram</a>
+                  <span style={{ marginTop: 30, marginLeft: 5, marginRight: 5, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 115 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
+                    <a href="https://t.me/cromynft" className="text-white">Telegram</a>
+                  </span>
+                  <span style={{ marginTop: 30, marginLeft: 5, borderWidth: 2, borderStyle: 'solid', borderColor: 'white', borderRadius: 25, height: 50, width: 115 }} className="mt-10 flex text-white items-center justify-center fade-hero-button-animation-loop">
+                    <a href="https://twitter.com/cromynft" className="text-white">Twitter</a>
                   </span>
                 </div>
               </div>
@@ -379,5 +401,13 @@ const Launcher = (props) => {
     </>
   )
 }
+
+// export async function getStaticProps({ preview = true }) {
+//   const posts = (await getAllPostsForHome(preview)) || []
+//   return {
+//     props: { posts, preview },
+//     revalidate: 10
+//   }
+// }
 
 export default Launcher;

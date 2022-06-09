@@ -57,7 +57,7 @@ const Navbar = ({ toggleMode, darkMode }) => {
                 <a href="/">
                   <img
                     className="h-8 w-auto sm:h-10 cursor-pointer"
-                    src="/logo.svg"
+                    src="/cromy-evolution-logo-light.png"
                     alt="Cromy Logo"
                   />
                 </a>
@@ -159,7 +159,7 @@ const Navbar = ({ toggleMode, darkMode }) => {
                     <div>
                       <img
                         className="h-auto mw-8"
-                        src="logo.svg"
+                        src="cromy-evolution-logo-light.png"
                         alt="Cromy logo"
                       />
                     </div>
