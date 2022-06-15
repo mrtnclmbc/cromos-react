@@ -19,6 +19,7 @@ const Launcher = (props) => {
   const [isLoadingPosts, setIsLoadingPosts] = useState(true)
   const [posts, setPosts] = useState([])
   const contentDivRef = useRef(null)
+  const heroVideoRef = useRef(null);
 
   useEffect(async () => {
     setTimeout(() => setExperienceTextOpacity(1), 2000);
@@ -38,6 +39,11 @@ const Launcher = (props) => {
     }
     window.app.updateGridPosition();
   }, []);
+
+  const replayHeroVideo = () => {
+    heroVideoRef.current.currentTime = 1.3;
+    heroVideoRef.current.play();
+  };
 
   return (
     <>
@@ -80,7 +86,7 @@ const Launcher = (props) => {
         <div style={{ display: 'block', position: 'relative', minHeight: windowHeight, width: "100%", overflow: 'hidden', zIndex: 0 }} className="w-full">
           <div className="overlay bg-gradient-to-tl from-yellow-300 via-red-500 to-red-800"></div>
 
-          <video playsInline autoPlay muted loop id="hero-section-video">
+          <video playsInline autoPlay muted id="hero-section-video" ref={heroVideoRef} onEnded={() => replayHeroVideo()}>
             <source src="https://www.cromy.io/nft/assets/video/cromy-hero-video.mp4" type="video/mp4" />
           </video>
 
