@@ -24,7 +24,7 @@ const Collectibles = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className="flex flex-col">
+      <div className="flex flex-col bg-white">
         <Collectible collectible={collectible} />
       </div>
       <Footer />

@@ -23,14 +23,14 @@ const Collectible = ({ collectible }) => {
   const SuccessMessage = ({ collectible }) => (
     <div className="flex flex-row justify-center">
       <p style={{ lineHeight: '22px' }}>
-        <strong className="">🎉 Congratulations! </strong> You bought a <strong className="text-red-600">{`${collectible?.title}`}</strong> 
+        <strong className="">🎉 Congratulations! </strong> You bought a <strong className="text-red-600">{`${collectible?.title}`}</strong>
       </p>
       <button className="text-black toast-button" style={{ minWidth: 65, fontSize: 14 }} onClick={() => setIsOpenPacksModalOpen(true)}>Open It</button>
     </div>
   );
 
   const showSuccessMessage = () => {
-    toast(<SuccessMessage collectible={collectible} />) 
+    toast(<SuccessMessage collectible={collectible} />)
   };
 
   useEffect(async () => {
@@ -48,7 +48,7 @@ const Collectible = ({ collectible }) => {
         console.log(e)
       }
       setLoading(false);
-      window.app.updateGridPosition();    
+      window.app.updateGridPosition();
     }
   }, [collectible, provider]);
 
@@ -61,9 +61,9 @@ const Collectible = ({ collectible }) => {
   const updateTotalMinted = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)
       const total = await contract.methods.totalSupply().call();
-      setTotalMinted(total);  
+      setTotalMinted(total);
     } catch (e) {
       console.error(e)
     }
@@ -72,7 +72,7 @@ const Collectible = ({ collectible }) => {
   const updateMaxAmount = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)
       const maxTokens = await contract.methods.MAX_SUPPLY().call();
       setMaxAmount(maxTokens);
     } catch (e) {
@@ -83,7 +83,7 @@ const Collectible = ({ collectible }) => {
   const updatePrice = async () => {
     try {
       const web3 = new Web3(networkRpcUrls[collectible?.network]);
-      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+      const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)
       const currentPrice = await contract.methods.CURRENT_PRICE().call();
       setPrice(currentPrice.length > 10 ? Web3.utils.fromWei(currentPrice, 'ether') : currentPrice);
     } catch (e) {
@@ -136,7 +136,7 @@ const Collectible = ({ collectible }) => {
             const web3 = new Web3(provider);
             const chainId = await web3.eth.getChainId();
             if (chainId === networkChainIds[collectible?.network]) {
-              const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)  
+              const contract = new web3.eth.Contract(BuyableBoosterPackABI, collectible?.address)
               const currentPrice = await contract.methods.CURRENT_PRICE().call();
               contract.methods.buyWithETH().send({ from: currentAddress, value: currentPrice })
                 .once('sending', async () => {
@@ -176,7 +176,7 @@ const Collectible = ({ collectible }) => {
   return (
     <>
       {loading ? <Loading /> : (
-        <div className="content-grid" style={{ paddingTop: 70, paddingLeft: 60, paddingRight: 60, paddingBottom: 30 }}>
+        <div className="content-grid bg-light-gray" style={{ paddingTop: 70, paddingLeft: 60, paddingRight: 60, paddingBottom: 30 }}>
         <div className="grid grid-9-3">
           <div className="marketplace-content grid-column">
             <div>
@@ -235,7 +235,7 @@ const Collectible = ({ collectible }) => {
                     onClick={() => buyCollectible()}>
                       {buyLoading === 'no' ? "Buy now" : (
                       <>
-                        <div className="animate-pulse mr-1">{buyLoading}</div> 
+                        <div className="animate-pulse mr-1">{buyLoading}</div>
                         <div className="pt-1 flex items-center justify-center space-x-1 animate-pulse">
                           <div className="w-1 h-1 bg-white rounded-full"></div>
                           <div className="w-1 h-1 bg-white rounded-full"></div>

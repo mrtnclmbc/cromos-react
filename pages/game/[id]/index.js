@@ -18,7 +18,7 @@ const Games = () => {
   }, [router.query])
 
   return (
-      <>
+      <div className="bg-white">
         <Head>
           <title>Cromy</title>
           <link rel="icon" href="/favicon.ico" />
@@ -28,7 +28,7 @@ const Games = () => {
           <Album album={album} />
         </div>
         <Footer />
-      </>
+      </div>
   )
 }
 
