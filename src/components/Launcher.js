@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import { Fade } from "react-awesome-reveal";
+import { useRouter } from 'next/router';
 
 import { Footer, Header, BoosterPackCard, GameCard } from './';
 import { getDapps } from '../services/dappsService';
@@ -20,6 +21,8 @@ const Launcher = (props) => {
   const [posts, setPosts] = useState([])
   const contentDivRef = useRef(null)
   const heroVideoRef = useRef(null);
+  const pageLoader = useRef(null);
+  const router = useRouter();
 
   useEffect(async () => {
     setTimeout(() => setExperienceTextOpacity(1), 2000);
@@ -40,6 +43,23 @@ const Launcher = (props) => {
     window.app.updateGridPosition();
   }, []);
 
+  const hidePageLoader = () => {
+    setTimeout(function() {
+      pageLoader.current.classList.add('hidden');
+      if (router.asPath === '/#explore') {
+        contentDivRef.current.scrollIntoView({behavior: 'smooth'});
+      }
+    }, 1500);
+  };
+
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      hidePageLoader();
+    } else {
+      window.addEventListener("load", hidePageLoader);
+    }
+  }, []);
+
   const replayHeroVideo = () => {
     heroVideoRef.current.currentTime = 1.3;
     heroVideoRef.current.play();
@@ -49,7 +69,7 @@ const Launcher = (props) => {
     <>
       {/*<!-- /STYLES -->*/}
         {/*<!-- PAGE LOADER -->*/}
-        <div className="page-loader bg-gradient-to-bl from-yellow-400 via-red-500 to-red-800">
+        <div className="page-loader bg-gradient-to-bl from-yellow-400 via-red-500 to-red-800" ref={pageLoader}>
           {/*<!-- PAGE LOADER DECORATION -->*/}
             <img className="lg:w-2/6 md:w-3/6 w-5/6 mb-0 object-cover object-center rounded" alt="hero" src="/img/cromy-logo-full.png" />
           {/*<!-- /PAGE LOADER DECORATION -->*/}
@@ -105,7 +125,8 @@ const Launcher = (props) => {
         </div>
 
         {/*<!-- CONTENT GRID -->*/}
-        <div ref={contentDivRef} className="content-grid">
+        <div className="content-grid">
+        <div ref={contentDivRef} id="explore" style={{ position: 'absolute', top: '-72px', left: 0 }}>&nbsp;</div>
           <Fade triggerOnce>
             <div className="section-header justify-center flex p-5 rounded-2xl">
               <div className="section-header-info text-center">

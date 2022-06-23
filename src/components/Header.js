@@ -11,6 +11,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
   const [scrolled, setScrolled] = useState(0)
   const sizes = useRect(refConnectWalletButton, updater);
 
+
   useEffect(() => {
     setTimeout(() => setUpdater([]), 1000);
     window.addEventListener('scroll', () => {
@@ -77,7 +78,7 @@ const Header = ({ title, subtitle, transparency, minorOpacityOnScroll }) => {
               {/*<!-- MENU MAIN ITEM -->*/}
               <li className="menu-main-item">
                 {/*<!-- MENU MAIN ITEM LINK -->*/}
-                <a className="menu-main-item-link" href="#">Explore</a>
+                <a href="/#explore" className="menu-main-item-link">Explore</a>
                 {/*<!-- /MENU MAIN ITEM LINK -->*/}
               </li>
               {/*<!-- /MENU MAIN ITEM -->*/}

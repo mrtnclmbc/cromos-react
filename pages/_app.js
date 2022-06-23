@@ -32,7 +32,7 @@ const App = ({ Component, pageProps }) => {
 
     // Check if authorized
     setIsAuth(localStorage.getItem('authorized') === 'true');
-    
+
     // Naive check for mobile
     setIsMobile(
       navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i),
@@ -104,7 +104,7 @@ const App = ({ Component, pageProps }) => {
       {/*<!-- simplebar -->*/}
       <script src="/launcher/js/vendor/simplebar.min.js"></script>
       {/*<!-- page loader -->*/}
-      <script src="/launcher/js/utils/page-loader.js" />
+      
       {/*<!-- simplebar -->*/}
       <script src="/launcher/js/vendor/simplebar.min.js" />
       {/*<!-- liquidify -->*/}
